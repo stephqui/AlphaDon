@@ -1,0 +1,33 @@
+﻿@model List<Alpha.Models.Project>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Liste Projet</title>
+</head>
+<body>
+    <h3>Liste des projets</h3><br />
+    @foreach (var p in Model)
+    {
+        <div>
+
+            <table>
+
+                @p.ProjectName  @p.Profile.LastName  @p.Profile.FirstName  @p.Profile.Adress   
+
+
+
+
+            </table>
+        </div>
+    }
+
+
+
+</body>
+</html>

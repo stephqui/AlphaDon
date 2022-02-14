@@ -16,10 +16,16 @@ namespace Alpha.Models
             _bddContext = new BddContext();
         }
 
+        
         public void DeleteCreateDatabase()
         {
             _bddContext.Database.EnsureDeleted();
             _bddContext.Database.EnsureCreated();
+        }
+
+        public List<Project> GetAllProjects()
+        {
+            return _bddContext.Projects.Include(p => p.Profile).ThenInclude(p => p.Adress).ToList();
         }
 
         public List<Profile> GetAllProfiles()
