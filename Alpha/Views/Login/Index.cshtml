@@ -1,0 +1,68 @@
+﻿@model Alpha.ViewModels.UserAccountViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Login";
+}
+
+
+    @if (Model.Authentify)
+    {
+        <h3>
+            Vous êtes authentifié avec votre login :
+            @Model.UserAccount.Mail
+        </h3>
+        <div>
+            @Html.ActionLink("Poursuivre sur le site", "GestionProjet")
+        </div>
+        @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+    }
+    else
+    {
+        @*<p>
+            Veuillez vous authentifier :
+        </p>
+        using (Html.BeginForm())
+        {
+            <div>
+                @Html.LabelFor(m => m.UserAccount.Mail)
+                @Html.TextBoxFor(m => m.UserAccount.Mail)
+                @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.UserAccount.Password)
+                @Html.PasswordFor(m => m.UserAccount.Password)
+                @Html.ValidationMessageFor(m => m.UserAccount.Password)
+            </div>
+            <input type="submit" value="Se connecter" />
+            <br />
+            @Html.ActionLink("Créer un compte", "CreateUserAccount")
+        }*@
+
+<form action="/login/index" method="post">
+    <h1>Se connecter</h1>
+
+    <p class="choose-email">ou utiliser mon adresse e-mail :</p>
+    @*<div class="inputs">
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Mot de passe">
+        </div>*@
+    <div align="justify">
+        @Html.LabelFor(m => m.UserAccount.Mail)
+        @Html.TextBoxFor(m => m.UserAccount.Mail)
+        @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+    </div>
+    <div align="justify">
+        @Html.LabelFor(m => m.UserAccount.Password)
+        @Html.PasswordFor(m => m.UserAccount.Password)
+        @Html.ValidationMessageFor(m => m.UserAccount.Password)
+    </div>
+    <input type="submit" value="Se connecter" />
+    <br />
+
+    <p class="inscription">Je n'ai pas de <span>compte</span>.</p>
+    @Html.ActionLink("Créer un compte", "CreateUserAccount")
+</form>
+
+    }
+

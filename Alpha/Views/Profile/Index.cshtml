@@ -1,0 +1,20 @@
+﻿@model List<Alpha.Models.Profile>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Accueil";
+}
+
+
+<table>
+    <tr>
+        <th>LastName</th>
+        <th>FirstName</th>
+    </tr>
+    @foreach (var profile in Model)
+    {
+        <tr>
+            <th>@profile.LastName</th>
+            <th>@profile.FirstName</th>
+        </tr>
+    }
+</table>
