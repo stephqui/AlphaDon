@@ -3,7 +3,6 @@
     Layout = "_Layout";
     ViewBag.Title = "Profile";
 }
-
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -11,52 +10,53 @@
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
+                <h4 class="text-center">Mon Profil</h4>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Editer votre Profil</h4>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="nom" value=""></div>
                     <div class="col-md-6"><label class="labels">Prénom</label><input type="text" class="form-control" value="" placeholder="prénom"></div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Numéro de téléphone</label><input type="text" class="form-control" placeholder="numéro de téléphone" value=""></div>
-                    <div class="col-md-12"><label class="labels">Adresse 1</label><input type="text" class="form-control" placeholder="adresse 1" value=""></div>
-                    <div class="col-md-12"><label class="labels">Adresse 2</label><input type="text" class="form-control" placeholder="adresse 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Code Postal</label><input type="text" class="form-control" placeholder="code postal" value=""></div>
-                    <div class="col-md-12"><label class="labels">Ville</label><input type="text" class="form-control" placeholder="ville" value=""></div>
-                    <div class="col-md-12"><label class="labels">Pays</label><input type="text" class="form-control" placeholder="pays" value=""></div>
+                <div class="row mt-2">
+                    <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="adresse" value=""></div>
+                    <div class="col-md-6"><label class="labels">Code Postal</label><input type="text" class="form-control" placeholder="code postal" value=""></div>
+                    <div class="col-md-6"><label class="labels">Ville</label><input type="text" class="form-control" placeholder="ville" value=""></div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Ville</label><input type="text" class="form-control" value="" placeholder="ville"></div>
-                    <div class="col-md-6"><label class="labels">Date de naissance</label><input type="text" class="form-control" placeholder="date de naissance" value=""></div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Pays</label><input type="text" class="form-control" placeholder="pays" value=""></div>
+                    <div class="col-md-6"><label class="labels">Nationalité</label><input type="text" class="form-control" placeholder="nationalité" value=""></div>
+                    <div class="col-md-6"><label class="labels">Numéro de téléphone</label><input type="text" class="form-control" placeholder="numéro de téléphone" value=""></div>
+                    <div class="col-md-6"><label class="labels">Date de naissance</label><input type="text" class="form-control" value="" placeholder="date de naissance"></div>
+                    <div class="form-group form-group__birthdate">
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+                <h4 class="text-center">Ma Societé</h4>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Nom de societé</label><input type="text" class="form-control" placeholder="société" value=""></div>
+                    <div class="col-md-6"><label class="labels">Numéro de Siret</label><input type="text" class="form-control" placeholder="siret" value=""></div>
+                </div>
+                <!-- Submit Button-->
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Sauvegarder</button></div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Votre Societé</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Societé</span></div><br>
-                <div class="col-md-12"><label class="labels">Nom de societé</label><input type="text" class="form-control" placeholder="société" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Numéro de Siret</label><input type="text" class="form-control" placeholder="siret" value=""></div>
-            </div>
-        </div>
+        <hr />
     </div>
-</div>
-
-
-
-@*<section class="text-center py-5">
-    <table>
-        <tr>
-            <th>LastName</th>
-            <th>FirstName</th>
-        </tr>
-        @foreach (var profile in Model)
-        {
-            <tr>
-                <th>@profile.LastName</th>
-                <th>@profile.FirstName</th>
-            </tr>
-        }
-    </table>
-</section>*@
+    <hr class="my-5">
+    @*<section class="text-center py-5">
+            <table>
+                <tr>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                </tr>
+                @foreach (var profile in Model)
+                {
+                    <tr>
+                        <th>@profile.LastName</th>
+                        <th>@profile.FirstName</th>
+                    </tr>
+                }
+            </table>
+        </section>*@

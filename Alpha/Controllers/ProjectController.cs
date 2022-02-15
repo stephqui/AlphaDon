@@ -13,8 +13,34 @@ namespace Alpha.Controllers
         {
             Dal dal = new Dal();
             List<Project> projects = dal.GetAllProjects();
-            return View(projects);
-      
+            return View(projects);     
+        }
+
+        public IActionResult MyProject()
+        {
+            Dal dal = new Dal();
+            Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
+            return View(project);
+        }
+
+        //*****************************************************************************************
+        public ActionResult CreateProject()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateProject(Project project)
+        {
+            Dal dal = new Dal();
+            if (dal.ProjectExiste(project.ProjectName))
+            {
+                ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
+                return View(project);
+            }
+            if (!ModelState.IsValid)
+                return View(project);
+            dal.CreateProject(project.ProjectName, project.StartDate);
+            return Redirect("/Project/Index");
         }
     }
 }

@@ -1,0 +1,24 @@
+﻿@model Alpha.Models.Project
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mon projet</title>
+</head>
+<body>
+    <h3>Mon Projet</h3><br />
+    <div h3>Je suis @Model.Profile.FirstName</div>
+    <div>@Model.ProjectName</div>
+    <div> @Model.Description</div>
+    <div>@Model.Category</div>
+    <div> @Model.StartDate</div>
+    <div> @Model.EndDate</div>
+    <div>@Model.Place</div>
+    <div>@Model.Area</div>
+    <div>@Model.Collect.Limit</div>
+</body>
+</html>

@@ -9,6 +9,11 @@ namespace Alpha.Models
     {
         void DeleteCreateDatabase();
 
+        //void GetAllProjects();
+        //void GetMyProject();
+        //void GetDonationsByCollectId();
+        //void AmountCalculation();
+        void CreateProject(string projectName, DateTime startDate, int projectId = 0);
         int AddUserAccount(string mail, string password);
         UserAccount Authentify(string mail, string password);
         UserAccount GetUserAccount(int id);

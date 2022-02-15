@@ -23,9 +23,51 @@ namespace Alpha.Models
             _bddContext.Database.EnsureCreated();
         }
 
+       
+        //Renvoie la liste des projets, leur statut, leur montant collecté.
         public List<Project> GetAllProjects()
         {
-            return _bddContext.Projects.Include(p => p.Profile).ThenInclude(p => p.Adress).ToList();
+            return _bddContext.Projects.Include(p => p.Collect).Include(p => p.Profile).ThenInclude(p => p.Adress).ToList();
+        }
+
+        //renvoie tous les dons par collecte
+        public List<UnitDonation> GetDonationsByCollectId(int collectId)
+        {
+            return _bddContext.UnitDonations.Where(u => u.CollectId == collectId).ToList();
+        }
+
+        //calcul a mise a jour de la somme des collectes
+        public int AmountCalculation(int collectId)
+        {
+            List<UnitDonation> donations = GetDonationsByCollectId(collectId);
+            int amount = 0;
+            foreach (UnitDonation donation in donations)
+            {
+                amount += donation.CurrentAmount;
+            }
+            return amount;
+        }
+
+        //affiche le projet du createur
+        public Project GetMyProject(int profileId)
+        {
+            Project project = _bddContext.Projects.Include(p => p.Collect).Include(p => p.Profile).FirstOrDefault(p => p.ProfileId == profileId);
+            return project;
+        }
+        public void CreateProject(string projectName, DateTime startDate, int id = 0)
+        {
+            Project projectToAdd = new Project { ProjectName = projectName, StartDate = startDate };
+            if (id != 0)
+            {
+                projectToAdd.Id = id;
+            }
+            this._bddContext.Projects.Add(projectToAdd);
+            this._bddContext.SaveChanges();
+        }
+
+        public bool ProjectExiste(string projectName)
+        {
+            return _bddContext.Projects.ToList().Any(Project => string.Compare(Project.ProjectName, projectName, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
         public List<Profile> GetAllProfiles()

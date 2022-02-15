@@ -48,7 +48,7 @@ namespace Alpha.Controllers
                 {
                     dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
                      profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod);
-                    return RedirectToAction("ProfileChange", new { @id = profile.Id });
+                    return Redirect("/Home/Index");
                 }
             }
             else

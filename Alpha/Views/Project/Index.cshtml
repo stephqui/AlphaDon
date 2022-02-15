@@ -3,7 +3,6 @@
     Layout = "_Layout";
     ViewBag.Title = "Project";
 }
-
 <section class="text-center py-5">
     <br />
     <br />
@@ -16,111 +15,145 @@
                     <th class="font-weight-bold">Prénom</th>
                     <th class="font-weight-bold">Nom</th>
                     <th class="font-weight-bold">Adresse</th>
+                    <th class="font-weight-bold">Montant actuel</th>
+                    <th class="font-weight-bold">Plafond à atteindre</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var p in Model)
                 {
-                    <tr>
-                        <td>@p.ProjectName</td>
-                        <td>@p.Profile.FirstName</td>
-                        <td>@p.Profile.LastName</td>
-                        <td>@p.Profile.Adress</td>
-                    </tr>
+                <tr>
+                    <td>@p.ProjectName</td>
+                    <td>@p.Profile.FirstName</td>
+                    <td>@p.Profile.LastName</td>
+                    <td>@p.Profile.Adress.City</td>
+                    <td> @p.Collect.CurrentAmount</td>
+                    <td>@p.Collect.Limit</td>
+                </tr>
                 }
             </tbody>
         </table>
-        </div>
-
+    </div>
 </section>
-
-<section class="text-center py-5">
-    <div class="container">
-        <div class="row-test">
-            <h2 class="mb-4 indigo-text font-weight-bold">Projets</h2> <br />
-            <div class="col-md-1"></div>
-            <div class="col-md-12">
-                <div class="row-test">
-                    <div class="btn-group btn-group">
-                        <a href="#myProject" class="btn btn-primary">Modifier le projet</a>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Contacter votre Référent Alpha</a>
-                        <div id="myModal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Modal Header</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <textarea class=form-control rows="25" id="myProject"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" alignment="left">Annuler</button>
-                                        <button type="button" class="btn btn-default" action="#" data-dismiss="modal">Envoyer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#chat" class="btn btn-primary">Consulter les messages liés à votre projet</a>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Newsletter <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Editer une nouvelle Newsletter</a></li>
-                                <li><a href="#">Consulter vos anciennes Newsletter</a></li>
-                            </ul>
-                        </div>
+<section>
+    <div class="row-test">
+        <div align="center">
+            <h1>Donner de nourriture à des pauvres <img src="~/img/Collecte en cours.png" class="img-circle" width="10%" title="Statut du projet"></h1>
+        </div>
+    </div>
+    <br>
+    <!-- Etat de la collecte-->
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+            400 € collectés
+        </div>
+        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:60%">
+            600 € manquants
+        </div>
+    </div>
+    <!-- Menu PP-->
+    <div class="btn-group btn-group-justified profile-button" id="menuPP">
+        <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#myProject">
+            Voir votre
+            projet
+        </a>
+        <a href="#" class="btn btn-primary profile-button" data-toggle="modal" data-target="#ModalMessageAuGP">
+            Contacer votre
+            Référent Alpha
+        </a>
+        <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#chat">
+            Consulter les messages liés à
+            votre projet
+        </a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
+                Newsletter <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Consulter vos anciennes Newsletter</a></button></li>
+                <li>
+                    <div type="button" class="fileUpload btn btn-primary profile-button">
+                        <span>Editer une nouvelle Newsletter</span>
+                        <input type="file" class="upload" />
                     </div>
-                    <div class="col-md-1"></div>
-                    <section>
-                        <div class="form-group">
-                            <div class="form-group shadow-textarea">
-                                <label for="exampleFormControlTextarea6">Détaillez votre projet</label>
-                                <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Votre commentaire..."></textarea>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                     aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                    <span class="sr-only">70% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="col-md-1"></div>
-                    <div id="chat" class="row-test">
-                        <h2>Commentaires liés au projet</h2>
-                        <p>Media objects can also be nested (a media object inside a media object):</p><br>
+                </li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
+                Voir les contreparties <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties non envoyées</a></button></li>
+                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties envoyées</a></button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Modifier le projet-->
+    <div id="myProject" class="collapse">
+        <div class="form-group">
+            <textarea class=form-control rows="25" id="myProject"></textarea>
+        </div>
+    </div>
+    </div>
+    <!-- Message au GP-->
+    <div id="ModalMessageAuGP" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Entrez votre message</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea class=form-control rows="25" id="myProject"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" alignment="left">Annuler</button>
+                    <button type="button" class="btn btn-default" action="#" data-dismiss="modal">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Commentaires-->
+    <div id="chat" class="panel-collapse collapse row-test">
+        <h2>Commentaires liés au projet</h2>
+        <div class="media">
+            <div class="media-left">
+                <img src="~/img_avatar1.png" class="media-object" style="width:45px">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    Gros riche sympa <small><i>Posted on February 19, 2016</i></small>
+                </h4>
+                <p>Vous faites du bon boulot ! Je vous soutiens.</p>
+                <!-- Nested media object -->
+                <div class="media">
+                    <div class="media-left">
+                        <img src="~/img_avatar2.png" class="media-object" style="width:45px">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            Troll <small><i>Posted on February 19, 2016</i></small>
+                        </h4>
+                        <p>Bande de escrocs</p>
+                        <!-- Nested media object -->
                         <div class="media">
                             <div class="media-left">
-                                <img src="~/img_avatar1.png" class="media-object" style="width:45px">
+                                <img src="~/img_avatar3.png" class="media-object" style="width:45px">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Gros riche sympa <small><i>Posted on February 19, 2016</i></small></h4>
-                                <p>Vous faites du bon boulot ! Je vous soutiens.</p>
-                                <!-- Nested media object -->
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="~/img_avatar2.png" class="media-object" style="width:45px">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <!-- Nested media object -->
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <img src="~/img_avatar3.png" class="media-object" style="width:45px">
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h4 class="media-heading">
+                                    J'aime débattre <small>
+                                        <i>
+                                            Posted on February 19,
+                                            2016
+                                        </i>
+                                    </small>
+                                </h4>
+                                <p>Ce ne sont pas des escrocs !</p>
                             </div>
                         </div>
                     </div>
@@ -128,5 +161,12 @@
             </div>
         </div>
     </div>
-
+    <!-- Newsletters publiées-->
+    <div id="NLList" class="collapse">
+        <div>
+            <ul>
+                <li><a href="1ere newsletter.pdf">Newsletter du 25 janvier</a></li>
+            </ul>
+        </div>
+    </div>
 </section>
