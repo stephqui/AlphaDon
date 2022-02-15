@@ -4,20 +4,25 @@
     Layout = "_Layout";
 }
 
-<p>
-    Veuillez Remplir les champs pour créer voter compte :
-</p>
-@using (Html.BeginForm())
-{
-    <div>
-        @Html.LabelFor(m => m.Mail)
-        @Html.TextBoxFor(m => m.Mail)
-        @Html.ValidationMessageFor(m => m.Mail)
-    </div>
-    <div>
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password)
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
-    <input type="submit" value="Créer" />
-}
+
+<section class="text-center py-5">
+    <br />
+    <br />
+
+    <h2 class="mb-4 indigo-text font-weight-bold">Créer votre compte</h2> <br />
+        @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.Mail)
+            @Html.TextBoxFor(m => m.Mail)
+            @Html.ValidationMessageFor(m => m.Mail)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <p>En créant votre compte vous acceptez nos <a href="#" style="color:dodgerblue">Conditions Générales d'Utilisation</a>.</p>
+        <input type="submit" value="Créer" />
+    }
+</section>
