@@ -54,13 +54,19 @@ namespace Alpha.Models
             Project project = _bddContext.Projects.Include(p => p.Collect).Include(p => p.Profile).FirstOrDefault(p => p.ProfileId == profileId);
             return project;
         }
-        public void CreateProject(string projectName, DateTime startDate, int id = 0)
+
+        // Creation de projet
+        public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId)
         {
-            Project projectToAdd = new Project { ProjectName = projectName, StartDate = startDate };
+            Project projectToAdd = new Project { ProjectName = projectName, Description = description,
+                Category = category, StartDate = startDate, EndDate = endDate, Area = area, Limit = limit,
+                ProfileId = profileId, CollectId = collectId };
             if (id != 0)
             {
                 projectToAdd.Id = id;
             }
+           
             this._bddContext.Projects.Add(projectToAdd);
             this._bddContext.SaveChanges();
         }
@@ -98,9 +104,15 @@ namespace Alpha.Models
             }
         }
 
+        //Creer une collecte
+        public void CreateCollect()
+        {
+            Collect collect = new Collect { };
+            this._bddContext.Add(collect);
+            this._bddContext.SaveChanges();
+        }
+
         // Authentification functions
-
-
 
         public int AddUserAccount(string mail, string password)
         {

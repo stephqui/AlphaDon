@@ -21,74 +21,25 @@
     }
     else
     {
-        @*<p>
-                Veuillez vous authentifier :
-            </p>
-            using (Html.BeginForm())
-            {
-                <div>
-                    @Html.LabelFor(m => m.UserAccount.Mail)
-                    @Html.TextBoxFor(m => m.UserAccount.Mail)
-                    @Html.ValidationMessageFor(m => m.UserAccount.Mail)
-                </div>
-                <div>
-                    @Html.LabelFor(m => m.UserAccount.Password)
-                    @Html.PasswordFor(m => m.UserAccount.Password)
-                    @Html.ValidationMessageFor(m => m.UserAccount.Password)
-                </div>
-                <input type="submit" value="Se connecter" />
-                <br />
-                @Html.ActionLink("Créer un compte", "CreateUserAccount")
-            }*@
-
-<form action="/login/index" method="post">
-    <h2 class="mb-4 indigo-text font-weight-bold">Se Connecter</h2>
-
-    <div align="center">
-        @Html.LabelFor(m => m.UserAccount.Mail)
-        @Html.TextBoxFor(m => m.UserAccount.Mail)
-        @Html.ValidationMessageFor(m => m.UserAccount.Mail)
-    </div>
-    <div align="center">
-        @Html.LabelFor(m => m.UserAccount.Password)
-        @Html.PasswordFor(m => m.UserAccount.Password)
-        @Html.ValidationMessageFor(m => m.UserAccount.Password)
-    </div>
-    <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-    </label>
-
-    <input type="submit" value="Se connecter" />
-    <br />
-    <p class="inscription">Je n'ai pas de compte.</p>
-    @Html.ActionLink("Créer un compte", "CreateUserAccount")
-</form>
-
-        <!--<div class="dropdown-menu">
-            <form class="px-4 py-3">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserAccount.Mail)
-                    @Html.TextBoxFor(m => m.UserAccount.Mail)
-                    @Html.ValidationMessageFor(m => m.UserAccount.Mail)-->
-                    @*<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@exemple.com">*@
-                <!--</div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserAccount.Password)
-                    @Html.PasswordFor(m => m.UserAccount.Password)
-                    @Html.ValidationMessageFor(m => m.UserAccount.Password)-->
-                    @*<input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Mot de Passe">*@
-                <!--</div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                    <label class="form-check-label" for="dropdownCheck">
-                        Se souvenir de moi
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Me Connecter</button>
-            </form>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="@Html.ActionLink("Créer un compte", "CreateUserAccount")">Pas encore Membre ? Créer un compte</a>
-            <a class="dropdown-item" href="#">Mot de Passe oublié ?</a>
-        </div>-->
+        <form action="/login/index" method="post">
+            <h2 class="mb-4 indigo-text font-weight-bold">Se Connecter</h2>
+            <div align="center">
+                @Html.LabelFor(m => m.UserAccount.Mail)
+                @Html.TextBoxFor(m => m.UserAccount.Mail)
+                @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+            </div>
+            <div align="center">
+                @Html.LabelFor(m => m.UserAccount.Password)
+                @Html.PasswordFor(m => m.UserAccount.Password)
+                @Html.ValidationMessageFor(m => m.UserAccount.Password)
+            </div>
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+            </label>
+            <input type="submit" value="Se connecter" />
+            <br />
+            <p class="inscription">Je n'ai pas de compte.</p>
+            @Html.ActionLink("Créer un compte", "CreateUserAccount")
+        </form>
     }
 </section>

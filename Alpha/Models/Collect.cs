@@ -10,8 +10,8 @@ namespace Alpha.Models
     {
         public int Id { get; set; }
     [MaxLength(30)]
-        [Required]
-        public int Limit { get; set; }
+        //[Required]
+        //public int Limit { get; set; }
 
         public int CurrentAmount { get; set; }
     }

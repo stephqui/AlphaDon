@@ -30,10 +30,10 @@ namespace Alpha.Models
 
         [MaxLength(20)]
         public string Rib { get; set; }
-
+        public int Limit { get; set; }
 
         // enum
-      
+
         public ProjectStatus Status { get; set; }
 
         public Range Zone { get; set; }

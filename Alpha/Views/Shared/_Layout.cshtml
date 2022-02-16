@@ -22,7 +22,6 @@
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
 
-
     <!-- Material Design CSS -->
     <link href="~/css/mdb.min.css" rel="stylesheet">
 
@@ -45,41 +44,34 @@
             <div class="container">
 
                 <!-- Navbar brand -->
-                <a class="navbar-brand" href="#"><img src="~/img/alpha-logo3 vide.png" alt="Logo Alpha-Don" style="width:70px; height:auto" /></a>
+                <a class="navbar-brand" href="#"><img src="~/img/alpha-logo3 vide.png" alt="Logo Alpha-Don" style="width:50px; height:auto" /></a>
+
+                @{ if (User.Identity.IsAuthenticated)
+                    {
+        <a class="navbar-brand" href="#page-top">Bonjour @User.Identity.Name</a> }
+                    else
+                    {
+        <a class="navbar-brand" href="#page-top">Bienvenue</a> } }
+
 
                 <!-- Collapse button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Collapsible content -->
-                <div class="collapse navbar-collapse" id="basicExampleNav">
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>*@
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <!-- Collapsible content -->
+                    @*<div class="collapse navbar-collapse" id="basicExampleNav">*@
 
                     <!-- Links -->
-                    <ul class="navbar-nav mx-auto mr-auto">
-                        <li class="nav-item active mx-2">
-                            <a class="nav-link " href="#FaireUnDon">Faire un Don</a>
+                    <!--<ul class="navbar-nav mx-auto mr-auto">
+                    <li class="nav-item active mx-2">-->
+                    @*<a class="nav-link" href="Projets Index">Projets</a>*@
+                    <!--<a class="nav-link" href="~/Project/Index">Projets</a>
                             <span class="sr-only">(current)</span>
                         </li>
 
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Créer un Projet</a>
-                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">An sub-menu</a>
-                                <a class="dropdown-item" href="#">Another one</a>
-                                <a class="dropdown-item" href="#">Something else</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#Des Projets Incroyables">Projets</a>
-                        </li>
-
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#team">Team</a>
-                        </li>
-                    </ul>
+                    </ul>-->
                     <!-- Links -->
 
                     <form class="form-inline text-white">
@@ -89,24 +81,25 @@
                         </div>
                     </form>
 
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-        <div>
-            <a class="btn btn-purple btn-sm" href="~/login/index"><i class="fa fa-clone left mr-2"></i> Se connecter</a>
-        </div> }
-    else
-    {
-<div>
-    <a class="btn btn-purple btn-sm" href="~/login/deconnexion"><i class="fa fa-clone left mr-2"></i> Se déconnecter</a>
-</div>}
-
-
+                    <ul class="navbar-nav ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Profile/ProfileChange/1"> Profil</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
+                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/CreateProject"> Créer un projet</a></li>
+                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/deconnexion"> Se déconnecter</a></li> }
+                                                                        else
+                                                                        {
+                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
+                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/index"> Se connecter</a></li>
+                                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/CreateUserAccount"> Créer un compte</a></li>}
+                    </ul>
                 </div>
                 <!-- Collapsible content -->
 
             </div>
             <!-- Additional container -->
-
+            @*</div>*@
         </nav>
         <!-- Navbar-->
 
@@ -256,154 +249,24 @@
                         <a class="btn btn-outline-purple" href="#" target="_blank" role="button">En Savoir Plus</a>
                     </div>
                     <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-                <!--Row features-->
-                <div class="row features-small mt-5 wow fadeIn">
-
-                    <!--First column-->
-                    <div class="col-md-4">
-                        <!--First row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">Free for personal and commercial use</h6>
-                                <p class="grey-text">
-                                    Our license is user-friendly. Feel free to use MDB for both private as well as commercial projects.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/First row-->
-                        <!--Second row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">400+ UI elements</h6>
-                                <p class="grey-text">
-                                    An impressive collection of flexible components allows you to develop any project.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Second row-->
-                        <!--Third row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">600+ icons</h6>
-                                <p class="grey-text">Hundreds of useful, scalable, vector icons at your disposal.</p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Third row-->
-                        <!--Fourth row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">Fully responsive</h6>
-                                <p class="grey-text">
-                                    It doesn't matter whether your project will be displayed on desktop, laptop, tablet or mobile phone. MDB
-                                    looks great on each screen.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Fourth row-->
-                    </div>
-                    <!--/First column-->
-                    <!--Second column-->
-                    <div class="col-md-4 flex-center">
-                        <img src="~/img/phone.jpg" alt="Material Destiny Template displayed on iPhone" class="z-depth-0 img-fluid">
-                    </div>
-                    <!--/Second column-->
-                    <!--Third column-->
-                    <div class="col-md-4 mt-2">
-                        <!--First row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">70+ CSS animations</h6>
-                                <p class="grey-text">
-                                    Neat and easy to use animations, which will increase the interactivity of your project and delight your visitors.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/First row-->
-                        <!--Second row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">Plenty of useful templates</h6>
-                                <p class="grey-text">Need inspiration? Use one of our predefined templates for free.</p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Second row-->
-                        <!--Third row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">Easy installation</h6>
-                                <p class="grey-text">
-                                    5 minutes, a few clicks and... done. You will be surprised at how easy it is.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Third row-->
-                        <!--Fourth row-->
-                        <div class="row">
-                            <div class="col-2">
-                                <i class="fas fa-check-circle fa-2x indigo-text"></i>
-                            </div>
-                            <div class="col-10">
-                                <h6 class="feature-title">Easy to use and customize</h6>
-                                <p class="grey-text">
-                                    Using MDB is straightforward and pleasant. Components flexibility allows you deep customization. You will
-                                    easily adjust each component to suit your needs.
-                                </p>
-                                <div style="height:15px"></div>
-                            </div>
-                        </div>
-                        <!--/Fourth row-->
-                    </div>
-                    <!--/Third column-->
-
-                </div>
-                <!--/Row features-->
-                <!--Call to action-->
-                <div class="text-center pt-4">
-                    <a class="btn btn-outline-purple" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
-                        Download Me Now
-                        <i class="fas fa-download ml-2"></i>
-                    </a>
-                    <a class="btn btn-outline-secondary" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
-                        Start free tutorial
-                        <i class="fas fa-graduation-cap ml-2"></i>
-                    </a>
-                </div>
-                <!--/.Call to action-->
+                    <!--</div>-->
+                    <!--/Row features-->
+                    <!--Call to action-->
+                    <!--<div class="text-center pt-4">
+                        <a class="btn btn-outline-purple" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
+                            Download Me Now
+                            <i class="fas fa-download ml-2"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
+                            Start free tutorial
+                            <i class="fas fa-graduation-cap ml-2"></i>
+                        </a>
+                    </div>-->
+                    <!--/.Call to action-->
 
             </section>
 
-            <hr class="my-5" id="Des Projets Incroyables">
+
 
             <!--Section Amazing Projects-->
 

@@ -17,6 +17,7 @@
                     <th class="font-weight-bold">Adresse</th>
                     <th class="font-weight-bold">Montant actuel</th>
                     <th class="font-weight-bold">Plafond à atteindre</th>
+                    <th class="font-weight-bold">Statut du projet</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +29,8 @@
                     <td>@p.Profile.LastName</td>
                     <td>@p.Profile.Adress.City</td>
                     <td> @p.Collect.CurrentAmount</td>
-                    <td>@p.Collect.Limit</td>
+                    <td>@p.Limit</td>
+                    <td>@p.Status</td>
                 </tr>
                 }
             </tbody>

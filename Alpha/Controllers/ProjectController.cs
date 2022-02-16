@@ -39,7 +39,10 @@ namespace Alpha.Controllers
             }
             if (!ModelState.IsValid)
                 return View(project);
-            dal.CreateProject(project.ProjectName, project.StartDate);
+            dal.CreateCollect();
+            dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
+                project.Place, project.Area, project.Limit, project.ProfileId, project.Id, project.CollectId);
+            
             return Redirect("/Project/Index");
         }
     }

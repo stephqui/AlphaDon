@@ -70,7 +70,7 @@ namespace Alpha.Models
                     Nick = "toto",
                     Nationality = "FR",
                     Phone = "0123456789",
-                    AdressId = 1
+                    AdressId = 6
                 },
                 new Profile
                 {
@@ -82,23 +82,79 @@ namespace Alpha.Models
                     Nick = "tata",
                     Nationality = "FR",
                     Phone = "0987654321",
-                    AdressId = 2,
+                    AdressId = 5,
                     Siret = "178569248"
-
-                }
+                },
+                new Profile
+                {
+                    profilePersonality = ProfilePersonality.Single,
+                    FirstName = "Jeremy",
+                    LastName = "ENGELMANN",
+                    Birthday = 1987-03-12,
+                    PayMethod = "CB",
+                    Nick = "jeje",
+                    Nationality = "FR",
+                    Phone = "0612010304",
+                    AdressId = 4
+                },
+                 new Profile
+                 {
+                     profilePersonality = ProfilePersonality.Single,
+                     FirstName = "David",
+                     LastName = "LAUNEY",
+                     Birthday = 1990 - 08 - 07,
+                     PayMethod = "CB",
+                     Nick = "dav",
+                     Nationality = "FR",
+                     Phone = "0712210304",
+                     AdressId = 1
+                 },
+                 new Profile
+                 {
+                     profilePersonality = ProfilePersonality.Single,
+                     FirstName = "Nacer",
+                     LastName = "BENCHEHIDA ",
+                     Birthday = 1989 - 08 - 07,
+                     PayMethod = "CB",
+                     Nick = "nass",
+                     Nationality = "FR",
+                     Phone = "0689213604",
+                     AdressId = 3
+                 },
+                 new Profile
+                 {
+                     profilePersonality = ProfilePersonality.Single,
+                     FirstName = "Stephane",
+                     LastName = "PROST-TOURNIER ",
+                     Birthday = 1968 - 04 - 25,
+                     PayMethod = "CB",
+                     Nick = "steph",
+                     Nationality = "FR",
+                     Phone = "0702413302",
+                     AdressId = 2
+                 }
                 );
             this.Adresses.AddRange(
-                new Adress { City = "Paris", Country = "FR", Street = "2, avenue de l'Opéra", Zip = 75016 },
-                new Adress { City = "Reims", Country = "FR", Street = "12, rue Carnot", Zip = 51000 }
+                new Adress { City = "Paris", Country = "FR", Street = "2, avenue de l'Opéra", Zip = 75016,},
+                new Adress { City = "Reims", Country = "FR", Street = "12, rue Carnot", Zip = 51000 },
+                new Adress { City = "Montévrin", Country = "FR", Street = "51, rue de l'Eglise", Zip = 77140 },
+                new Adress { City = "Caen", Country = "FR", Street = "253, Boulevard Leroy", Zip = 14000 },
+                new Adress { City = "Toulouse", Country = "FR", Street = "58, Route de Narbonne", Zip = 31500 },
+                new Adress { City = "Annecy", Country = "FR", Street = "156, Avenue de Geneve", Zip = 74000 }
+
                 );
             this.UserAccounts.AddRange(
-                new UserAccount { Mail = "alain@gmail.com", Password = "9C-D4-E5-8F-17-09-F7-F9-0A-A4-75-FA-F1-89-62-A7", Status = AccountStatus.IsProjectCreator, ProfilId = 1 },
-                new UserAccount { Mail = "joe@yahoo.com", Password = "C6-01-63-F5-D6-84-99-D3-07-EA-E7-1A-BE-31-9D-ED", Status = AccountStatus.Valid, ProfilId = 2 }
+                new UserAccount { Mail = "alain@gmail.com", Password = "9C-D4-E5-8F-17-09-F7-F9-0A-A4-75-FA-F1-89-62-A7", Status = AccountStatus.IsProjectCreator, ProfilId = 6, Role ="Basic" },
+                new UserAccount { Mail = "joe@yahoo.com", Password = "C6-01-63-F5-D6-84-99-D3-07-EA-E7-1A-BE-31-9D-ED", Status = AccountStatus.Valid, ProfilId = 4, Role = "Basic" },
+                new UserAccount { Mail = "jeremy@gmail.com", Password = "C6-01-63-F5-D6-84-99-D3-07-EA-E7-1A-BE-31-9D-ED", Status = AccountStatus.Valid, ProfilId = 3, Role = "Admin" },
+                new UserAccount { Mail = "nacer@gmail.com", Password = "93-EE-3B-3C-46-68-92-1D-BF-4B-44-8D-20-B7-C6-63", Status = AccountStatus.Valid, ProfilId = 1, Role = "Admin" },
+                new UserAccount { Mail = "david@gmail.com", Password = "1D-F1-37-E0-56-CD-51-99-14-A4-87-52-D3-66-77-04", Status = AccountStatus.Valid, ProfilId = 2, Role = "Admin" },
+                new UserAccount { Mail = "stephane@gmail.com", Password = "A8-B7-6B-BF-C1-F3-39-16-81-44-28-3D-F3-A8-09-2F", Status = AccountStatus.Valid, ProfilId = 5, Role = "Admin" }
                 );
 
             this.Collects.AddRange(
-                 new Collect { Limit = 5000, CurrentAmount = 2000, Id = 1 },
-                 new Collect { Limit = 10000, CurrentAmount = 4000, Id = 2 }
+                 new Collect {  CurrentAmount = 2000, Id = 1 },
+                 new Collect {  CurrentAmount = 1500, Id = 2 }
                  );
 
             this.Projects.AddRange(
@@ -111,20 +167,22 @@ namespace Alpha.Models
                     Place = "Marne-la-Vallée",
                     Rib = "FR76 8001 0032 1540",
                     Category = ProjectCategory.fairTrade,
+                    Limit = 5000,
                     CollectId = 1,
-                    ProfileId =1
+                    ProfileId =5
                 },
                  new Project
                  {
-                     ProjectName = "Lancez moi",
+                     ProjectName = "Traverse",
                      StartDate = new DateTime(2022, 02, 10),
                      EndDate = new DateTime(2022, 06, 25),
                      Description = "Aider la rénovation du pont de Morette",
                      Place = "Thones",
                      Rib = "FR76 8002 0001 0150",
                      Category = ProjectCategory.infrastructural,
+                     Limit = 2000,
                      CollectId = 2,
-                     ProfileId = 2
+                     ProfileId = 4
                  });
 
             this.UnitDonations.AddRange(

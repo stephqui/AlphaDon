@@ -14,17 +14,92 @@
         @using (Html.BeginForm())
         {
             <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Profile, new { @class = "form-control", placeholder = "Nom" })
+                @Html.LabelFor(model => model.Profile)
+                @Html.ValidationMessageFor(model => model.Profile)
+            </div>
+            <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", placeholder = "Nom du projet" })
                 @Html.LabelFor(model => model.ProjectName)
                 @Html.ValidationMessageFor(model => model.ProjectName)
             </div>
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", placeholder = "date" })
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
+                @Html.LabelFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Category, new { @class = "form-control", placeholder = "Categorie" })
+                @Html.LabelFor(model => model.Category)
+                @Html.ValidationMessageFor(model => model.Category)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", placeholder = "Date du debut" })
                 @Html.LabelFor(model => model.StartDate)
                 @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", placeholder = "Date de fin" })
+                @Html.LabelFor(model => model.EndDate)
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Place, new { @class = "form-control", placeholder = "Ville" })
+                @Html.LabelFor(model => model.Place)
+                @Html.ValidationMessageFor(model => model.Place)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Area, new { @class = "form-control", placeholder = "Continent" })
+                @Html.LabelFor(model => model.Area)
+                @Html.ValidationMessageFor(model => model.Area)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "Limite du don" })
+                @Html.LabelFor(model => model.Limit)
+                @Html.ValidationMessageFor(model => model.Limit)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.ProfileId, new { @class = "form-control", placeholder = "ProfileId" })
+                @Html.LabelFor(model => model.ProfileId)
+                @Html.ValidationMessageFor(model => model.ProfileId)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.CollectId, new { @class = "form-control", placeholder = "CollectId" })
+                @Html.LabelFor(model => model.CollectId)
+                @Html.ValidationMessageFor(model => model.CollectId)
             </div>
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Cree</button>
         }
+
+        @*<div>
+                <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+                <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+                <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
+                <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
+            </div>*@
+        <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+        <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+        <br />
+        <br />
+        @if (ViewBag.Error != null)
+        {
+            <h2> @ViewBag.Error </h2>
+        }
+        <form method="post" action="SendEmail">
+            <div class="container">
+                <span class="form-control-static"> Receiver: </span>
+                <input class="form-control" type="text" name="receiver"> <br />
+                <span class="form-control-static"> Subject: </span>
+                <input class="form-control" type="text" name="subject"> <br />
+                <span class="form-control-static"> Message: </span>
+                <input class="form-control" type="text" name="message"> <br />
+                <input class="btn btn-primary" type="submit" value="Nous contacter">
+            </div>
+        </form>
+    </div>
+</div>
+
     </div>
 </div>

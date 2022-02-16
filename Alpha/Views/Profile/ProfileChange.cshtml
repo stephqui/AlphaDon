@@ -4,43 +4,77 @@
     ViewBag.Title = "Modification du profil";
 }
 
-<h3 class="titre">ProfileChange</h3>
-<p class="contenu">Ici se trouve la page de la modification du profil</p>
-
+<br />
+<br />
+<br />
+<h3 class="titre">Votre Profil</h3>
+<p class="contenu">Vous pouvez modifier votre profil</p>
 <body>
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier un profil : </legend>
-            @Html.LabelFor(l => Model.LastName)
-            @Html.TextBoxFor(l => Model.LastName)
-            @Html.ValidationMessageFor(l => Model.LastName)
-            <br />
-            @Html.LabelFor(f => Model.FirstName)
-            @Html.TextBoxFor(f => Model.FirstName)
-            @Html.ValidationMessageFor(f => Model.FirstName)
-            <br />
-            @Html.LabelFor(n => Model.Nationality)
-            @Html.TextBoxFor(n => Model.Nationality)
-            @Html.ValidationMessageFor(n => Model.Nationality)
-            <br />
-            @Html.LabelFor(n => Model.Nick)
-            @Html.TextBoxFor(n => Model.Nick)
-            @Html.ValidationMessageFor(n => Model.Nick)
-            <br />
-            @Html.LabelFor(b => Model.Birthday)
-            @Html.TextBoxFor(b => Model.Birthday)
-            @Html.ValidationMessageFor(b => Model.Birthday)
-            <br />
-            @Html.LabelFor(b => Model.Phone)
-            @Html.TextBoxFor(b => Model.Phone)
-            @Html.ValidationMessageFor(b => Model.Phone)
-            <br />
-            @Html.LabelFor(p => Model.PayMethod)
-            @Html.TextBoxFor(p => Model.PayMethod)
-            @Html.ValidationMessageFor(p => Model.PayMethod)
-            <br />
-            <input type="submit" value="Modifier" />
+            <div class="container rounded bg-white mt-5 mb-5">
+                <div class="row">
+                    <div class="col-md-4 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <label class="header">Profile Photo:</label>
+                            <input id="image" type="file" placeholder="Photo">
+                            <a class="text-black-50">Je m'appelle @User.Identity.Name<span class="font-weight-bold">Bruce</span></a>
+                            <span class="text-black-50">brucewayne@mail.com</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 border-right">
+                        <div class="p-3 py-5">
+                            <h4 class="text-center">Mon Profil</h4>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Nom</label></div>
+                                @Html.TextBoxFor(l => Model.LastName)
+                                @Html.ValidationMessageFor(l => Model.LastName)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Prénom</label></div>
+                                @Html.TextBoxFor(f => Model.FirstName)
+                                @Html.ValidationMessageFor(f => Model.FirstName)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Nationalité</label></div>
+                                @Html.TextBoxFor(n => Model.Nationality)
+                                @Html.ValidationMessageFor(n => Model.Nationality)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Pseudo</label></div>
+                                @Html.TextBoxFor(n => Model.Nick)
+                                @Html.ValidationMessageFor(n => Model.Nick)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Date de naissance</label></div>
+                                @Html.TextBoxFor(b => Model.Birthday)
+                                @Html.ValidationMessageFor(b => Model.Birthday)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Téléphone</label></div>
+                                @Html.TextBoxFor(b => Model.Phone)
+                                @Html.ValidationMessageFor(b => Model.Phone)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Mode de paiement</label></div>
+                                @Html.TextBoxFor(p => Model.PayMethod)
+                                @Html.ValidationMessageFor(p => Model.PayMethod)
+                            </div>
+                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">sauvegarder</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </fieldset>
     }
 </body>

@@ -18,7 +18,8 @@ namespace Alpha.Models
         [MaxLength(35)]
         public string Mail { get; set; }
 
-    
+        public string Role { get; set; }
+
         public AccountStatus Status { get; set; }
  
 

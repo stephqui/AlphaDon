@@ -40,6 +40,8 @@ namespace Alpha.Controllers
                     var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, userAccount.Id.ToString()),
+                        new Claim(ClaimTypes.Role, userAccount.Role),
+                        //new Claim(ClaimTypes.NameIdentifier, userAccount.Profil.FirstName),
                     };
 
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -80,7 +82,7 @@ namespace Alpha.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
 
-                return Redirect("/");
+                return Redirect("/profile/profilechange");
             }
             return View(userAccount);
         }
