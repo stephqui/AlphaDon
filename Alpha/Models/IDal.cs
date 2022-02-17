@@ -10,25 +10,26 @@ namespace Alpha.Models
         void DeleteCreateDatabase();
 
         //*********************************** PROJECT *************************************************
-        void ProjectExiste(string projectName);
-        void GetAllProjects();
-        void GetMyProject();
-        void GetDonationsByCollectId();
-        void AmountCalculation();
+        bool ProjectExiste(string projectName);
+        List<Project> GetAllProjects();
+        Project GetMyProject(int profileId);
+        List<UnitDonation> GetDonationsByCollectId(int collectId);
+        int AmountCalculation(int collectId);
         void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
-            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId);
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId,
+            string summary, string picture);
         void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date);
 
 
         //*********************************** PROFILE / USERACCOUNT *************************************************
         int AddUserAccount(string mail, string password);
 
-        void GetAllProfiles();
+        List<Profile> GetAllProfiles();
         void ProfileChange(int id, string lastName, string firstName, string nationality, Int32 birthday,
             string nick, string phone, string payMethod);
         UserAccount Authentify(string mail, string password);
         UserAccount GetUserAccount(int id);
-        void GetAllUserAccount();
+        List<UserAccount> GetAllUserAccount();
         UserAccount GetUserAccount(string idStr);
     }
 }

@@ -23,7 +23,8 @@ namespace Alpha.Models
             _bddContext.Database.EnsureCreated();
         }
 
-       
+        //**************************************** PROJECT *******************************************************************
+
         //Renvoie la liste des projets, leur statut, leur montant collecté.
         public List<Project> GetAllProjects()
         {
@@ -47,7 +48,6 @@ namespace Alpha.Models
             }
             return amount;
         }
-        //**************************************** PROJECT *******************************************************************
         //affiche le projet du createur
         public Project GetMyProject(int profileId)
         {
@@ -57,7 +57,8 @@ namespace Alpha.Models
 
         // Creation de projet
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
-            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId)
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId,
+            string summary, string picture)
         {
             //on crée une collecte en meme temps que le projet
             Collect collect = new Collect { };

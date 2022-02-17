@@ -40,7 +40,7 @@ namespace Alpha.Controllers
             if (!ModelState.IsValid)
                 return View(project);
             dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-                project.Place, project.Area, project.Limit, project.ProfileId, project.Id, project.CollectId);
+                project.Place, project.Area, project.Limit, project.ProfileId, project.Id, project.CollectId, project.Summary, project.Picture);
             
             return Redirect("/Project/Index");
         }

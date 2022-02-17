@@ -2,6 +2,97 @@
 @{
     Layout = null;
 }
+
+<div id="FormCreation">
+    <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:5% 15%;">
+        <tr><th colspan="3">Bonjour, Nom !</th></tr>
+        <tr><th colspan="3">Expliquez-nous vos aspirations...</th></tr>
+        <!-- Nom du projet -->
+        <tr>
+            <th><label title="Name" for="name">Nom du projet : </label></th>
+            <td colspan="2"> @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", placeholder = "Nom du projet" })</td>
+            @*<td colspan="2"><input type="text" id="name" name="Name" style="width:100%;"></td>*@
+        </tr>
+        <!-- Description rapide -->
+        <tr>
+            <th><label for="shortdescr">Expliquez votre projet en quelques mots.</label></th>
+            <td rowspan="2" colspan="2"><input type="text" id="shortdescr" name="Description sommaire" style="width:100%;"></td>
+        </tr>
+        <tr>
+            <td><label for="shortdescr">Ils permettront aux visiteurs d'avoir rapidement une idée pendant la navigation. Une description détaillée sera demandée plus tard.</label></td>
+        </tr>
+        <!-- Category -->
+        <tr>
+            <th>De quel domaine relève votre projet ?</th>
+            <td>
+                <input type="radio" id="medical" name="category" value="medical">
+                <label for="medical">Médical</label><br>
+                <input type="radio" id="sport" name="category" value="sport">
+                <label for="sport">Sport</label><br>
+                <input type="radio" id="humanitarian" name="category" value="humanitarian">
+                <label for="humanitarian">Humanitaire</label>
+            </td>
+            <td>
+                <input type="radio" id="educational" name="category" value="educational">
+                <label for="educational">Education</label><br>
+                <input type="radio" id="infrastructural" name="category" value="infrastructural">
+                <label for="infrastructural">Construction, Infrastructures</label><br>
+                <input type="radio" id="fairTrade" name="category" value="fairTrade">
+                <label for="fairTrade">Commerce Equitable</label>
+            </td>
+        </tr>
+        <!-- Place + WorldArea -->
+        <tr>
+            <th><label for="Place">Où se situe votre projet ?</label></th>
+            <td><input type="text" id="Place" name="Place"></td>
+            <td>
+                <select name="WorldArea" id="WorldArea">
+                    <option value="middleEast">Moyen-Orient, monde arabe</option>
+                    <option value="farEast">Extrême-Orient</option>
+                    <option value="africa">Afrique</option>
+                    <option value="northAmerica">Amérique du Nord</option>
+                    <option value="southAmerica">Amérique du Sud</option>
+                    <option value="europa">Europe</option>
+                    <option value="oceania">Océanie</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Description-->
+        <tr>
+            <th><label for="Description"><h4>Description de votre projet</h4></label></th>
+            <td colspan="2">Ne lésinez pas sur les explications ! Le gestionnaire qui prendra votre projet en charge sera ravi de vous aider !</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="height:350px;"><textarea name="Description" id="Description" rows="4" cols="50" style="width:100%; height:100%;"></textarea></td>
+        </tr>
+        <!-- Image -->
+        <tr>
+            <th>Uploader une image pour illustrer votre projet</th>
+            <td colspan="2"><input type="file" class="upload" /></td>
+        </tr>
+        <!-- Montant -->
+        <tr>
+            <th>
+                <label for="Limit">Quel montant estimez-vous avoir besoin pour mener à bien votre projet ?</label>
+            </th>
+            <td colspan="2"><input type="text" id="Limit" name="Limit"></td>
+        </tr>
+        <!-- Dates -->
+        <tr>
+            <th>Dates de début et de fin</th>
+            <td>Début :<input type="date" id="StartDate" name="StartDate"></td>
+            <td>Fin :<input type="date" id="EndDate" name="EndDate"></td>
+        </tr>
+        <!-- Submit Button-->
+        <tr>
+            <td colspan="3" style="padding-top:15%; padding-left: 70%;">
+                <button class="btn btn-primary btn-xl" type="submit">Soumettre le projet</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@* *********************************************************************************************************************@
 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Creer ton projet</h2>
 <!-- Icon Divider-->
 <div class="divider-custom">
@@ -24,10 +115,16 @@
                 @Html.ValidationMessageFor(model => model.ProjectName)
             </div>
             <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Summary, new { @class = "form-control", placeholder = "Breve " })
+                @Html.LabelFor(model => model.Summary)
+                @Html.ValidationMessageFor(model => model.Summary)
+            </div>
+            <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
                 @Html.LabelFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
+
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.Category, new { @class = "form-control", placeholder = "Categorie" })
                 @Html.LabelFor(model => model.Category)
@@ -74,11 +171,11 @@
         }
 
         @*<div>
-                <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
-                <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
-                <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
-                <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
-            </div>*@
+            <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+            <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+            <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
+            <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
+        </div>*@
         <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
         <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
         <br />
