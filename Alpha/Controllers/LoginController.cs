@@ -50,6 +50,10 @@ namespace Alpha.Controllers
 
                     HttpContext.SignInAsync(userPrincipal);
 
+                    //Pour recuperer le role ou l'id
+                    //string str = @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+                    //string str = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 
@@ -82,7 +86,9 @@ namespace Alpha.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
 
-                return Redirect("/profile/profilechange");
+                return RedirectToAction(nameof(Index), new { id = id });
+ 
+                //return Redirect("/profile/profilechange");
             }
             return View(userAccount);
         }

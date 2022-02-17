@@ -3,172 +3,170 @@
     Layout = "_Layout";
     ViewBag.Title = "Project";
 }
-<section class="text-center py-5">
-    <br />
-    <br />
-    <h2 class="mb-4 indigo-text font-weight-bold">Liste des projets</h2> <br />
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Prénom</th>
-                    <th class="font-weight-bold">Nom</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Statut du projet</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-                <tr>
-                    <td>@p.ProjectName</td>
-                    <td>@p.Profile.FirstName</td>
-                    <td>@p.Profile.LastName</td>
-                    <td>@p.Profile.Adress.City</td>
-                    <td> @p.Collect.CurrentAmount</td>
-                    <td>@p.Limit</td>
-                    <td>@p.Status</td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</section>
-<section>
+<head>
+    <style>
+        .imgStatut {
+            border-radius: 45%;
+            width: 10%
+        }
+    </style>
+</head>
+<body>
+    <section class="text-center py-5">
+        <br />
+        <br />
+        <h2 class="mb-4 indigo-text font-weight-bold">Liste des projets</h2> <br />
+        <div id="ProjectList">
+            @foreach (var p in Model)
+            {
+                <table id="Project" style="width:30%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left: 3%; margin-top:3%; padding:1%;">
+                    <tr><td id="Comp1Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                    <tr><th colspan="2">@p.ProjectName<img src="~/img/Collecte en cours.png" style="border-radius:45%; width:30%"></th></tr>
+                    <tr>
+                        <td><div style="text-align:left;">@p.Profile.FirstName @p.Profile.LastName</div></td>
+                        <td><div style="text-align:right;">@p.Category</div></td>
+                    </tr>
+                    <tr>
+                        <td><div style="text-align:left;">@p.Collect.CurrentAmount</div></td>
+                        <td><div style="text-align:right;">@p.Limit</div></td>
+                    </tr>
+                </table>
+            }
+        </div> (modifié)
+    </section>
+</body>
+<!--<section>
     <div class="row-test">
         <div align="center">
             <h1>Donner de nourriture à des pauvres <img src="~/img/Collecte en cours.png" class="img-circle" width="10%" title="Statut du projet"></h1>
         </div>
     </div>
-    <br>
-    <!-- Etat de la collecte-->
-    <div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
-            400 € collectés
-        </div>
-        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:60%">
-            600 € manquants
-        </div>
+    <br>-->
+<!-- Etat de la collecte-->
+<!--<div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+        400 € collectés
     </div>
-    <!-- Menu PP-->
-    <div class="btn-group btn-group-justified profile-button" id="menuPP">
-        <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#myProject">
-            Voir votre
-            projet
-        </a>
-        <a href="#" class="btn btn-primary profile-button" data-toggle="modal" data-target="#ModalMessageAuGP">
-            Contacer votre
-            Référent Alpha
-        </a>
-        <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#chat">
-            Consulter les messages liés à
-            votre projet
-        </a>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
-                Newsletter <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Consulter vos anciennes Newsletter</a></button></li>
-                <li>
-                    <div type="button" class="fileUpload btn btn-primary profile-button">
-                        <span>Editer une nouvelle Newsletter</span>
-                        <input type="file" class="upload" />
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
-                Voir les contreparties <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties non envoyées</a></button></li>
-                <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties envoyées</a></button></li>
-            </ul>
-        </div>
+    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:60%">
+        600 € manquants
     </div>
-    <!-- Modifier le projet-->
-    <div id="myProject" class="collapse">
-        <div class="form-group">
-            <textarea class=form-control rows="25" id="myProject"></textarea>
-        </div>
-    </div>
-    </div>
-    <!-- Message au GP-->
-    <div id="ModalMessageAuGP" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Entrez votre message</h4>
+</div>-->
+<!-- Menu PP-->
+<!--<div class="btn-group btn-group-justified profile-button" id="menuPP">
+    <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#myProject">
+        Voir votre
+        projet
+    </a>
+    <a href="#" class="btn btn-primary profile-button" data-toggle="modal" data-target="#ModalMessageAuGP">
+        Contacer votre
+        Référent Alpha
+    </a>
+    <a class="btn btn-primary profile-button" data-toggle="collapse" data-parent="#menuPP" href="#chat">
+        Consulter les messages liés à
+        votre projet
+    </a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
+            Newsletter <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Consulter vos anciennes Newsletter</a></button></li>
+            <li>
+                <div type="button" class="fileUpload btn btn-primary profile-button">
+                    <span>Editer une nouvelle Newsletter</span>
+                    <input type="file" class="upload" />
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <textarea class=form-control rows="25" id="myProject"></textarea>
-                    </div>
+            </li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle profile-button" data-toggle="dropdown">
+            Voir les contreparties <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties non envoyées</a></button></li>
+            <li><button type="button" class="btn btn-primary profile-button"><a href="#NLList" data-toggle="collapse" data-parent="#menuPP" style="color:white">Contreparties envoyées</a></button></li>
+        </ul>
+    </div>
+</div>-->
+<!-- Modifier le projet-->
+<!--<div id="myProject" class="collapse">
+    <div class="form-group">
+        <textarea class=form-control rows="25" id="myProject"></textarea>
+    </div>
+</div>
+</div>-->
+<!-- Message au GP-->
+<!--<div id="ModalMessageAuGP" class="modal fade" role="dialog">
+    <div class="modal-dialog">-->
+<!-- Modal content-->
+<!--<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Entrez votre message</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <textarea class=form-control rows="25" id="myProject"></textarea>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" alignment="left">Annuler</button>
-                    <button type="button" class="btn btn-default" action="#" data-dismiss="modal">Envoyer</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" alignment="left">Annuler</button>
+                <button type="button" class="btn btn-default" action="#" data-dismiss="modal">Envoyer</button>
             </div>
         </div>
     </div>
-    <!-- Commentaires-->
-    <div id="chat" class="panel-collapse collapse row-test">
-        <h2>Commentaires liés au projet</h2>
-        <div class="media">
-            <div class="media-left">
-                <img src="~/img_avatar1.png" class="media-object" style="width:45px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">
-                    Gros riche sympa <small><i>Posted on February 19, 2016</i></small>
-                </h4>
-                <p>Vous faites du bon boulot ! Je vous soutiens.</p>
-                <!-- Nested media object -->
-                <div class="media">
-                    <div class="media-left">
-                        <img src="~/img_avatar2.png" class="media-object" style="width:45px">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            Troll <small><i>Posted on February 19, 2016</i></small>
-                        </h4>
-                        <p>Bande de escrocs</p>
-                        <!-- Nested media object -->
-                        <div class="media">
-                            <div class="media-left">
-                                <img src="~/img_avatar3.png" class="media-object" style="width:45px">
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    J'aime débattre <small>
-                                        <i>
-                                            Posted on February 19,
-                                            2016
-                                        </i>
-                                    </small>
-                                </h4>
-                                <p>Ce ne sont pas des escrocs !</p>
-                            </div>
+</div>-->
+<!-- Commentaires-->
+<!--<div id="chat" class="panel-collapse collapse row-test">
+    <h2>Commentaires liés au projet</h2>
+    <div class="media">
+        <div class="media-left">
+            <img src="~/img_avatar1.png" class="media-object" style="width:45px">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">
+                Gros riche sympa <small><i>Posted on February 19, 2016</i></small>
+            </h4>
+            <p>Vous faites du bon boulot ! Je vous soutiens.</p>-->
+<!-- Nested media object -->
+<!--<div class="media">
+    <div class="media-left">
+        <img src="~/img_avatar2.png" class="media-object" style="width:45px">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            Troll <small><i>Posted on February 19, 2016</i></small>
+        </h4>
+        <p>Bande de escrocs</p>-->
+<!-- Nested media object -->
+<!--<div class="media">
+                        <div class="media-left">
+                            <img src="~/img_avatar3.png" class="media-object" style="width:45px">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                J'aime débattre <small>
+                                    <i>
+                                        Posted on February 19,
+                                        2016
+                                    </i>
+                                </small>
+                            </h4>
+                            <p>Ce ne sont pas des escrocs !</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Newsletters publiées-->
-    <div id="NLList" class="collapse">
+</div>-->
+<!-- Newsletters publiées-->
+<!--<div id="NLList" class="collapse">
         <div>
             <ul>
                 <li><a href="1ere newsletter.pdf">Newsletter du 25 janvier</a></li>
             </ul>
         </div>
     </div>
-</section>
+</section>-->

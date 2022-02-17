@@ -17,6 +17,7 @@ namespace Alpha.Models
         //void AmountCalculation();
         void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId);
+        void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date);
         int AddUserAccount(string mail, string password);
         UserAccount Authentify(string mail, string password);
         UserAccount GetUserAccount(int id);

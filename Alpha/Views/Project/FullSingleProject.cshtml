@@ -1,0 +1,173 @@
+﻿@model Alpha.Models.Project
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Project";
+}
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Projet sur Alpha-Don</title>
+    <style>
+        #Compensations {
+            display: none;
+        }
+
+            #Compensations:target {
+                display: block;
+            }
+
+        #theProject {
+            display: none;
+        }
+
+            #theProject:target {
+                display: block;
+            }
+
+        #Comments {
+            display: none;
+        }
+
+            #Comments:target {
+                display: block;
+            }
+
+        #ContactGP {
+            visibility: hidden;
+        }
+
+            #ContactGP:target {
+                visibility: visible;
+            }
+
+        .imgStatut {
+            border-radius: 45%;
+            width: 10%
+        }
+    </style>
+</head>
+<body>
+    <div id="ProjectPublic">
+        <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:0.5%;">
+            <tr id="nomduprojet"><th colspan="5">@Model.ProjectName <img src="~/img/Collecte en cours.png" class="imgStatut"> </th></tr>
+            <tr id="description sommaire"><td colspan="5" align="center">Description sommaire</td></tr>
+            <tr>
+                <td id="image du projet" rowspan="4" style="width:60%;"><img src="~/img/crowdfunding.png"></td>
+                <td id="cagnotte" colspan="4" style="padding:3%;">
+                    <div style="text-align:center;">
+                        <div class="progress" style="height:30px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width:40%;">
+                                @Model.Collect.CurrentAmount
+                            </div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width:60%">
+                                @Model.Limit <p>€ attendus !</p>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="nbre donateurs"><div style="text-align:center">25 <br>contributions</div></td>
+                <td id="image date"><img src="img/calendrier.png" style="height:55px; float:right;"></td>
+                <td id="nbre de jours">Plus que <br><h4>25 jours !</h4></td>
+            </tr>
+            <tr id="donation" style="height:55px;">
+                <td style="width:10%"></td>
+                <td style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">CONTRIBUER AU PROJET</td>
+                <td style="width:10%"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="#"><img src="~/img/facebook.png" style="height:40px; padding-left: 5%; padding-top: 2%;"></a>
+                    <a href="#"><img src="~/img/messenger.png" style="height:40px; padding-left: 5%; padding-top: 2%;"></a>
+                    <a href="#"><img src="~/img/twitter.png" style="height:40px; padding-left: 5%; padding-top: 2%;"></a>
+                    <a href="#"><img src="~/img/whatsapp.png" style="height:40px; padding-left: 5%; padding-top: 2%;"></a>
+                </td>
+            </tr>
+            <tr><td id="nom du pp">Projet porté par <b>@Model.Profile.FirstName</b> depuis le @Model.StartDate</td></tr>
+            <tr><td id="zone"><b>@Model.Place</b>, @Model.Area</td></tr>
+        </table>
+    </div>
+    <div id="MenuProjet">
+        <table style="margin:5%; background-color:#E2E5E9; border-radius:5px; z-index: 1;">
+            <tr>
+                <th style="width:20%;" onclick="location.href='#theProject'">Projet</th>
+                <th style="width:20%;" onclick="location.href='#Compensations'" title="Choisissez votre contrepartie préférée pour faire un don !">Contreparties</th>
+                <th style="width:20%;" onclick="location.href='#Comments'">Commentaires</th>
+            </tr>
+        </table>
+    </div>
+    <div id="Corpus" style="margin:5%;">
+        <div id="theProject">
+            <p>
+                @Model.Description
+            </p>
+        </div>
+        <div id="Compensations">
+            <table id="Comp1" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left: 5%; padding:1%;">
+                <tr>
+                    <td id="Comp1Name" style="width:80%">Une brosse à dent dédicacée</td>
+                    <td id="Comp1Price" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                </tr>
+                <tr><td id="Comp1Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                <tr>
+                    <td id="Comp1Descr" colspan="2">Cette brosse à dent a été signée par Superman lui-même</td>
+                </tr>
+            </table>
+            <table id="Comp2" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left:5%; padding:1%;">
+                <tr>
+                    <td id="Comp2Name" style="width:80%">Une brosse à dent dédicacée</td>
+                    <td id="Comp2Price" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                </tr>
+                <tr><td id="Comp2Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                <tr>
+                    <td id="Comp2Descr" colspan="2">Cette brosse à dent a été signée par Superman lui-même</td>
+                </tr>
+            </table>
+            <table id="Comp3" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left:5%; padding:1%;">
+                <tr>
+                    <td id="Comp3Name" style="width:80%">Une brosse à dent dédicacée</td>
+                    <td id="Comp3Price" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                </tr>
+                <tr><td id="Comp3Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                <tr>
+                    <td id="Comp3Descr" colspan="2">Cette brosse à dent a été signée par Superman lui-même</td>
+                </tr>
+            </table>
+        </div>
+        <div id="Comments">
+            <table id="Comt1" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
+                <tr>
+                    <th id="Comt1avatar" style="width:5%" rowspan="3">
+                        <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />
+                    </th>
+                    <th id="Comt1Name" style="text-align:left ">Gros riche sympa</th>
+                </tr>
+                <tr><td id="Comt1Comt" style="font-size:large">Vous faites du bon boulot !</td></tr>
+                <tr><td id="Comt1Date" style="font-size: small;">Posté le 15 juillet 2021</td></tr>
+            </table>
+            <table id="Comt2" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
+                <tr>
+                    <th id="Comt2avatar" style="width:5%" rowspan="3">
+                        <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />
+                    </th>
+                    <th id="Comt2Name" style="text-align:left ">Gros riche sympa</th>
+                </tr>
+                <tr><td id="Comt2Comt" style="font-size:large">Vous faites du bon boulot !</td></tr>
+                <tr><td id="Comt2Date" style="font-size: small;">Posté le 15 juillet 2021</td></tr>
+            </table>
+            <table id="Comt3" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
+                <tr>
+                    <th id="Comt3avatar" style="width:5%" rowspan="3">
+                        <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />
+                    </th>
+                    <th id="Comt3Name" style="text-align:left ">Gros riche sympa</th>
+                </tr>
+                <tr><td id="Comt3Comt" style="font-size:large">Vous faites du bon boulot !</td></tr>
+                <tr><td id="Comt3Date" style="font-size: small;">Posté le 15 juillet 2021</td></tr>
+            </table>
+        </div>
+    </div>
+</body>

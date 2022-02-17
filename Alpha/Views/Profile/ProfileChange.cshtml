@@ -70,6 +70,29 @@
                                 @Html.TextBoxFor(p => Model.PayMethod)
                                 @Html.ValidationMessageFor(p => Model.PayMethod)
                             </div>
+                            <br />
+                            <h4 class="text-center">Vous êtes...</h4>
+                            <br />
+                            <label class="container">
+                                une personne physique
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                une Entreprise
+                                <input type="radio" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                une ONG
+                                <input type="radio" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                une Association
+                                <input type="radio" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">sauvegarder</button></div>
                         </div>
                     </div>

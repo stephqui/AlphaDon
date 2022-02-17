@@ -14,7 +14,8 @@ namespace Alpha.Models
         public long Amount { get; set; }
 
         public string Object { get; set; }
-
+        public string Description { get; set; }
+        public string Picture { get; set; }
 
         //creation ForeignKey en 2 lignes
         public int? ProjectId { get; set; }

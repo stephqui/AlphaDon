@@ -47,7 +47,7 @@ namespace Alpha.Models
             }
             return amount;
         }
-
+        //**************************************** PROJECT *******************************************************************
         //affiche le projet du createur
         public Project GetMyProject(int profileId)
         {
@@ -59,6 +59,11 @@ namespace Alpha.Models
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId)
         {
+            //on crée une collecte en meme temps que le projet
+            Collect collect = new Collect { };
+            this._bddContext.Add(collect);
+            this._bddContext.SaveChanges();
+
             Project projectToAdd = new Project { ProjectName = projectName, Description = description,
                 Category = category, StartDate = startDate, EndDate = endDate, Area = area, Limit = limit,
                 ProfileId = profileId, CollectId = collectId };
@@ -76,6 +81,25 @@ namespace Alpha.Models
             return _bddContext.Projects.ToList().Any(Project => string.Compare(Project.ProjectName, projectName, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
+        //**************************************** DON *******************************************************************
+        // Creation d'un don
+        public void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date)
+        {
+            UnitDonation unitDonationToAdd = new UnitDonation
+            {
+                Id = id,
+                PayMethod = payMethod,
+                CurrentAmount = CurrentAmount,
+                Date = date
+            };
+            if (id != 0)
+            {
+                unitDonationToAdd.Id = id;
+            }
+            this._bddContext.UnitDonations.Add(unitDonationToAdd);
+            this._bddContext.SaveChanges();
+        }
+
         public List<Profile> GetAllProfiles()
         {
             return _bddContext.Profiles.ToList();
@@ -86,6 +110,12 @@ namespace Alpha.Models
             return _bddContext.UserAccounts.Include(u => u.Profil).ThenInclude(p => p.Adress).ToList();
         }
 
+        //public void CreateProfile()
+        //{
+        //    Profile profile = new Profile { };
+        //    this._bddContext.Add(profile);
+        //    this._bddContext.SaveChanges();
+        //}
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
             string nick, string phone, string payMethod)
         {
@@ -104,13 +134,8 @@ namespace Alpha.Models
             }
         }
 
-        //Creer une collecte
-        public void CreateCollect()
-        {
-            Collect collect = new Collect { };
-            this._bddContext.Add(collect);
-            this._bddContext.SaveChanges();
-        }
+
+
 
         // Authentification functions
 
@@ -131,6 +156,8 @@ namespace Alpha.Models
 
             return userAccount.Id;
         }
+
+
 
         public UserAccount Authentify(string mail, string password)
         {

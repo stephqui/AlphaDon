@@ -24,6 +24,8 @@ namespace Alpha.Models
         public DateTime EndDate { get; set; }
 
         public string Description { get; set; }
+        public string Summary { get; set; }
+        public string Picture { get; set; }
 
         [MaxLength(20)]
         public string Place { get; set; }
