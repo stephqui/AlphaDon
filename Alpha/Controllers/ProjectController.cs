@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Alpha.Controllers
 {
     public class ProjectController : Controller
     {
+        /*public IActionResult Index(int value, string test)*/
         public IActionResult Index()
         {
             Dal dal = new Dal();
@@ -39,8 +41,13 @@ namespace Alpha.Controllers
             }
             if (!ModelState.IsValid)
                 return View(project);
+
+            //recupere id du user connecté
+            string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserAccount ua = dal.GetUserAccountConnected(uaId);
+
             dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-                project.Place, project.Area, project.Limit, project.ProfileId, project.Id, project.CollectId, project.Summary, project.Picture);
+                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, project.Picture);
             
             return Redirect("/Project/Index");
         }

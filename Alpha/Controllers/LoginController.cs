@@ -39,9 +39,11 @@ namespace Alpha.Controllers
                 {
                     var userClaims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Name, userAccount.Id.ToString()),
+                        //new Claim(ClaimTypes.Name, userAccount.Id.ToString()),
+
+                        new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Role, userAccount.Role),
-                        //new Claim(ClaimTypes.NameIdentifier, userAccount.Profil.FirstName),
+                        new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
                     };
 
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -69,6 +71,7 @@ namespace Alpha.Controllers
             return View();
         }
 
+        // 2eme post ********************************************************
         [HttpPost]
         public IActionResult CreateUserAccount(UserAccount userAccount)
         {

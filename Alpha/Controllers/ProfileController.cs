@@ -1,5 +1,6 @@
 ﻿using Alpha.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace Alpha.Controllers
             return View("Error");
         }
         [HttpPost]
-        public IActionResult ProfileChange(Profile profile)
+        public IActionResult ProfileChange(Profile profile, IFormFile image)
         {
             //if (!ModelState.IsValid)
             //{

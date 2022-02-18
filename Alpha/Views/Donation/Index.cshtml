@@ -1,0 +1,9 @@
+﻿@model List<Alpha.Models.UnitDonation>
+
+<h2>Les collectes</h2>
+<br />
+@foreach (var ud in Model)
+            {
+<div>La collecte:  @ud.CollectId </div>
+<div>a un montant de : @ud.CurrentAmount</div>
+            }

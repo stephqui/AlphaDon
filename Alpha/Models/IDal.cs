@@ -16,7 +16,7 @@ namespace Alpha.Models
         List<UnitDonation> GetDonationsByCollectId(int collectId);
         int AmountCalculation(int collectId);
         void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
-            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId,
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture);
         void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date);
 

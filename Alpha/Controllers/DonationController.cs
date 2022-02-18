@@ -14,15 +14,24 @@ namespace Alpha.Controllers
         {
             dal = new Dal();
         }
-        public IActionResult Index()
+        public IActionResult Index(int collectId)
         {
             Dal dal = new Dal();
-            List<Project> projects = dal.GetAllProjects();
-            return View(projects);
+            List<UnitDonation> unitDonations = dal.GetDonationsByCollectId(2);
+            return View(unitDonations);
         }
         public ActionResult CreateUnitDonation()
         {
             return View();
+        }
+
+        public IActionResult UpDateCollect(int collectId)
+        { 
+            Dal dal = new Dal();
+            int test = dal.AmountCalculation(2);
+
+            return RedirectToAction("Index", "Project");
+            //return RedirectToAction("Index", "Project", new { value = test, test = "toto" });
         }
 
         // a compléter ************************************************************************************
@@ -30,7 +39,7 @@ namespace Alpha.Controllers
         public IActionResult CreateUnitDonation(UnitDonation unitDonation)
         {
             Dal dal = new Dal();
-            
+
             //if (dal.CreateUnitDonation(project.ProjectName))
             //{
             //    ModelState.AddModelError("Nom", "Ce nom du project existe déjà");

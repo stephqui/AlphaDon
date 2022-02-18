@@ -10,7 +10,7 @@
 <h3 class="titre">Votre Profil</h3>
 <p class="contenu">Vous pouvez modifier votre profil</p>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("profilechange", "profile", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         <fieldset>
             <div class="container rounded bg-white mt-5 mb-5">
@@ -19,7 +19,7 @@
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                             <label class="header">Profile Photo:</label>
-                            <input id="image" type="file" placeholder="Photo">
+                            <input id="image" name="image" type="file" placeholder="Photo">
                             <a class="text-black-50">Je m'appelle @User.Identity.Name<span class="font-weight-bold">Bruce</span></a>
                             <span class="text-black-50">brucewayne@mail.com</span>
                         </div>

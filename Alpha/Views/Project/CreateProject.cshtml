@@ -2,7 +2,6 @@
 @{
     Layout = null;
 }
-
 <div id="FormCreation">
     <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:5% 15%;">
         <tr><th colspan="3">Bonjour, Nom !</th></tr>
@@ -10,13 +9,14 @@
         <!-- Nom du projet -->
         <tr>
             <th><label title="Name" for="name">Nom du projet : </label></th>
-            <td colspan="2"> @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", placeholder = "Nom du projet" })</td>
-            @*<td colspan="2"><input type="text" id="name" name="Name" style="width:100%;"></td>*@
+            <td colspan="2">@Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", placeholder = "Nom du projet", style = "width:100%;", id = "name" })</td>
+            @Html.ValidationMessageFor(model => model.ProjectName)
         </tr>
         <!-- Description rapide -->
         <tr>
             <th><label for="shortdescr">Expliquez votre projet en quelques mots.</label></th>
-            <td rowspan="2" colspan="2"><input type="text" id="shortdescr" name="Description sommaire" style="width:100%;"></td>
+            <td rowspan="2" colspan="2">@Html.TextBoxFor(model => model.Summary, new { @class = "form-control", placeholder = "Brève description", style = "width:100%;", id = "shortdescr", rows = "2" })</td>
+            @Html.ValidationMessageFor(model => model.Summary)
         </tr>
         <tr>
             <td><label for="shortdescr">Ils permettront aux visiteurs d'avoir rapidement une idée pendant la navigation. Une description détaillée sera demandée plus tard.</label></td>
@@ -44,8 +44,10 @@
         <!-- Place + WorldArea -->
         <tr>
             <th><label for="Place">Où se situe votre projet ?</label></th>
-            <td><input type="text" id="Place" name="Place"></td>
+            <td>@Html.TextBoxFor(model => model.Place, new { @class = "form-control", placeholder = "Ville", id = "Place", name = "Place" })</td>
+            @Html.ValidationMessageFor(model => model.Place)
             <td>
+                @*@Html.DropDownList(model => model.Area, new { @class = "form-control", placeholder = "Ville", id = "Place", name = "Place" })
                 <select name="WorldArea" id="WorldArea">
                     <option value="middleEast">Moyen-Orient, monde arabe</option>
                     <option value="farEast">Extrême-Orient</option>
@@ -54,16 +56,28 @@
                     <option value="southAmerica">Amérique du Sud</option>
                     <option value="europa">Europe</option>
                     <option value="oceania">Océanie</option>
-                </select>
+                </select>*@
             </td>
         </tr>
         <!-- Description-->
         <tr>
             <th><label for="Description"><h4>Description de votre projet</h4></label></th>
-            <td colspan="2">Ne lésinez pas sur les explications ! Le gestionnaire qui prendra votre projet en charge sera ravi de vous aider !</td>
+            <td colspan="2"><label for="Description">Ne lésinez pas sur les explications ! Le gestionnaire qui prendra votre projet en charge sera ravi de vous aider !</label></td>
         </tr>
         <tr>
-            <td colspan="3" style="height:350px;"><textarea name="Description" id="Description" rows="4" cols="50" style="width:100%; height:100%;"></textarea></td>
+            <td colspan="3" style="height:350px;">
+                @Html.TextBoxFor(model => model.Description, new
+                {
+                    @class = "form-control",
+                    placeholder = "Description",
+id = "Description",
+                    name = "Description",
+                    rows = "4",
+                    cols = "50",
+                    style = "width:100%; height:100%;"
+                })
+            </td>
+            @Html.ValidationMessageFor(model => model.Description)
         </tr>
         <!-- Image -->
         <tr>
@@ -75,13 +89,197 @@
             <th>
                 <label for="Limit">Quel montant estimez-vous avoir besoin pour mener à bien votre projet ?</label>
             </th>
-            <td colspan="2"><input type="text" id="Limit" name="Limit"></td>
+            <td colspan="2"> @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "Montant de la collecte", title = "D'après la législation française, il vous est interdit de réclamer plus de 2,5 millions d'euros." })</td>
+            @Html.ValidationMessageFor(model => model.Limit)
         </tr>
         <!-- Dates -->
         <tr>
-            <th>Dates de début et de fin</th>
-            <td>Début :<input type="date" id="StartDate" name="StartDate"></td>
-            <td>Fin :<input type="date" id="EndDate" name="EndDate"></td>
+            <th><label for="StartDate">Dates de début et de fin</label></th>
+            <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "Date de début", id = "StartDate", name = "StartDate" })</td>
+            <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "Date de fin", id = "EndDate", name = "EndDate" })</td>
+            @Html.ValidationMessageFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </tr>
+        <!-- Submit Button-->
+        <tr>
+            <td colspan="3" style="padding-top:15%; padding-left: 70%;">
+                <button class="btn btn-primary btn-xl" type="submit">Soumettre le projet</button>
+            </td>
+        </tr>
+    </table>
+</div>
+@* *********************************************************************************************************************@
+<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Creer ton projet</h2>
+<!-- Icon Divider-->
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+    <div class="divider-custom-line"></div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+        @using (Html.BeginForm())
+        {
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Profile, new { @class = "form-control", placeholder = "Nom" })
+                @Html.LabelFor(model => model.Profile)
+                @Html.ValidationMessageFor(model => model.Profile)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Category, new { @class = "form-control", placeholder = "Categorie" })
+                @Html.LabelFor(model => model.Category)
+                @Html.ValidationMessageFor(model => model.Category)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Area, new { @class = "form-control", placeholder = "Continent" })
+                @Html.LabelFor(model => model.Area)
+                @Html.ValidationMessageFor(model => model.Area)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "Limite du don" })
+                @Html.LabelFor(model => model.Limit)
+                @Html.ValidationMessageFor(model => model.Limit)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.ProfileId, new { @class = "form-control", placeholder = "ProfileId" })
+                @Html.LabelFor(model => model.ProfileId)
+                @Html.ValidationMessageFor(model => model.ProfileId)
+            </div>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.CollectId, new { @class = "form-control", placeholder = "CollectId" })
+                @Html.LabelFor(model => model.CollectId)
+                @Html.ValidationMessageFor(model => model.CollectId)
+            </div>
+            <!-- Submit Button-->
+            <button class="btn btn-primary btn-xl" type="submit">Cree</button>
+        }
+        @*<div>
+                <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+                <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+                <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
+                <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
+            </div>*@
+        <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+        <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+        <br />
+        <br />
+        @if (ViewBag.Error != null)
+        {
+            <h2> @ViewBag.Error </h2>
+        }
+        <form method="post" action="SendEmail">
+            <div class="container">
+                <span class="form-control-static"> Receiver: </span>
+                <input class="form-control" type="text" name="receiver"> <br />
+                <span class="form-control-static"> Subject: </span>
+                <input class="form-control" type="text" name="subject"> <br />
+                <span class="form-control-static"> Message: </span>
+                <input class="form-control" type="text" name="message"> <br />
+                <input class="btn btn-primary" type="submit" value="Nous contacter">
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+11 h 05
+<div id="FormCreation">
+    <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:5% 15%;">
+        <tr><th colspan="3">Bonjour, Nom !</th></tr>
+        <tr><th colspan="3">Expliquez-nous vos aspirations...</th></tr>
+        <!-- Nom du projet -->
+        <tr>
+            <th><label title="Name" for="name">Nom du projet : </label></th>
+            <td colspan="2">@Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", placeholder = "Nom du projet", style = "width:100%;", id = "name" })</td>
+            @Html.ValidationMessageFor(model => model.ProjectName)
+        </tr>
+        <!-- Description rapide -->
+        <tr>
+            <th><label for="shortdescr">Expliquez votre projet en quelques mots.</label></th>
+            <td rowspan="2" colspan="2">@Html.TextBoxFor(model => model.Summary, new { @class = "form-control", placeholder = "Brève description", style = "width:100%;", id = "shortdescr", rows = "2" })</td>
+            @Html.ValidationMessageFor(model => model.Summary)
+        </tr>
+        <tr>
+            <td><label for="shortdescr">Ils permettront aux visiteurs d'avoir rapidement une idée pendant la navigation. Une description détaillée sera demandée plus tard.</label></td>
+        </tr>
+        <!-- Category -->
+        <tr>
+            <th>De quel domaine relève votre projet ?</th>
+            <td>
+                <input type="radio" id="medical" name="category" value="medical">
+                <label for="medical">Médical</label><br>
+                <input type="radio" id="sport" name="category" value="sport">
+                <label for="sport">Sport</label><br>
+                <input type="radio" id="humanitarian" name="category" value="humanitarian">
+                <label for="humanitarian">Humanitaire</label>
+            </td>
+            <td>
+                <input type="radio" id="educational" name="category" value="educational">
+                <label for="educational">Education</label><br>
+                <input type="radio" id="infrastructural" name="category" value="infrastructural">
+                <label for="infrastructural">Construction, Infrastructures</label><br>
+                <input type="radio" id="fairTrade" name="category" value="fairTrade">
+                <label for="fairTrade">Commerce Equitable</label>
+            </td>
+        </tr>
+        <!-- Place + WorldArea -->
+        <tr>
+            <th><label for="Place">Où se situe votre projet ?</label></th>
+            <td>@Html.TextBoxFor(model => model.Place, new { @class = "form-control", placeholder = "Ville", id = "Place", name = "Place" })</td>
+            @Html.ValidationMessageFor(model => model.Place)
+            <td>
+                @*@Html.DropDownList(model => model.Area, new { @class = "form-control", placeholder = "Ville", id = "Place", name = "Place" })
+                <select name="WorldArea" id="WorldArea">
+                    <option value="middleEast">Moyen-Orient, monde arabe</option>
+                    <option value="farEast">Extrême-Orient</option>
+                    <option value="africa">Afrique</option>
+                    <option value="northAmerica">Amérique du Nord</option>
+                    <option value="southAmerica">Amérique du Sud</option>
+                    <option value="europa">Europe</option>
+                    <option value="oceania">Océanie</option>
+                </select>*@
+            </td>
+        </tr>
+        <!-- Description-->
+        <tr>
+            <th><label for="Description"><h4>Description de votre projet</h4></label></th>
+            <td colspan="2"><label for="Description">Ne lésinez pas sur les explications ! Le gestionnaire qui prendra votre projet en charge sera ravi de vous aider !</label></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="height:350px;">
+                @Html.TextBoxFor(model => model.Description, new
+                {
+                    @class = "form-control",
+                    placeholder = "Description",
+id = "Description",
+                    name = "Description",
+                    rows = "4",
+                    cols = "50",
+                    style = "width:100%; height:100%;"
+                })
+            </td>
+            @Html.ValidationMessageFor(model => model.Description)
+        </tr>
+        <!-- Image -->
+        <tr>
+            <th>Uploader une image pour illustrer votre projet</th>
+            <td colspan="2"><input type="file" class="upload" /></td>
+        </tr>
+        <!-- Montant -->
+        <tr>
+            <th>
+                <label for="Limit">Quel montant estimez-vous avoir besoin pour mener à bien votre projet ?</label>
+            </th>
+            <td colspan="2"> @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "Montant de la collecte", title = "D'après la législation française, il vous est interdit de réclamer plus de 2,5 millions d'euros." })</td>
+            @Html.ValidationMessageFor(model => model.Limit)
+        </tr>
+        <!-- Dates -->
+        <tr>
+            <th><label for="StartDate">Dates de début et de fin</label></th>
+            <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "Date de début", id = "StartDate", name = "StartDate" })</td>
+            <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "Date de fin", id = "EndDate", name = "EndDate" })</td>
+            @Html.ValidationMessageFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
         </tr>
         <!-- Submit Button-->
         <tr>
@@ -171,11 +369,11 @@
         }
 
         @*<div>
-            <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
-            <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
-            <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
-            <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
-        </div>*@
+                <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
+                <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
+                <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
+                <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
+            </div>*@
         <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
         <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
         <br />

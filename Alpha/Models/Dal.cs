@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,19 +36,10 @@ namespace Alpha.Models
         public List<UnitDonation> GetDonationsByCollectId(int collectId)
         {
             return _bddContext.UnitDonations.Where(u => u.CollectId == collectId).ToList();
+            //return _bddContext.UnitDonations.Count();
         }
 
-        //calcul a mise a jour de la somme des collectes
-        public int AmountCalculation(int collectId)
-        {
-            List<UnitDonation> donations = GetDonationsByCollectId(collectId);
-            int amount = 0;
-            foreach (UnitDonation donation in donations)
-            {
-                amount += donation.CurrentAmount;
-            }
-            return amount;
-        }
+ 
         //affiche le projet du createur
         public Project GetMyProject(int profileId)
         {
@@ -57,7 +49,7 @@ namespace Alpha.Models
 
         // Creation de projet
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
-            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, int? collectId,
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture)
         {
             //on crée une collecte en meme temps que le projet
@@ -67,7 +59,7 @@ namespace Alpha.Models
 
             Project projectToAdd = new Project { ProjectName = projectName, Description = description,
                 Category = category, StartDate = startDate, EndDate = endDate, Area = area, Limit = limit,
-                ProfileId = profileId, CollectId = collectId };
+                ProfileId = profileId, CollectId = collect.Id };
             if (id != 0)
             {
                 projectToAdd.Id = id;
@@ -101,6 +93,22 @@ namespace Alpha.Models
             this._bddContext.SaveChanges();
         }
 
+        //calcul a mise a jour de la somme des collectes
+        public int AmountCalculation(int collectId)
+        {
+            Collect collectToUpdate = this._bddContext.Collects.Find(collectId);
+
+            List<UnitDonation> donations = GetDonationsByCollectId(collectId);
+            int amount = 0;
+            foreach (UnitDonation donation in donations)
+            {
+                amount += donation.CurrentAmount;
+            }
+
+            collectToUpdate.CurrentAmount = amount;
+            this._bddContext.SaveChanges();
+            return amount;
+        }
         public List<Profile> GetAllProfiles()
         {
             return _bddContext.Profiles.ToList();
@@ -134,6 +142,13 @@ namespace Alpha.Models
                 _bddContext.SaveChanges();
             }
         }
+        public UserAccount GetUserAccountConnected(string uaId)
+        {
+            //recupere id du user connecté
+            
+            UserAccount ua = this.GetAllUserAccount().FirstOrDefault(u => u.Id == Convert.ToInt32(uaId));
+            return ua;
+        }
 
 
 
@@ -163,7 +178,7 @@ namespace Alpha.Models
         public UserAccount Authentify(string mail, string password)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = this._bddContext.UserAccounts.FirstOrDefault(u => u.Mail == mail && u.Password == motDePasse);
+            UserAccount userAccount = this._bddContext.UserAccounts.Include(p => p.Profil).FirstOrDefault(u => u.Mail == mail && u.Password == motDePasse);
             return userAccount;
         }
 
