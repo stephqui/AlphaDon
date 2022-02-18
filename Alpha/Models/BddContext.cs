@@ -216,16 +216,16 @@ namespace Alpha.Models
                  });
 
             this.Collects.AddRange(
-               new Collect { CurrentAmount = 2000, Id = 1 },
+               new Collect { CurrentAmount = 0, Id = 1 },
                new Collect { CurrentAmount = 0, Id = 2 }
                );
 
 
             this.UnitDonations.AddRange(
-             new UnitDonation { PayMethod = "CB", CurrentAmount = 20, Date = new DateTime(2022, 02, 10), CollectId = 1 },
-             new UnitDonation { PayMethod = "CB", CurrentAmount = 100, Date = new DateTime(2022, 01, 08), CollectId = 2 },
-             new UnitDonation { PayMethod = "PayPa", CurrentAmount = 48, Date = new DateTime(2022, 01, 09), CollectId = 2 },
-             new UnitDonation { PayMethod = "PayPa", CurrentAmount = 76, Date = new DateTime(2022, 01, 09), CollectId = 2 }
+             new UnitDonation { PayMethod = "CB", Amount = 20, Date = new DateTime(2022, 02, 10), CollectId = 1 },
+             new UnitDonation { PayMethod = "CB", Amount = 100, Date = new DateTime(2022, 01, 08), CollectId = 2 },
+             new UnitDonation { PayMethod = "PayPa", Amount = 48, Date = new DateTime(2022, 01, 09), CollectId = 2 },
+             new UnitDonation { PayMethod = "PayPa", Amount = 76, Date = new DateTime(2022, 01, 09), CollectId = 2 }
             );
 
             this.SaveChanges();

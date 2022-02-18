@@ -8,7 +8,7 @@ namespace Alpha.Models
 {
     public enum ProjectStatus { created, toControl, beingControled, collectStarted, collectOver, beingExecuted, executed }
     public enum Range { international, national, regional, local }
-    public enum WorldAreas { middleEast, farEast, africa, northAmerica, southAmerica, europe, oceania }
+    public enum WorldAreas { middleEast, farEast, africa, northAmerica, southAmerica, europa, oceania }
     public enum ProjectCategory { medical, sport, humanitarian, educational, infrastructural, fairTrade }
    
     

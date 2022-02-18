@@ -17,18 +17,19 @@ namespace Alpha.Controllers
         public IActionResult Index(int collectId)
         {
             Dal dal = new Dal();
-            List<UnitDonation> unitDonations = dal.GetDonationsByCollectId(2);
+            List<UnitDonation> unitDonations = dal.GetDonationsByCollectId(collectId);
             return View(unitDonations);
         }
-        public ActionResult CreateUnitDonation()
+        public ActionResult CreateUnitDonation(int collectId)
         {
-            return View();
+            ViewBag.collectId = collectId;
+            return View("DonationProject");
         }
 
         public IActionResult UpDateCollect(int collectId)
         { 
             Dal dal = new Dal();
-            int test = dal.AmountCalculation(2);
+            int test = dal.AmountCalculation(collectId);
 
             return RedirectToAction("Index", "Project");
             //return RedirectToAction("Index", "Project", new { value = test, test = "toto" });
@@ -39,17 +40,8 @@ namespace Alpha.Controllers
         public IActionResult CreateUnitDonation(UnitDonation unitDonation)
         {
             Dal dal = new Dal();
-
-            //if (dal.CreateUnitDonation(project.ProjectName))
-            //{
-            //    ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
-            //    return View(project);
-            //}
-            //if (!ModelState.IsValid)
-            //    return View(project);
-            //dal.CreateCollect();
-            //dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-            //    project.Place, project.Area, project.Limit, project.ProfileId, project.Id, project.CollectId);
+            dal.CreateUnitDonation(unitDonation.Id, unitDonation.PayMethod, unitDonation.Amount, DateTime.Now, unitDonation.CollectId.Value);
+            dal.AmountCalculation(unitDonation.CollectId.Value);
             return Redirect("/Project/Index");
         }
     }

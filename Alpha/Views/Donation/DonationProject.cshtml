@@ -1,21 +1,69 @@
-﻿@model Alpha.Models.Collect
-    <!DOCTYPE html>
+﻿@model Alpha.Models.UnitDonation
 
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Test</title>
-    </head>
-    <body>
+@using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post))
+{
+    <div id="Donation">
+        amount:@Html.TextBoxFor(m => m.Amount)
+        <input type="hidden" name="collectId" value="@ViewBag.collectId" />
+        <input type="submit" value="Faire un don" />
 
-            <br />
-            <br />
-            <h3>
-                Vous êtes sur le calcul des dons
-
-            </h3>
-            <br />
-            <br />
-</body>
-</html>
-
+        <table style="width:80%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
+            <tr>
+                <th colspan="7">
+                    <h4>Faire un don</h4>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="1" style="width:20%;"></td>
+                <td colspan="5">
+                    <div align="center"><input style="width:100%; " name="Faire un don sans contrepartie !"></div>
+                </td>
+                <td colspan="1" style="width:40%; text-align:center">Sélectionner un moyen de paiement</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="1"></td>
+                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">10 €</td>
+                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">20 €</td>
+                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">40 €</td>
+                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">60 €</td>
+                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">100€</td>
+                <td colspan="1">
+                    <img src="img/carte bleue.png" style="height:30px" />
+                    <img src="img/Paypal.png" style="size:200%; height:30px; padding-left: 5%;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+                <td rowspan="3">
+                    <div align="center">
+                        <button class="btn btn-primary btn-xl" type="submit">Donner !</button><br>Label et Input
+                        NomLabel et Input Prénom <br> Label et Input CB <br><br><br><br>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="5">
+                    <div align="center">Choisissez / ajoutez des contreparties !</div>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+        <!--For each Compensation-->
+        <table style="width:50%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
+            <tr>
+                <td></td>
+                <td rowspan="2"><img src="img/phone.jpg" style="width:100px" /> </td>
+                <td rowspan="2" colspan="3">Nom de la compensation<br> description</td>
+                <td rowspan="2">montant <br><input type="checkbox"> </td>
+            </tr>
+        </table>
+    </div>
+        }
+@*<h2>Les collectes</h2>
+    <br />
+    @foreach (var ud in Model)
+    {
+        <div>La collecte:  @ud.CollectId </div>
+        <div>a un montant de : @ud.CurrentAmount</div>
+    }*@

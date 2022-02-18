@@ -9,13 +9,12 @@ namespace Alpha.Models
     public class UnitDonation
     {
         public int Id { get; set; }
-        [Required]
+
         [MaxLength(5)]
         public string PayMethod { get; set; }
 
         [Required]
-        [MaxLength(10)]
-        public int CurrentAmount { get; set; }
+        public int Amount { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

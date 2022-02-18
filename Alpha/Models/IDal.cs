@@ -12,13 +12,14 @@ namespace Alpha.Models
         //*********************************** PROJECT *************************************************
         bool ProjectExiste(string projectName);
         List<Project> GetAllProjects();
+        Project GetThisProject(int projectId);
         Project GetMyProject(int profileId);
         List<UnitDonation> GetDonationsByCollectId(int collectId);
         int AmountCalculation(int collectId);
         void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture);
-        void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date);
+        void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date, int collectId);
 
 
         //*********************************** PROFILE / USERACCOUNT *************************************************

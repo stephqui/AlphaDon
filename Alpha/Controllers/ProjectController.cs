@@ -18,6 +18,12 @@ namespace Alpha.Controllers
             return View(projects);     
         }
 
+        public IActionResult FullSingleProject(int projectId)
+        {
+            Dal dal = new Dal();
+            Project project = dal.GetThisProject(projectId);
+            return View("FullSingleProject", project);
+        }
         public IActionResult MyProject()
         {
             Dal dal = new Dal();

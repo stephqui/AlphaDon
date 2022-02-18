@@ -47,6 +47,13 @@ namespace Alpha.Models
             return project;
         }
 
+        public Project GetThisProject(int projectId)
+        {
+
+            Project targetProject =  _bddContext.Projects.Include(p => p.Profile).Include(c => c.Collect).FirstOrDefault(p => p.Id == projectId);
+            return targetProject;
+        }
+
         // Creation de projet
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
@@ -54,7 +61,7 @@ namespace Alpha.Models
         {
             //on crée une collecte en meme temps que le projet
             Collect collect = new Collect { };
-            this._bddContext.Add(collect);
+            this._bddContext.Collects.Add(collect);
             this._bddContext.SaveChanges();
 
             Project projectToAdd = new Project { ProjectName = projectName, Description = description,
@@ -76,19 +83,20 @@ namespace Alpha.Models
 
         //**************************************** DON *******************************************************************
         // Creation d'un don
-        public void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date)
+        public void CreateUnitDonation(int id, string payMethod, int amount, DateTime date, int collectId)
         {
             UnitDonation unitDonationToAdd = new UnitDonation
             {
                 Id = id,
                 PayMethod = payMethod,
-                CurrentAmount = CurrentAmount,
-                Date = date
+                Amount = amount,
+                Date = date,
+                CollectId = collectId
             };
-            if (id != 0)
-            {
-                unitDonationToAdd.Id = id;
-            }
+            //if (id != 0)
+            //{
+            //    unitDonationToAdd.Id = id;
+            //}
             this._bddContext.UnitDonations.Add(unitDonationToAdd);
             this._bddContext.SaveChanges();
         }
@@ -102,7 +110,7 @@ namespace Alpha.Models
             int amount = 0;
             foreach (UnitDonation donation in donations)
             {
-                amount += donation.CurrentAmount;
+                amount += donation.Amount;
             }
 
             collectToUpdate.CurrentAmount = amount;
