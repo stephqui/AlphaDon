@@ -4,7 +4,55 @@
     ViewBag.Title = "Project";
 }
 
-<!DOCTYPE html>
+<body>
+    <section class="text-center py-5">
+        <br>
+        <br>
+        <!--Main container-->
+        <div class="container">
+            <meta name="viewport" content="width=device-width" />
+            <h3>Mon projet</h3>
+            <div class="col-md-6 my-4">
+                <img class="d-block w-100" src="~/img/@Model.Picture" style="width:150px">
+            </div>
+            <div class="col-md-6 my-4">
+                <div class="row pb-5">
+                    <h2 class="display-4">Mon Projet</h2>
+                    <hr>
+
+                    <div> <h3>Le projet 1 est un projet: @Model.ProjectName</h3></div>
+                    <div h3>Je suis: @Model.Profile.FirstName</div>
+                    <div>Statut du projet: @Model.Status</div>
+                    <div> @Model.Description</div>
+                    <div>@Model.Category</div>
+                    <div>@Model.Area</div>
+                    <div>@Model.Place</div>
+                    <div> @Model.StartDate</div>
+                    <div> @Model.EndDate</div>
+                    <div> @Model.Picture</div>
+                    <div>Objectif: @Model.Limit</div>
+                    <div>Montant déjà reçu: @Model.Collect.CurrentAmount</div>
+
+                    <a class="btn btn-outline-purple" href="#" target="_blank" role="button">Statut</a>
+                    @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                    {
+                       new SelectListItem{ Text="Créé", Value = "created" },
+                       new SelectListItem{ Text="A vérifier", Value = "toControl" },
+                       new SelectListItem{ Text="Vérifié", Value = "beingControled" },
+                       new SelectListItem{ Text="Collecte démarrée", Value = "collectStarted" },
+                       new SelectListItem{ Text="Collecte terminée", Value = "collectOver" },
+                       new SelectListItem{ Text="En cours de validation", Value = "beingExecuted" },
+                       new SelectListItem{ Text="Validé", Value = "executed" }
+                    }, new { @class = "form-select w-100" })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+@*<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -45,4 +93,4 @@
             @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
         </div>
 </body>
-</html>
+</html>*@
