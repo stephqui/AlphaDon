@@ -113,6 +113,7 @@ namespace Alpha.Models
                 Nick = "jeje",
                 Nationality = "FR",
                 Phone = "0612010304",
+                Picture = "crash.jpg",
                 Adress = addr3
             };
             this.UserAccounts.Add(new UserAccount
@@ -206,6 +207,7 @@ namespace Alpha.Models
                     Rib = "FR76 8001 0032 1540",
                     Category = ProjectCategory.fairTrade,
                     Limit = 5000,
+                    Picture = "crowdfunding3.jpg",
                     CollectId = 1,
                     ProfileId = 1
                 },
