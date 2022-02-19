@@ -56,18 +56,17 @@ namespace Alpha.Controllers
 
         //*****************************************************************************************
 
-        //Pour le gestionnaire de projet, il affiche le formulaire pour remplir/modifier les champs.
-        //Je le neutralise car la méthode demande l'id du createur.
-        //public ActionResult CreateProject(int projectId)
-        //{
-        //    if (projectId != 0)
-        //    {
 
-        //        Project project = dal.GetThisProject(projectId);
-        //        return View(project);
-        //    }
-        //    return View();
-        //}
+        public ActionResult CreateProject(int projectId)
+        {
+            if (projectId != 0)
+            {
+
+                Project project = dal.GetThisProject(projectId);
+                return View(project);
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult CreateProject(Project project, IFormFile image)
         {
