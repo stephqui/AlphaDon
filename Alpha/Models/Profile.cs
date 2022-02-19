@@ -34,6 +34,7 @@ namespace Alpha.Models
 
         [MaxLength(13)]
         public string Phone { get; set; }
+        public string Picture { get; set; }
 
         //public List<Project> MyFavoritesProjects { get; set; }
         public List<Newsletter> MyNewsletters { get; set; }

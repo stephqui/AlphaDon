@@ -185,6 +185,7 @@ namespace Alpha.Models
                 Profil = profile6,
                 Role = "Admin"
             });
+
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
             this.Projects.AddRange(
@@ -236,6 +237,4 @@ namespace Alpha.Models
             optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Alpha");
         }
     }
-
-
 }

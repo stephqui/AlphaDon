@@ -66,7 +66,7 @@ namespace Alpha.Models
 
             Project projectToAdd = new Project { ProjectName = projectName, Description = description,
                 Category = category, StartDate = startDate, EndDate = endDate, Area = area, Limit = limit,
-                ProfileId = profileId, CollectId = collect.Id };
+                ProfileId = profileId, CollectId = collect.Id, Picture = picture };
             if (id != 0)
             {
                 projectToAdd.Id = id;
@@ -134,7 +134,7 @@ namespace Alpha.Models
         //    this._bddContext.SaveChanges();
         //}
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
-            string nick, string phone, string payMethod)
+            string nick, string phone, string payMethod, string picture)
         {
             Profile profile = _bddContext.Profiles.Find(id);
 
@@ -147,6 +147,7 @@ namespace Alpha.Models
                 profile.Birthday = birthday;
                 profile.Phone = phone;
                 profile.PayMethod = payMethod;
+                profile.Picture = picture;
                 _bddContext.SaveChanges();
             }
         }

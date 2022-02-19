@@ -59,42 +59,50 @@
                             aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>*@
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <!-- Collapsible content -->
-                    @*<div class="collapse navbar-collapse" id="basicExampleNav">*@
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <!-- Collapsible content -->
+                @*<div class="collapse navbar-collapse" id="basicExampleNav">*@
 
-                    <!-- Links -->
-                    <!--<ul class="navbar-nav mx-auto mr-auto">
-                    <li class="nav-item active mx-2">-->
-                    @*<a class="nav-link" href="Projets Index">Projets</a>*@
-                    <!--<a class="nav-link" href="~/Project/Index">Projets</a>
-                            <span class="sr-only">(current)</span>
-                        </li>
+                <!-- Links -->
+                <!--<ul class="navbar-nav mx-auto mr-auto">
+    <li class="nav-item active mx-2">-->
+                @*<a class="nav-link" href="Projets Index">Projets</a>*@
+                <!--<a class="nav-link" href="~/Project/Index">Projets</a>
+            <span class="sr-only">(current)</span>
+        </li>
 
-                    </ul>-->
-                    <!-- Links -->
+    </ul>-->
+                <!-- Links -->
 
-                    <form class="form-inline text-white">
-                        <div class="md-form my-0">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Rechercher">
-                            <i class="fa fa-search pr-3"></i>
-                        </div>
-                    </form>
+                <form class="form-inline text-white">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Rechercher">
+                        <i class="fa fa-search pr-3"></i>
+                    </div>
+                </form>
 
-                    <ul class="navbar-nav ms-auto">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Mon Profil</a></li>
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
-                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/CreateProject"> Créer un projet</a></li>
-                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/deconnexion"> Se déconnecter</a></li> }
+                <ul class="navbar-nav ms-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+            @if (User.IsInRole("Admin"))
+            {
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/ManageProjects"> Gérer les projet</a></li>
+            }
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Mon Profil</a></li>
+                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
+                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/CreateProject"> Créer un projet</a></li>
+                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/deconnexion"> Se déconnecter</a></li>
+ }
+
                                                                         else
                                                                         {
                                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
                                                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/index"> Se connecter</a></li>
-                                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/CreateUserAccount"> Créer un compte</a></li>}
-                    </ul>
-                </div>
+                                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/CreateUserAccount"> Créer un compte</a></li>
+}
+
+                </ul>
+            </div>
                 <!-- Collapsible content -->
 
             </div>

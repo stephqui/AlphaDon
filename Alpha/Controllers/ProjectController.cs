@@ -1,7 +1,9 @@
 ﻿using Alpha.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,6 +19,12 @@ namespace Alpha.Controllers
             List<Project> projects = dal.GetAllProjects();
             return View(projects);     
         }
+        public IActionResult ManageProjects()
+        {
+            Dal dal = new Dal();
+            List<Project> projects = dal.GetAllProjects();
+            return View(projects);
+        }
 
         public IActionResult FullSingleProject(int projectId)
         {
@@ -27,19 +35,39 @@ namespace Alpha.Controllers
         public IActionResult MyProject()
         {
             Dal dal = new Dal();
-            Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
+            Project project = dal.GetMyProject(1);
+            //Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
             return View(project);
         }
 
         //*****************************************************************************************
-        public ActionResult CreateProject()
+
+        //Pour le gestionnaire de projet, il affiche le formulaire pour remplir/modifier les champs.
+        public ActionResult CreateProject(int projectId)
         {
+            if (projectId != 0)
+            {
+                Dal dal = new Dal();
+                Project project = dal.GetThisProject(projectId);
+                return View(project);
+            }
             return View();
         }
         [HttpPost]
-        public ActionResult CreateProject(Project project)
+        public ActionResult CreateProject(Project project, IFormFile image)
         {
             Dal dal = new Dal();
+
+            if (image != null && image.Length > 0)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    image.CopyTo(fileStream);
+                }
+            }
+
             if (dal.ProjectExiste(project.ProjectName))
             {
                 ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
@@ -53,7 +81,7 @@ namespace Alpha.Controllers
             UserAccount ua = dal.GetUserAccountConnected(uaId);
 
             dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, project.Picture);
+                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
             
             return Redirect("/Project/Index");
         }

@@ -27,7 +27,7 @@ namespace Alpha.Models
 
         List<Profile> GetAllProfiles();
         void ProfileChange(int id, string lastName, string firstName, string nationality, Int32 birthday,
-            string nick, string phone, string payMethod);
+            string nick, string phone, string payMethod, string picture);
         UserAccount Authentify(string mail, string password);
         UserAccount GetUserAccount(int id);
         List<UserAccount> GetAllUserAccount();

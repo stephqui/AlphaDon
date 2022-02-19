@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,12 +44,22 @@ namespace Alpha.Controllers
             //{
             //    return View(profile);
             //}
+
+            if (image != null && image.Length > 0)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    image.CopyTo(fileStream);
+                }
+            }
             if (profile.Id != 0)
             {
                 using (Dal dal = new Dal())
                 {
                     dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
-                     profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod);
+                     profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName);
                     return Redirect("/Home/Index");
                 }
             }
