@@ -191,8 +191,8 @@ namespace Alpha.Models
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
             this.Collects.AddRange(
-             new Collect { CurrentAmount = 0, Id = 1 },
-             new Collect { CurrentAmount = 0, Id = 2 }
+             new Collect { CurrentAmount = 1350, Id = 1 },
+             new Collect { CurrentAmount = 890, Id = 2 }
              );
             this.SaveChanges();
 
