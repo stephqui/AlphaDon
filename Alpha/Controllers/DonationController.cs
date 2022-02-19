@@ -9,14 +9,16 @@ namespace Alpha.Controllers
 {
     public class DonationController : Controller
     {
-        private IDal dal;
+
+        private Dal dal;
         public DonationController()
         {
             dal = new Dal();
         }
+        
         public IActionResult Index(int collectId)
         {
-            Dal dal = new Dal();
+
             List<UnitDonation> unitDonations = dal.GetDonationsByCollectId(collectId);
             return View(unitDonations);
         }
@@ -28,7 +30,6 @@ namespace Alpha.Controllers
 
         public IActionResult UpDateCollect(int collectId)
         { 
-            Dal dal = new Dal();
             int test = dal.AmountCalculation(collectId);
 
             return RedirectToAction("Index", "Project");
@@ -39,7 +40,6 @@ namespace Alpha.Controllers
         [HttpPost]
         public IActionResult CreateUnitDonation(UnitDonation unitDonation)
         {
-            Dal dal = new Dal();
             dal.CreateUnitDonation(unitDonation.Id, unitDonation.PayMethod, unitDonation.Amount, DateTime.Now, unitDonation.CollectId.Value);
             dal.AmountCalculation(unitDonation.CollectId.Value);
             return Redirect("/Project/Index");

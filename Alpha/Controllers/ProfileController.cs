@@ -13,10 +13,14 @@ namespace Alpha.Controllers
    // [Authorize]
     public class ProfileController : Controller
     {
-       // [AllowAnonymous]
+        private Dal dal;
+        public ProfileController()
+        {
+            dal = new Dal();
+        }
+        // [AllowAnonymous]
         public IActionResult Index()
         {
-            Dal dal = new Dal();
             List<Profile> profiles = dal.GetAllProfiles();
             return View(profiles);
 
@@ -25,15 +29,13 @@ namespace Alpha.Controllers
         {
             if (id != 0)
             {
-                using (Dal dal = new Dal())
-                {
+               
                     Profile profile = dal.GetAllProfiles().Where(s => s.Id == id).FirstOrDefault();
                     if (profile == null)
                     {
                         return View("Error");
                     }
                     return View(profile);//retourne le formulaire
-                }
             }
             return View("Error");
         }
@@ -56,12 +58,9 @@ namespace Alpha.Controllers
             }
             if (profile.Id != 0)
             {
-                using (Dal dal = new Dal())
-                {
                     dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
                      profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName);
                     return Redirect("/Home/Index");
-                }
             }
             else
             {

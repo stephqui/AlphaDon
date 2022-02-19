@@ -12,51 +12,65 @@ namespace Alpha.Controllers
 {
     public class ProjectController : Controller
     {
+        private Dal dal;
+        public ProjectController()
+        {
+            dal = new Dal();
+        }
         /*public IActionResult Index(int value, string test)*/
         public IActionResult Index()
         {
-            Dal dal = new Dal();
             List<Project> projects = dal.GetAllProjects();
             return View(projects);     
         }
         public IActionResult ManageProjects()
         {
-            Dal dal = new Dal();
             List<Project> projects = dal.GetAllProjects();
             return View(projects);
         }
 
+        //le gestionnaire controle le projet en cours de création
+        public IActionResult ThisProject(int projectId)
+        {
+
+            Project project = dal.GetThisProject(projectId);
+            return View("MyProject", project);
+        }
+
+
+        //visiteur qui veut faire un don
         public IActionResult FullSingleProject(int projectId)
         {
-            Dal dal = new Dal();
             Project project = dal.GetThisProject(projectId);
             return View("FullSingleProject", project);
         }
+
+        //le createur du projet va voir son projet
         public IActionResult MyProject()
         {
-            Dal dal = new Dal();
-            Project project = dal.GetMyProject(1);
-            //Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
+            //Project project = dal.GetMyProject(1);
+            Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
+            
             return View(project);
         }
 
         //*****************************************************************************************
 
         //Pour le gestionnaire de projet, il affiche le formulaire pour remplir/modifier les champs.
-        public ActionResult CreateProject(int projectId)
-        {
-            if (projectId != 0)
-            {
-                Dal dal = new Dal();
-                Project project = dal.GetThisProject(projectId);
-                return View(project);
-            }
-            return View();
-        }
+        //Je le neutralise car la méthode demande l'id du createur.
+        //public ActionResult CreateProject(int projectId)
+        //{
+        //    if (projectId != 0)
+        //    {
+
+        //        Project project = dal.GetThisProject(projectId);
+        //        return View(project);
+        //    }
+        //    return View();
+        //}
         [HttpPost]
         public ActionResult CreateProject(Project project, IFormFile image)
         {
-            Dal dal = new Dal();
 
             if (image != null && image.Length > 0)
             {
@@ -85,5 +99,28 @@ namespace Alpha.Controllers
             
             return Redirect("/Project/Index");
         }
+    
+
+    //commentaires
+    [HttpPost]
+    public IActionResult NewComment(Project project, ushort projectId, string comment)
+    {
+
+        string stUserId = HttpContext.User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Sid)?.Value;
+        dal.CreateCommentProject(ushort.Parse(stUserId), projectId, comment);
+
+        return RedirectToAction("FullSingleProject", new { id = projectId });
+    }
+
+    [HttpPost]
+    public IActionResult AnswerComment(Project proj, ushort projectId, ushort replyerId, string comment)
+    {
+
+        string stUserId = HttpContext.User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Sid)?.Value;
+        dal.AnswerCommentProject(ushort.Parse(stUserId), projectId, comment, replyerId);
+
+        return RedirectToAction("FullSingleProject");
     }
 }
+}
+

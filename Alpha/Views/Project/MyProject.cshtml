@@ -15,9 +15,9 @@
     <br>
 
     <div>
-        <h3>Mon Projet</h3>
+        <h3>Résumé de la vue - Mon Projet</h3>
     </div>
-        <div> <h3>Mon premier projet: @Model.ProjectName</h3></div>
+        <div> <h3>Mon projet: @Model.ProjectName</h3></div>
         <div h3>Je suis: @Model.Profile.FirstName</div>
         <div>Statut du projet: @Model.Status</div>
         <div> @Model.Description</div>
@@ -29,5 +29,20 @@
 
         <div>Objectif: @Model.Limit</div>
         <div>Montant déjà reçu: @Model.Collect.CurrentAmount</div>
+
+        <div>
+            <a class="btn btn-outline-purple" href="#" target="_blank" role="button">Statut</a>
+            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+            {
+               new SelectListItem{ Text="Créé", Value = "created" },
+               new SelectListItem{ Text="A vérifier", Value = "toControl" },
+               new SelectListItem{ Text="Vérifié", Value = "beingControled" },
+               new SelectListItem{ Text="Collecte démarrée", Value = "collectStarted" },
+               new SelectListItem{ Text="Collecte terminée", Value = "collectOver" },
+               new SelectListItem{ Text="En cours de validation", Value = "beingExecuted" },
+               new SelectListItem{ Text="Validé", Value = "executed" }
+            }, new { @class = "form-select w-100" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
+        </div>
 </body>
 </html>

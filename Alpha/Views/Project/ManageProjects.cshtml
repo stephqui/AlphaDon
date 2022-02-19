@@ -25,7 +25,7 @@
                 @foreach (var p in Model)
                 {
                 <tr>
-                    <td><a href="@Url.Action("Myproject", "Project", new { projectId = p.Id })">@p.ProjectName</a></td>
+                    <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.ProjectName</a></td>
                     <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.FirstName</a></td>
                     <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.LastName</a></td>
                     <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.Adress.City</a></td>

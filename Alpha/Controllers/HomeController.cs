@@ -9,9 +9,13 @@ namespace Alpha.Controllers
 {
     public class HomeController : Controller
     {
+        private Dal dal;
+        public HomeController()
+        {
+            dal = new Dal();
+        }
         public IActionResult Index()
         {
-            Dal dal = new Dal();
             List<Profile> profiles = dal.GetAllProfiles();
             return View(profiles);
 

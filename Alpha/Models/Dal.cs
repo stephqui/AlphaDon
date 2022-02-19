@@ -81,6 +81,42 @@ namespace Alpha.Models
             return _bddContext.Projects.ToList().Any(Project => string.Compare(Project.ProjectName, projectName, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
+        //*************************************** COMMENTAIRES ********************************************
+        //commentaires
+        public void CreateCommentProject(ushort userId, ushort projectId, string comment)
+        {
+            //ajout lien project -> comment
+            Comment comment1 = _bddContext.Comment.Include(p => p.Project).FirstOrDefault(p => p.ProjectId == projectId);
+
+            Project project = _bddContext.Projects.Find(projectId);
+
+            DateTime now = DateTime.Now;
+            Comment newComment = new Comment { User = userId, ProjectId = projectId, Contenu = comment };
+            //Comment newComment = new Comment { Contenu = comment, Date = now, User = user };
+
+            _bddContext.Comment.Add(newComment);
+            _bddContext.SaveChanges();
+        }
+
+
+        public void AnswerCommentProject(ushort userId, ushort projectId, string comment, ushort replyerId)
+        {
+            //ajout lien project -> comment
+            Comment comment1 = _bddContext.Comment.Include(p => p.Project).FirstOrDefault(p => p.ProjectId == projectId);
+
+            UserAccount user = _bddContext.UserAccounts.Find(userId);
+            Project project = _bddContext.Projects.Find(projectId);
+
+            DateTime now = DateTime.Now;
+            Comment answerComment = _bddContext.Comment.Find(replyerId);
+
+            Comment newComment = new Comment { Contenu = comment, Date = now, ProjectId = projectId, User = userId };
+            //Comment newComment = new Comment { CommentText = comment, Date = now, Project = project, User = user, Replyer = answerComment };
+
+            _bddContext.Comment.Add(newComment);
+            _bddContext.SaveChanges();
+        }
+
         //**************************************** DON *******************************************************************
         // Creation d'un don
         public void CreateUnitDonation(int id, string payMethod, int amount, DateTime date, int collectId)

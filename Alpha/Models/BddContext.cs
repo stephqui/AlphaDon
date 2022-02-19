@@ -27,6 +27,7 @@ namespace Alpha.Models
         public DbSet<AlphaPlatformAccount> AlphaPlatformAccounts { get; set; }
         public DbSet<Compensation> Compensations { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<Comment> Comment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,7 +49,7 @@ namespace Alpha.Models
 
             modelBuilder.Entity<Compensation>().HasIndex(a => a.ProjectId).IsUnique();
 
-            modelBuilder.Entity<NonCashDonation>().HasIndex(a => a.CollectId).IsUnique();
+            //modelBuilder.Entity<NonCashDonation>().HasIndex(a => a.CollectId).IsUnique();
 
         }
 
@@ -188,6 +189,12 @@ namespace Alpha.Models
 
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
+            this.Collects.AddRange(
+             new Collect { CurrentAmount = 0, Id = 1 },
+             new Collect { CurrentAmount = 0, Id = 2 }
+             );
+            this.SaveChanges();
+
             this.Projects.AddRange(
                 new Project
                 {
@@ -215,12 +222,7 @@ namespace Alpha.Models
                      CollectId = 2,
                      ProfileId = 2
                  });
-
-            this.Collects.AddRange(
-               new Collect { CurrentAmount = 0, Id = 1 },
-               new Collect { CurrentAmount = 0, Id = 2 }
-               );
-
+            this.SaveChanges();
 
             this.UnitDonations.AddRange(
              new UnitDonation { PayMethod = "CB", Amount = 20, Date = new DateTime(2022, 02, 10), CollectId = 1 },
