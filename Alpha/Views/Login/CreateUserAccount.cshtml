@@ -10,8 +10,8 @@
     <br />
 
     <h2 class="mb-4 indigo-text font-weight-bold">Créer votre compte</h2> <br />
-        @using (Html.BeginForm())
-    {
+        @using (Html.BeginForm("CreateUserAccount", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
         <div>
             @Html.LabelFor(m => m.Mail)
             @Html.TextBoxFor(m => m.Mail)
