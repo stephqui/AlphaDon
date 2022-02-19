@@ -200,7 +200,7 @@ namespace Alpha.Models
 
         // Authentification functions
 
-        public int AddUserAccount(string mail, string password)
+        public UserAccount AddUserAccount(string mail, string password)
         {
             Profile profil = new Profile()
             {
@@ -211,11 +211,11 @@ namespace Alpha.Models
             this._bddContext.SaveChanges();
 
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, ProfilId = profil.Id };
+            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, Role= "Basic", ProfilId = profil.Id };
             this._bddContext.UserAccounts.Add(userAccount);
             this._bddContext.SaveChanges();
 
-            return userAccount.Id;
+            return userAccount;
         }
 
 

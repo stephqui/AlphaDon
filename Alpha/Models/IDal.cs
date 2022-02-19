@@ -23,7 +23,7 @@ namespace Alpha.Models
 
 
         //*********************************** PROFILE / USERACCOUNT *************************************************
-        int AddUserAccount(string mail, string password);
+        UserAccount AddUserAccount(string mail, string password);
 
         List<Profile> GetAllProfiles();
         void ProfileChange(int id, string lastName, string firstName, string nationality, Int32 birthday,

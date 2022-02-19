@@ -22,7 +22,7 @@ namespace Alpha.Controllers
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentify = HttpContext.User.Identity.IsAuthenticated };
             if (viewModel.Authentify)
             {
-                viewModel.UserAccount = dal.GetUserAccount(HttpContext.User.Identity.Name);
+                viewModel.UserAccount = dal.GetUserAccount(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
                 return View(viewModel);
             }
             return View(viewModel);
@@ -40,11 +40,13 @@ namespace Alpha.Controllers
                     var userClaims = new List<Claim>()
                     {
                         //new Claim(ClaimTypes.Name, userAccount.Id.ToString()),
-
                         new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Role, userAccount.Role),
-                        new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
                     };
+                    if (userAccount.Profil.FirstName != null)
+                    { 
+                        userClaims.Add(new Claim(ClaimTypes.Name, userAccount.Profil.FirstName));
+                    }
 
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
@@ -75,17 +77,17 @@ namespace Alpha.Controllers
         [HttpPost]
         public IActionResult CreateUserAccount(UserAccount userAccount)
         {
-            UserAccount userAccount1 = dal.Authentify(userAccount.Mail, userAccount.Password);
+            
             if (userAccount.Mail !=null && userAccount.Password !=null)
             {
-                int id = dal.AddUserAccount(userAccount.Mail, userAccount.Password);
+                userAccount = dal.AddUserAccount(userAccount.Mail, userAccount.Password);
 
                 var userClaims = new List<Claim>()
                 {
                     //new Claim(ClaimTypes.Name, id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Role, userAccount.Role),
-                        new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
+                        //new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
                 };
 
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -93,10 +95,12 @@ namespace Alpha.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
 
-                return RedirectToAction(nameof(Index), new { id = id });
+                return RedirectToAction("ProfileChange", "Profile", new { id = userAccount.Id });
  
                 //return Redirect("/Profile/ProfileChange");
             }
+            
+
             return View(userAccount);
         }
 
