@@ -39,7 +39,7 @@
             margin: 0;
             padding: 0;
             background-color: #DBEFE1;
-            position: sticky;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -204,7 +204,7 @@
                                     <div class="dropdown-content">
                                         <a href="#">Page d'accueil</a>
                                         @*<a href="@Url.Action("ModifyProject", "Project", new { projectId = p.Id})">Voir mon projet</a>*@
-                                        <a href="#">Gérer mon profil</a>
+                                        <a href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Gérer mon profil</a>
                                         <a href="#">Mes newsletters</a>
                                         <a href="#">Mes favoris</a>
                                         <a href="#">Historique des dons</a>
