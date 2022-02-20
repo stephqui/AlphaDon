@@ -18,6 +18,7 @@
     <link href="~/css/mdb.min.css" rel="stylesheet">
     <!-- Custom styles -->
     <link href="~/css/style.min.css" rel="stylesheet">
+
     <style>
         body {
             height: 150vh;
@@ -42,13 +43,7 @@
                 line-height: 75px;
             }
 
-            .alphabar td {
-                font-weight: bold;
-                width: 20%;
-                color: #066387;
-                text-align: center;
-                padding: auto, 20%;
-            }
+
 
         .alphabarlink a {
             color: #066387;
@@ -139,14 +134,19 @@
                 background-color: #B2BED2;
                 color: #066387;
                 cursor: pointer;
-            }
 
-            .boutondusite button {
-                height: 100%;
-                width: 100%;
-                color: #B2BED2;
-                background-color: transparent;
-                border: transparent;
+            }
+               <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Mon Profil</a></li>
+               <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
+               <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/CreateProject"> Créer un projet</a></li>
+               <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/deconnexion"> Se déconnecter</a></li>
+                    }
+
+            else
+            {
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/index"> Se connecter</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/CreateUserAccount"> Créer un compte</a></li>
             }
 
                 .boutondusite button:hover {
@@ -196,10 +196,23 @@
                                         <a href="#">Mes newsletters</a>
                                         <a href="#">Mes favoris</a>
                                         <a href="#">Historique des dons</a>
+
                                     </div>
-                                }
+                                </div>
+
+                                <!--Price -->
+                                <h2 class="font-weight-bold my-4">2,5%</h2>
+                                <p>
+                                    Esse corporis saepe laudantium velit adipisci cumque iste ratione facere non distinctio cupiditate
+                                    sequi atque.
+                                </p>
+                                <a class="btn btn-outline-white btn-rounded">Virement</a>
+
                             </div>
+                            <!-- Content -->
+
                         </div>
+
                     </li>
                     </td>
                     <td style="width:5%;"></td>
@@ -255,7 +268,12 @@
             <section class="text-center py-5">
                 <div id="contenu">
                     @RenderBody()
+
                 </div>
+                <!-- Grid row-->
+
             </section>
+
         </body>
     </html>
+
