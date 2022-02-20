@@ -54,8 +54,11 @@
                            new SelectListItem{ Text="Validé", Value = "executed" }
                         }, new { @class = "form-select w-100" })
                         @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
-                        @*<a class="btn btn-outline-purple" href="#" target="_blank" role="button">Statut</a>*@
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">Sauvegarder</button></div>
+                        <div class="row", center>
+                            <div class="mt-5 text-center"><button href="@Url.Action()" type="submit" value="Sauvegarder" class="btn btn-info">Sauvegarder</button></div>
+
+                            <div class="mt-5 text-center"><button href="@Url.Action("DeleteProject", "Project")" type="submit" value="Supprimer" class="btn btn-danger">Supprimer le projet </button></div>
+                        </div>
                     </div>
                 </div>
             </div>
