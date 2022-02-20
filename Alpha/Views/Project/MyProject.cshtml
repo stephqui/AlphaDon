@@ -59,38 +59,56 @@
     <title>Mon projet</title>
 </head>
 <body>
-    <br>
-    <br>
+    <section class="text-center py-5">
+        <br>
+        <!--Main container-->
+        <div class="container">
+            <meta name="viewport" content="width=device-width" />
+            <h3>Mon projet à évaluer</h3>
+            <br>
+            <hr />
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="overlay z-depth-1-half">
+                        <img src="~/img/@Model.Picture" style="width:500px", height="370" object-fit: cover">
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
 
-    <div>
-        <h3>Résumé de la vue - Mon Projet</h3>
-    </div>
-        <div> <h3>Mon projet: @Model.ProjectName</h3></div>
-        <div h3>Je suis: @Model.Profile.FirstName</div>
-        <div>Statut du projet: @Model.Status</div>
-        <div> @Model.Description</div>
-        <div>@Model.Category</div>
-        <div>@Model.Area</div>
-        <div>@Model.Place</div>
-        <div> @Model.StartDate</div>
-        <div> @Model.EndDate</div>
+                        <div> <h3>Mon projet: @Model.ProjectName</h3></div>
+                        <div h3>Je suis: @Model.Profile.FirstName</div>
+                        <div>Statut du projet: @Model.Status</div>
+                        <div> @Model.Description</div>
+                        <div>@Model.Category</div>
+                        <div>@Model.Area</div>
+                        <div>@Model.Place</div>
+                        <div> @Model.StartDate</div>
+                        <div> @Model.EndDate</div>
 
-        <div>Objectif: @Model.Limit</div>
-        <div>Montant déjà reçu: @Model.Collect.CurrentAmount</div>
+                        <div>Objectif: @Model.Limit</div>
+                        <div>Montant déjà reçu: @Model.Collect.CurrentAmount</div>
 
-        <div>
-            <a class="btn btn-outline-purple" href="#" target="_blank" role="button">Statut</a>
-            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
-            {
-               new SelectListItem{ Text="Créé", Value = "created" },
-               new SelectListItem{ Text="A vérifier", Value = "toControl" },
-               new SelectListItem{ Text="Vérifié", Value = "beingControled" },
-               new SelectListItem{ Text="Collecte démarrée", Value = "collectStarted" },
-               new SelectListItem{ Text="Collecte terminée", Value = "collectOver" },
-               new SelectListItem{ Text="En cours de validation", Value = "beingExecuted" },
-               new SelectListItem{ Text="Validé", Value = "executed" }
-            }, new { @class = "form-select w-100" })
-            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
+                        <div>
+                            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                            {
+                               new SelectListItem{ Text="Créé", Value = "created" },
+                               new SelectListItem{ Text="A vérifier", Value = "toControl" },
+                               new SelectListItem{ Text="Vérifié", Value = "beingControled" },
+                               new SelectListItem{ Text="Collecte démarrée", Value = "collectStarted" },
+                               new SelectListItem{ Text="Collecte terminée", Value = "collectOver" },
+                               new SelectListItem{ Text="En cours de validation", Value = "beingExecuted" },
+                               new SelectListItem{ Text="Validé", Value = "executed" }
+                            }, new { @class = "form-select w-100" })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger float-end" })
+                            <a class="btn btn-outline-purple" href="#" target="_blank" role="button">Statut</a>
+                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">Sauvegarder</button></div>
+                        </div>
+                    </div>
+                </div>
+            <br />
+            <hr />
         </div>
+      </section>
 </body>
 </html>*@
