@@ -26,12 +26,12 @@
                 {
                     <tr>
                         <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.ProjectName</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.FirstName</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.LastName</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.Adress.City</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })"> @p.Collect.CurrentAmount</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Limit</a></td>
-                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Status</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.Profile.FirstName</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.Profile.LastName</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.Profile.Adress.City</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })"> @p.Collect.CurrentAmount</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.Limit</a></td>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.Status</a></td>
                     </tr>
                 }
             </tbody>
