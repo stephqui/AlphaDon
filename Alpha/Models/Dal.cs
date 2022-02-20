@@ -54,15 +54,18 @@ namespace Alpha.Models
             return targetProject;
         }
 
+        // je vais **********************TENTER DE MODIFIER ********** POUR ADAPTER COMME LA METHODE PROFILE CHANGE ******
         // Creation de projet
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture)
         {
             //on crée une collecte en meme temps que le projet
+            
             Collect collect = new Collect { };
             this._bddContext.Collects.Add(collect);
             this._bddContext.SaveChanges();
+ 
 
             Project projectToAdd = new Project { ProjectName = projectName, Description = description,
                 Category = category, StartDate = startDate, EndDate = endDate, Area = area, Limit = limit,
