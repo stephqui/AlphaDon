@@ -1,12 +1,8 @@
 ﻿@model Alpha.Models.UnitDonation
-
 @using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post))
 {
     <div id="Donation">
-        amount:@Html.TextBoxFor(m => m.Amount)
         <input type="hidden" name="collectId" value="@ViewBag.collectId" />
-        <input type="submit" value="Faire un don" />
-
         <table style="width:80%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
             <tr>
                 <th colspan="7">
@@ -16,7 +12,9 @@
             <tr>
                 <td colspan="1" style="width:20%;"></td>
                 <td colspan="5">
-                    <div align="center"><input style="width:100%; " name="Faire un don sans contrepartie !"></div>
+                    <div align="center">
+                        amount:@Html.TextBoxFor(m => m.Amount, new { @class = "form-control", style = "width:80px; height:40px; text-align:center; font-size:35px;", placeholder = "0€", type = "number" })
+                    </div>
                 </td>
                 <td colspan="1" style="width:40%; text-align:center">Sélectionner un moyen de paiement</td>
             </tr>
@@ -28,8 +26,8 @@
                 <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">60 €</td>
                 <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">100€</td>
                 <td colspan="1">
-                    <img src="img/carte bleue.png" style="height:30px" />
-                    <img src="img/Paypal.png" style="size:200%; height:30px; padding-left: 5%;" />
+                    <img src="~/img/carte bleue.png" style="height:30px" />
+                    <img src="~/img/Paypal.png" style="size:200%; height:30px; padding-left: 5%;" />
                 </td>
             </tr>
             <tr>
@@ -53,13 +51,13 @@
         <table style="width:50%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
             <tr>
                 <td></td>
-                <td rowspan="2"><img src="img/phone.jpg" style="width:100px" /> </td>
+                <td rowspan="2"><img src="~/img/phone.jpg" style="width:100px" /> </td>
                 <td rowspan="2" colspan="3">Nom de la compensation<br> description</td>
                 <td rowspan="2">montant <br><input type="checkbox"> </td>
             </tr>
         </table>
     </div>
-        }
+}
 @*<h2>Les collectes</h2>
     <br />
     @foreach (var ud in Model)

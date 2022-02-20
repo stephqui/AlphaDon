@@ -20,7 +20,9 @@ namespace Alpha.Models
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture);
         void CreateUnitDonation(int id, string payMethod, int CurrentAmount, DateTime date, int collectId);
-
+        void UpdateProject(int id, string projectName, string description, string summary, string picture, string place, string rib, int limit);
+        void DeleteProject(int id);
+        void DeleteProject(int id, string projectName, string description, string summary, string picture, string place, string rib, int limit);
 
         //*********************************** PROFILE / USERACCOUNT *************************************************
         UserAccount AddUserAccount(string mail, string password);

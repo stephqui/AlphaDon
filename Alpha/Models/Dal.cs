@@ -81,6 +81,39 @@ namespace Alpha.Models
             return _bddContext.Projects.ToList().Any(Project => string.Compare(Project.ProjectName, projectName, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
+        public void DeleteProject(int id)
+        {
+            Project projectToDelete = this._bddContext.Projects.Find(id);
+            this._bddContext.Projects.Remove(projectToDelete);
+            this._bddContext.SaveChanges();
+        }
+
+        public void DeleteProject(int id, string projectName, string description, string summary, string picture, string place, string rib, int limit)
+        {
+            Project projectToDelete = this._bddContext.Projects.Where(r => r.Id == id && r.ProjectName == projectName && r.Description == description && r.Summary == summary && r.Picture == picture && r.Place == place && r.Rib == rib && r.Limit == limit).FirstOrDefault();
+            if (projectToDelete != null)
+            {
+                this._bddContext.Projects.Remove(projectToDelete);
+                this._bddContext.SaveChanges();
+            }
+        }
+
+        public void UpdateProject(int id, string projectName, string description, string summary, string picture, string place, string rib, int limit)
+        {
+            Project projectToUpdate = this._bddContext.Projects.Find(id);
+            if (projectToUpdate != null)
+            {
+                projectToUpdate.ProjectName = projectName;
+                projectToUpdate.Description = description;
+                projectToUpdate.Summary = summary;
+                projectToUpdate.Picture = picture;
+                projectToUpdate.Place = place;
+                projectToUpdate.Rib = rib;
+                projectToUpdate.Limit = limit;
+                this._bddContext.SaveChanges();
+            }
+        }
+
         //*************************************** COMMENTAIRES ********************************************
         //commentaires
         public void CreateCommentProject(ushort userId, ushort projectId, string comment)

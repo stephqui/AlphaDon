@@ -209,7 +209,8 @@ namespace Alpha.Models
                     Limit = 5000,
                     Picture = "crowdfunding3.jpg",
                     CollectId = 1,
-                    ProfileId = 1
+                    ProfileId = 1,
+                    
                 },
                  new Project
                  {
@@ -223,7 +224,74 @@ namespace Alpha.Models
                      Limit = 2000,
                      CollectId = 2,
                      ProfileId = 2
-                 });
+                 }
+                  //new Project
+                  //{
+                  //    ProjectName = "Rénovation d'une école",
+                  //    StartDate = new DateTime(2022, 01, 20),
+                  //    EndDate = new DateTime(2023, 01, 20),
+                  //    Description = "Aider la rénovation d'une école au Cambodge",
+                  //    Place = "Phnom Pen",
+                  //    Rib = "FR76 8002 0004 0220",
+                  //    Category = ProjectCategory.infrastructural,
+                  //    Limit = 50000,
+                  //    CollectId = 3,
+                  //    ProfileId = 3
+                  //},
+                  //new Project
+                  //{
+                  //    ProjectName = "Tour du monde en sac à dos",
+                  //    StartDate = new DateTime(2021, 11, 31),
+                  //    EndDate = new DateTime(2022, 07, 31),
+                  //    Description = "M'aider à réaliser mon rêve de faire le tour du monde",
+                  //    Place = "France",
+                  //    Rib = "FR76 8002 0008 0880",
+                  //    Category = ProjectCategory.sport,
+                  //    Limit = 25000,
+                  //    CollectId = 4,
+                  //    ProfileId = 4
+                  //},
+                  //  new Project
+                  //  {
+                  //      ProjectName = "Du matériel médical pour le Cameroun",
+                  //      StartDate = new DateTime(2021, 12, 31),
+                  //      EndDate = new DateTime(2022, 12, 31),
+                  //      Description = "Envoi d'un container à l'hôpital de M'Bouo",
+                  //      Place = "Cameroun",
+                  //      Rib = "FR76 8002 0009 0990",
+                  //      Category = ProjectCategory.medical,
+                  //      Limit = 10000,
+                  //      CollectId = 5,
+                  //      ProfileId = 5
+                  //  },
+                  //  new Project
+                  //  {
+                  //      ProjectName = "Opération humanitaire en Bulgarie",
+                  //      StartDate = new DateTime(2022, 01, 01),
+                  //      EndDate = new DateTime(2022, 10, 10),
+                  //      Description = "3 étudiants pour aider les orphelins bulgares",
+                  //      Place = "Bulgarie",
+                  //      Rib = "FR76 8002 0010 1010",
+                  //      Category = ProjectCategory.humanitarian,
+                  //      Limit = 5000,
+                  //      CollectId = 6,
+                  //      ProfileId = 6
+                  //  },
+                  //  new Project
+                  //  {
+                  //      ProjectName = "ENSEMBLE, POUR DES FORÊTS LIBRES",
+                  //      StartDate = new DateTime(2021, 11, 01),
+                  //      EndDate = new DateTime(2022, 11, 01),
+                  //      Description = "DÉCOUVRIR ET DÉFENDRE LE VIVANT, ET SA BIODIVERSITÉ",
+                  //      Place = "France",
+                  //      Rib = "FR76 8002 0011 1111",
+                  //      Category = ProjectCategory.infrastructural,
+                  //      Limit = 4000,
+                  //      CollectId = 7,
+                  //      ProfileId = 7
+                  //  }
+
+                 ) ;
             this.SaveChanges();
 
             this.UnitDonations.AddRange(
