@@ -28,956 +28,253 @@
     <!-- Custom styles -->
     <link href="~/css/style.min.css" rel="stylesheet">
 
+    <style>
 
+        body {
+            background-color: #1D617A;
+        }
+
+        .alphabar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #DBEFE1;
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.8em;
+        }
+
+            .alphabar tr {
+                line-height: 75px;
+            }
+
+            .alphabar td {
+                font-weight: bold;
+                width: 20%;
+                color: #066387;
+                text-align: center;
+                padding: auto, 20%;
+            }
+
+        .alphabarlink a {
+            color: #066387;
+            padding: 14px 16px;
+            text-decoration: none;
+            line-height: 100%;
+            display: inline-block;
+        }
+
+        .dashboarduser {
+            display: none;
+            position: absolute;
+            min-width: 160%;
+            background-color: #B2BED2;
+            border-radius: 5px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: black;
+            text-align: left;
+            margin-left: -16px;
+            padding: -14px;
+        }
+
+
+        /* Style The Dropdown Button */
+        .tablebtn {
+            border: none;
+            cursor: pointer;
+        }
+
+            .tablebtn:hover {
+                background-color: #1D617A;
+                color: #B2BED2;
+            }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #B2BED2;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: black;
+            text-align: left;
+            margin-left: -1%;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover {
+            background-color: #1D617A;
+            color: #B2BED2;
+            cursor: pointer;
+        }
+
+        .imgStatut {
+            border-radius: 45%;
+            width: 10%
+        }
+
+        .boutondusite {
+            width: 20%;
+            text-align: center;
+            background-color: #066387;
+            color: #B2BED2;
+            border-radius: 5px;
+            border-color: #066387;
+            border-style: solid;
+        }
+
+            .boutondusite:hover {
+                background-color: #B2BED2;
+                color: #066387;
+                cursor: pointer;
+            }
+
+            .boutondusite button {
+                height: 100%;
+                width: 100%;
+                color: #B2BED2;
+                background-color: transparent;
+                border: transparent;
+            }
+
+                .boutondusite button:hover {
+                    background-color: #B2BED2;
+                    color: #066387;
+                    cursor: pointer;
+                }
+    </style>
 
 </head>
 
 <body>
-
-    <!--Main Navigation-->
     <header>
+        <ul class="alphabar">
+            <table>
+                <tr>
 
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark secondary-color-dark">
+                    <!--Bienvenue-->
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <td class="tablebtn" style="width:19%">
+                    <li class="alphabarlink">
+                        <div class="tablebtn">
 
-            <!-- Additional container -->
-            <div class="container">
+                            <div class="dropdown" style="margin-left:-10%;">
+                                Bonjour, @User.Identity.Name !
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="dropdown-content">
+                                        <a href="#">Page d'accueil</a>
+                                        <a href="~/../Project/ManageProjects">Gérer les projet</a>
+                                        <a href="#">Statistiques du site</a>
+                                        <a href="#">Accéder aux AlphaNewsletters</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="dropdown-content">
+                                        <a href="#">Page d'accueil</a>
+                                        @*<a href="@Url.Action("ModifyProject", "Project", new { projectId = p.Id})">Voir mon projet</a>*@
+                                        <a href="#">Gérer mon profil</a>
+                                        <a href="#">Mes newsletters</a>
+                                        <a href="#">Mes favoris</a>
+                                        <a href="#">Historique des dons</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </li>
+                    </td>
 
-                <!-- Navbar brand -->
-                <a class="navbar-brand" href="#"><img src="~/img/alpha-logo3 vide.png" alt="Logo Alpha-Don" style="width:50px; height:auto" /></a>
 
-                @{ if (User.Identity.IsAuthenticated && @User.Identity.Name != null)
-                    {
-        <a class="navbar-brand" href="#page-top">Bonjour @User.Identity.Name</a> }
-                    else
-                    {
-        <a class="navbar-brand" href="#page-top">Bienvenue</a> } }
+                    <td style="width:5%;"></td>
+                    <!--Créer un projet-->
+                    <td class="tablebtn" style="width:14%" onclick="location.href='@Url.Action("CreateProject", "Project")'">
+                    <li class="alphabarlink">Créer un projet</li>
+                    </td>
+                }
+                else
+                {
+                    <td style="width:38%;"></td>
+                }
+                    }
 
+                    <td style="width:7%;"></td>
+                    <!--AlphaLogo-->
+                    <td class="tablebtn" style="width:5%;">
+                    <li class="alphabarlink">
+                        <div class="alphalogo" style="height:75px" title="Page d'accueil">
+                            <a style="position: relative;" href="~/../Project/Index">
+                                <img src="~/img/alpha-logo3 vide.png" style="height:55px;" />
+                            </a>
+                        </div>
+                    </li>
+                    </td>
 
-                <!-- Collapse button -->
-                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>*@
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <!-- Collapsible content -->
-                @*<div class="collapse navbar-collapse" id="basicExampleNav">*@
+                    <td style="width:7%;"></td>
+                    <!--Recherche un projet-->
+                    <td class="tablebtn" style="width:14%" onclick="location.href=''">
+                    <li class="alphabarlink">Rechercher un projet</li>
+                    </td>
 
-                <!-- Links -->
-                <!--<ul class="navbar-nav mx-auto mr-auto">
-    <li class="nav-item active mx-2">-->
-                @*<a class="nav-link" href="Projets Index">Projets</a>*@
-                <!--<a class="nav-link" href="~/Project/Index">Projets</a>
-            <span class="sr-only">(current)</span>
-        </li>
-
-    </ul>-->
-                <!-- Links -->
-
-                <form class="form-inline text-white">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Rechercher">
-                        <i class="fa fa-search pr-3"></i>
-                    </div>
-                </form>
-
-                <ul class="navbar-nav ms-auto">
+                    <td style="width:5%;"></td>
+                    <!--Se connecter-->
                     @if (User.Identity.IsAuthenticated)
                     {
-            @if (User.IsInRole("Admin"))
-            {
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/ManageProjects"> Gérer les projet</a></li>
-            }
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Mon Profil</a></li>
-                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
-                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/CreateProject"> Créer un projet</a></li>
-                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/deconnexion"> Se déconnecter</a></li>
- }
-
-                                                                        else
-                                                                        {
-                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets</a></li>
-                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/index"> Se connecter</a></li>
-                                                                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/login/CreateUserAccount"> Créer un compte</a></li>
-}
-
+                        <td class="tablebtn" style="width:8%" onclick="location.href='@Url.Action("Deconnexion", "Login")'">
+                        <li class="alphabarlink">Se déconnecter</li>
+                        </td>
+                        <td style="width:7%;"></td>
+                    }
+                    else
+                    {
+                        <td class="tablebtn" style="width:7%" onclick="location.href='@Url.Action("Index", "Login")'">
+                        <li class="alphabarlink">Se connecter</li>
+                        </td>
+                        <td class="tablebtn" style="width:8%" onclick="location.href='@Url.Action("CreateAccount", "Login")'">
+                        <li class="alphabarlink">Créer un compte</li>
+                        </td>
+                    }
+                    <td style="width:4%;"></td>
+                    </tr>
+                    </table>
                 </ul>
-            </div>
-                <!-- Collapsible content -->
-
-            </div>
-            <!-- Additional container -->
-            @*</div>*@
-        </nav>
-        <!-- Navbar-->
-
-    </header>
-    <!-- Main Navigation -->
-
-
-    <section class="text-center py-5">
-        <div id="contenu">
-            @RenderBody()
-        </div>
-    </section>
-
-
-    <!--Main layout-->
-    <main class="pt-5" id="features">
-
-
-
-        <!--Main container-->
-        <div class="container">
-
-            <!--Section Features-->
+            </header>
             <section class="text-center py-5">
-
-                <!--Heading-->
-                <h2 class="mb-4 indigo-text font-weight-bold">Nos Projets du Jour</h2>
-                <!--Grid row-->
-                <div class="row d-flex justify-content-center mb-4">
-                    <!--Grid column-->
-                    <div class="col-md-8">
-                        Description
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate
-                            hic
-                            provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis
-                            est
-                            sit pariatur.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-                </div>
-                <!--Grid row-->
-                <!--Grid row-->
-                <div class="row">
-                    <!--Grid column-->
-                    <div class="col-md-4 mb-5">
-                        <i class="fa fa-camera-retro fa-4x blue-text"></i>
-                        <h4 class="my-4 font-weight-bold indigo-text">Experience</h4>
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-md-4 mb-1">
-                        <i class="fa fa-heart fa-4x red-text"></i>
-                        <h4 class="my-4 font-weight-bold indigo-text">Notre Coup de Coeur</h4>
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-md-4 mb-1">
-                        <i class="fa fa-bicycle fa-4x deep-purple-text"></i>
-                        <h4 class="my-4 font-weight-bold indigo-text">Dernière Ligne Droite !</h4>
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-                    </div>
-                    <!--Grid column-->
-                </div>
-                <!--Grid row-->
-            </section>
-            <!--Section Features-->
-
-            <hr class="my-5">
-
-            <section class="py-5">
-                <!--Grid row-->
-                <div class="row pb-5">
-
-                    <!--Grid column-->
-                    <div class="col-md-6 my-4">
-
-                        <!--Carousel Wrapper-->
-                        <div id="carousel-example-1z" class="carousel slide carousel-fade carousel-fade" data-ride="carousel">
-                            <!--Indicators-->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-1z" data-slide-to="2"></li>
-                            </ol>
-                            <!--/.Indicators-->
-                            <!--Slides-->
-                            <div class="carousel-inner z-depth-1-half" role="listbox">
-                                <!--First slide-->
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="~/img/slideshow/pilotage-du-projet.jpg" alt="First slide">
-                                </div>
-                                <!--/First slide-->
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="~/img/slideshow/projet_application.jpg" alt="Second slide">
-                                </div>
-                                <!--/Second slide-->
-                                <!--Third slide-->
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="~/img/slideshow/Projet-de-territoire.png" alt="Third slide">
-                                </div>
-                                <!--/Third slide-->
-                            </div>
-                            <!--/.Slides-->
-                            <!--Controls-->
-                            <a class="carousel-control-prev" href="~/carousel-example-1z" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="~/carousel-example-1z" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            <!--/.Controls-->
-                        </div>
-                        <!--/.Carousel Wrapper-->
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-md-6 my-4">
-
-                        <h2 class="display-4">Créer votre Projet !</h2>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis pariatur quod ipsum atque quam dolorem voluptate officia sunt placeat consectetur alias fugit cum praesentium ratione sint mollitia, perferendis natus quaerat!.</p>
-                        <p>Datque quam dolorem voluptate officia sunt placeat consectetur alias fugit cum praesentium ratione.</p>
-                        <a class="btn btn-outline-purple" href="#" target="_blank" role="button">En Savoir Plus</a>
-                    </div>
-                    <!--Grid column-->
-                    <!--</div>-->
-                    <!--/Row features-->
-                    <!--Call to action-->
-                    <!--<div class="text-center pt-4">
-                        <a class="btn btn-outline-purple" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">
-                            Download Me Now
-                            <i class="fas fa-download ml-2"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">
-                            Start free tutorial
-                            <i class="fas fa-graduation-cap ml-2"></i>
-                        </a>
-                    </div>-->
-                    <!--/.Call to action-->
+                <div id="contenu">
+                    @RenderBody()
                 </div>
             </section>
 
+        </body>
 
-
-            <!--Section Amazing Projects-->
-
-            <section class="text-center py-5">
-
-                <div class="row d-flex justify-content-center">
-
-                    <div class="col-md-6 text-center mb-5">
-
-                        <!-- Heading -->
-                        <h2 class="font-weight-bold indigo-text text-center mb-4">Des Projets Incroyables</h2>
-
-                        <!-- Section description -->
-                        <p class="text-muted">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                        </p>
-                    </div>
-
-                </div>
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/chalet.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/coffee.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/nature-societe.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/eau_nature.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/humain-nature.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="overlay z-depth-1-half">
-                            <img src="~/img/img-projets/nature1.png" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                            maiores nam,
-                            aperiam minima
-                            assumenda deleniti hic.
-                        </p>
-
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-
-            </section>
-            <!--Section Amazing Projects-->
-
-            <hr class="my-5" id="pricing">
-
-            <!--Section pricing-->
-            <section class="text-center dark-grey-text py-5">
-
-                <div class="row d-flex justify-content-center">
-
-                    <div class="col-md-6 text-center mb-5">
-
-                        <!-- Heading -->
-                        <h2 class="font-weight-bold indigo-text text-center mb-4">Nos tarifs transparents</h2>
-
-                        <!-- Section description -->
-                        <p class="text-muted">Sans frais si vous dépensez chez nos partenaires e-commerce ou commission dégréssive pour un virement vers un compte bancaire en zone SEPA (1,5% à 3,5% de commission). </p>
-                    </div>
-
-                </div>
-
-                <!-- Grid row -->
-                <div class="row">
-
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!-- Card -->
-                        <div class="card">
-
-                            <!-- Content -->
-                            <div class="card-body">
-
-                                <!-- Offer -->
-                                <h5 class="mb-4">En dessous de 2000 €</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-home text-secondary"></i>
-                                    </div>
-                                </div>
-
-                                <!-- Price -->
-                                <h2 class="font-weight-bold indigo-text my-4">3,5%</h2>
-                                <p class="grey-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa pariatur id
-                                    nobis accusamus deleniti cumque hic laborum.
-                                </p>
-                                <a class="btn btn-outline-purple btn-rounded">Virement</a>
-
-                            </div>
-                            <!-- Content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <!-- Card -->
-                        <div class="card purple-gradient">
-
-                            <!-- Content -->
-                            <div class="card-body white-text">
-
-                                <!-- Offer -->
-                                <h5 class="mb-4">De 2000 € à 200 000 €</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                </div>
-
-                                <!--Price -->
-                                <h2 class="font-weight-bold my-4">2,5%</h2>
-                                <p>
-                                    Esse corporis saepe laudantium velit adipisci cumque iste ratione facere non distinctio cupiditate
-                                    sequi atque.
-                                </p>
-                                <a class="btn btn-outline-white btn-rounded">Virement</a>
-
-                            </div>
-                            <!-- Content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <!-- Card -->
-                        <div class="card">
-
-                            <!-- Content -->
-                            <div class="card-body">
-
-                                <!-- Offer -->
-                                <h5 class="mb-4">Au dessus de 200 000 €</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                        <i class="far fa-chart-bar text-secondary"></i>
-                                    </div>
-                                </div>
-
-                                <!--Price -->
-                                <h2 class="font-weight-bold indigo-text my-4">1,5%</h2>
-                                <p class="grey-text">
-                                    At ab ea a molestiae corrupti numquam quo beatae minima ratione magni
-                                    accusantium repellat eveniet quia vitae.
-                                </p>
-                                <a class="btn btn-outline-purple btn-rounded">Virement</a>
-
-                            </div>
-                            <!-- Content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row -->
-
-            </section>
-            <!--Section: pricing-->
-
-            <hr class="my-5" id="articles">
-
-            <!--Section: articles-->
-            <section id="articles" class="text-center py-5">
-
-                <!-- Container -->
-                <div class="container">
-
-                    <!-- Section heading -->
-                    <h2 class="h1-responsive indigo-text font-weight-bold mb-4">Les Projets Terminés</h2>
-                    <!-- Section description -->
-                    <p class="grey-text w-responsive mx-auto mb-5">
-                        Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia deserunt mollit est laborum.
-                    </p>
-
-                    <!-- Grid row -->
-                    <div class="row text-center">
-
-                        <!-- Grid column -->
-                        <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
-                            <!--Featured image-->
-                            <div class="overlay rounded z-depth-1">
-                                <img src="~/img/img-projets/students.jpg" class="img-fluid" alt="école image">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Excerpt-->
-                            <div class="card-body pb-0">
-                                <h4 class="font-weight-bold my-3">Ecole en Afrique</h4>
-                                <p class="grey-text">
-                                    Temporibus autem quibusdam et aut officiis debitis aut rerum
-                                    necessitatibus saepe eveniet ut et voluptates repudiandae.
-                                </p>
-                                <a class="btn btn-purple btn-sm"><i class="fa fa-clone left mr-2"></i> En savoir plus</a>
-                            </div>
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
-                            <!--Featured image-->
-                            <div class="overlay rounded z-depth-1">
-                                <img src="~/img/img-projets/JO.jpg" class="img-fluid" alt="jeux Olympiques">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Excerpt-->
-                            <div class="card-body pb-0">
-                                <h4 class="font-weight-bold my-3">En route vers les J.O.</h4>
-                                <p class="grey-text">
-                                    Temporibus autem quibusdam et aut officiis debitis aut rerum
-                                    necessitatibus saepe eveniet ut et voluptates repudiandae.
-                                </p>
-                                <a class="btn btn-purple btn-sm"><i class="fa fa-clone left mr-2"></i> En savoir plus</a>
-                            </div>
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-lg-4 col-md-6">
-                            <!--Featured image-->
-                            <div class="overlay rounded z-depth-1">
-                                <img src="~/img/img-projets/commerce.png" class="img-fluid" alt="commerce image">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Excerpt-->
-                            <div class="card-body pb-0">
-                                <h4 class="font-weight-bold my-3">Ouvrir un commerce</h4>
-                                <p class="grey-text">
-                                    Temporibus autem quibusdam et aut officiis debitis aut rerum
-                                    necessitatibus saepe eveniet ut et voluptates repudiandae.
-                                </p>
-                                <a class="btn btn-purple btn-sm"><i class="fa fa-clone left mr-2"></i> En savoir plus</a>
-                            </div>
-                        </div>
-                        <!-- Grid column -->
-
-                    </div>
-                    <!-- Grid row -->
-
-                </div>
-                <!-- Container -->
-
-            </section>
-            <!--Section articles-->
-
-            <hr class="my-5" id="team">
-
-            <!--Section team-->
-            <section class="team-section text-center py-5 dark-grey-text">
-
-                <div class="row d-flex justify-content-center">
-
-                    <div class="col-md-8 text-center mb-5">
-
-                        <!-- Section heading -->
-                        <h2 class="indigo-text font-weight-bold mb-4">Notre Super Team</h2>
-
-                        <!-- Section description -->
-                        <p class="text-muted w-responsive mx-auto mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam
-                            eum porro a pariatur veniam.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <!-- Grid row-->
-                <div class="row text-center text-md-left">
-
-                    <!-- Grid column -->
-                    <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
-                        <div class="avatar mb-md-0 mb-4 mx-4">
-                            <img src="~/img/team/team-1.jpg" class="rounded z-depth-1" alt="Sample avatar">
-                        </div>
-                        <div class="mx-4">
-                            <h4 class="font-weight-bold mb-3">Stephane</h4>
-                            <h6 class="font-weight-bold grey-text mb-3">Président</h6>
-                            <p class="grey-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-                                tenetur.
-                            </p>
-                            <!-- Facebook-->
-                            <a class="p-2 fa-lg fb-ic" href="" target="_blank" rel="noopener">
-                                <i class="fab fa-facebook-f"> </i>
-                            </a>
-                            <!-- Twitter -->
-                            <a class="p-2 fa-lg tw-ic">
-                                <i class="fab fa-twitter"> </i>
-                            </a>
-                            <!--Dribbble -->
-                            <a class="p-2 fa-lg dribbble-ic">
-                                <i class="fab fa-dribbble"> </i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
-                        <div class="avatar mb-md-0 mb-4 mx-4">
-                            <img src="~/img/team/team-2.jpg" class="rounded z-depth-1" alt="Sample avatar">
-                        </div>
-                        <div class="mx-4">
-                            <h4 class="font-weight-bold mb-3">Nacer</h4>
-                            <h6 class="font-weight-bold grey-text mb-3">Gestionnaire de projet</h6>
-                            <p class="grey-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-                                tenetur.
-                            </p>
-                            <!-- Facebook-->
-                            <a class="p-2 fa-lg fb-ic">
-                                <i class="fab fa-facebook-f"> </i>
-                            </a>
-                            <!--YouTube -->
-                            <a class="p-2 fa-lg yt-ic">
-                                <i class="fab fa-youtube"> </i>
-                            </a>
-                            <!--Instagram-->
-                            <a class="p-2 fa-lg ins-ic">
-                                <i class="fab fa-instagram"> </i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row-->
-                <!-- Grid row-->
-                <div class="row text-center text-md-left">
-
-                    <!-- Grid column -->
-                    <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
-                        <div class="avatar mb-md-0 mb-4 mx-4">
-                            <img src="~/img/team/team-3.jpg" class="rounded z-depth-1" alt="Sample avatar">
-                        </div>
-                        <div class="mx-4">
-                            <h4 class="font-weight-bold mb-3">David</h4>
-                            <h6 class="font-weight-bold grey-text mb-3">Administrateur de compte et profil</h6>
-                            <p class="grey-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-                                tenetur.
-                            </p>
-                            <!-- Facebook-->
-                            <a class="p-2 fa-lg fb-ic">
-                                <i class="fab fa-facebook-f"> </i>
-                            </a>
-                            <!-- Twitter -->
-                            <a class="p-2 fa-lg tw-ic">
-                                <i class="fab fa-twitter"> </i>
-                            </a>
-                            <!-- GitHub-->
-                            <a class="p-2 fa-lg git-ic">
-                                <i class="fab fa-github"> </i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
-                    <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
-                        <div class="avatar mb-md-0 mb-4 mx-4">
-                            <img src="~/img/team/team-4.jpg" class="rounded z-depth-1" alt="Sample avatar">
-                        </div>
-                        <div class="mx-4">
-                            <h4 class="font-weight-bold mb-3">Jérémy</h4>
-                            <h6 class="font-weight-bold grey-text mb-3">Secrétaire</h6>
-                            <p class="grey-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-                                tenetur.
-                            </p>
-                            <!-- Google +-->
-                            <a class="p-2 fa-lg vkon-ic">
-                                <i class="fab fa-vk"> </i>
-                            </a>
-                            <!--LinkedIn -->
-                            <a class="p-2 fa-lg li-ic">
-                                <i class="fab fa-linkedin-in"> </i>
-                            </a>
-                            <!--Email-->
-                            <a class="p-2 fa-lg email-ic">
-                                <i class="fas fa-envelope"> </i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row-->
-
-            </section>
-            <!--Section team-->
-
-            <hr class="my-5" id="contact">
-
-            <!--Section contact-->
-            <section class="py-5">
-
-                <div class="row d-flex justify-content-center">
-
-                    <div class="col-md-6 text-center mb-5">
-
-                        <!-- Heading -->
-                        <h2 class="font-weight-bold indigo-text text-center">Nous Contacter</h2>
-
-                        <!-- Section description -->
-                        <p class="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente molestiae.</p>
-                    </div>
-
-                </div>
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-lg-5 col-md-12">
-                        <!-- Form contact -->
-                        <form class="p-5 grey-text">
-                            <div class="md-form form-sm">
-                                <input type="text" id="form1" class="form-control form-control-sm">
-                                <label for="form1">Votre nom</label>
-                            </div>
-                            <div class="md-form form-sm">
-                                <input type="text" id="form2" class="form-control form-control-sm">
-                                <label for="form2">Votre email</label>
-                            </div>
-                            <div class="md-form form-sm">
-                                <input type="text" id="form3" class="form-control form-control-sm">
-                                <label for="form3">Sujet</label>
-                            </div>
-                            <div class="md-form form-sm">
-                                <textarea type="text" id="form4" class="md-textarea form-control form-control-sm" rows="3"></textarea>
-                                <label for="form4">Votre message</label>
-                            </div>
-                            <div class="text-center mt-4">
-                                <button class="btn btn-purple">Envoyer <i class="fas fa-paper-plane ml-1"></i></button>
-                            </div>
-                        </form>
-                        <!-- Form contact -->
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-7 col-md-12">
-
-                        <!--Grid row-->
-                        <div class="row text-center">
-
-                            <!--Grid column-->
-                            <div class="col-lg-4 col-md-12 mb-3">
-
-                                <p><i class="fa fa-map fa-1x mr-2 grey-text"></i>101 Reykjavík, Iceland</p>
-
-                            </div>
-                            <!--Grid column-->
-                            <!--Grid column-->
-                            <div class="col-lg-4 col-md-6 mb-3">
-
-                                <p><i class="fa fa-building fa-1x mr-2 grey-text"></i>Mon - Fri, 8:00-22:00</p>
-
-                            </div>
-                            <!--Grid column-->
-                            <!--Grid column-->
-                            <div class="col-lg-4 col-md-6 mb-3">
-
-                                <p><i class="fa fa-phone fa-1x mr-2 grey-text"></i>+ 01 234 567 89</p>
-
-                            </div>
-                            <!--Grid column-->
-
-                        </div>
-                        <!--Grid row-->
-                        <!--Google map-->
-                        <div id="map-container" class="z-depth-1-half map-container mb-5" style="height: 400px">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d78751.84536737092!2d-21.970582757028907!3d64.14107458796731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d674b9eedcedc3%3A0xec912ca230d26071!2sReykjavik%2C%20Islande!5e0!3m2!1sfr!2sfr!4v1584851204729!5m2!1sfr!2sfr" width="635" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                        </div>
-
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-
-            </section>
-            <!--Section: Contact-->
-
-        </div>
-        <!--Main container-->
-
-    </main>
-    <!--Main layout-->
-    <!-- Footer -->
-    <footer class="page-footer font-small mt-5">
-
-        <!-- Footer links -->
-        <div class="secondary-color">
-
-            <div class="container">
-                <!--Grid row-->
-                <div class="row py-4 d-flex align-items-center">
-
-                    <!--Grid column-->
-                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-
-                        <a class="mr-4" href="#">
-                            A propos d'Alpha-Don
-                        </a>
-
-                        <a class="mr-4" href="#">
-                            Notre Service
-                        </a>
-
-                        <a class="mr-4" href="#">
-                            Conditions
-                        </a>
-
-                        <a class="" href="#">
-                            Projets
-                        </a>
-
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-md-6 col-lg-7 text-center text-md-right">
-                        <!--Facebook-->
-                        <a class="fb-ic ml-0">
-                            <i class="fab fa-facebook white-text mr-4"> </i>
-                        </a>
-                        <!--Twitter-->
-                        <a class="tw-ic">
-                            <i class="fab fa-twitter white-text mr-4"> </i>
-                        </a>
-                        <!--Google +-->
-                        <a class="vkon-ic">
-                            <i class="fab fa-vk white-text mr-4"> </i>
-                        </a>
-                        <!--Linkedin-->
-                        <a class="li-ic">
-                            <i class="fab fa-linkedin white-text mr-4"> </i>
-                        </a>
-                        <!--Instagram-->
-                        <a class="ins-ic">
-                            <i class="fab fa-instagram white-text mr-lg-4"> </i>
-                        </a>
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-            </div>
-        </div>
-        <!-- Footer links -->
-        <!-- Copyright -->
-        <div class="footer-copyright secondary-color-dark text-center py-3">
-            © 2022 Copyright <a href="https://www.alpha-don.net" target="_blank" rel="noopener">alpha-don.net</a>
-
-        </div>
-        <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="~/js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="~/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="~/js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-
-        // Animations initialization
-        new WOW().init();
-
-        // Adding animations to the sections
-        $("section").addClass("wow fadeIn");
-
-        // Animations Init
-        new WOW().init();
-
-        // Carousel options
-        $('.carousel').carousel({
-            interval: 3000,
-        })
-    </script>
-</body>
-
-</html>			
+    </html>			
