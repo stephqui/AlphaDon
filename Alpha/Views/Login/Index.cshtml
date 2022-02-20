@@ -1,45 +1,70 @@
 ﻿@model Alpha.ViewModels.UserAccountViewModel
-
 @{
     Layout = "_Layout";
     ViewBag.Title = "Login";
 }
-
 <section class="text-center py-5">
-    <br />
-    <br />
     @if (Model.Authentify)
     {
-        <h3>
-            Vous êtes authentifié avec votre login :
-            @Model.UserAccount.Mail
-        </h3>
-        <div>
-            @Html.ActionLink("Poursuivre sur le site", "GestionProjet")
+        <div id="AlreadyLogged">
+            <table style="margin:5% 33%; width:34%; background-color: #E2E5E9;">
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding-right:5% padding-left:5%; text-align: center;">
+                        Vous êtes authentifié avec votre login :<br>
+                        <div class="titres1" style="font-size:2em;">@Model.UserAccount.Mail</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding-right:5%; padding-bottom:7%;text-align: center;">@Html.ActionLink("Poursuivre sur le site", "GestionProjet")</td>
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding-right:5%; padding-bottom:7%;text-align: center;">@Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")</td>
+                </tr>
+            </table>
         </div>
-        @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+        <h3>
+        </h3>
     }
     else
     {
         <form action="/login/index" method="post">
-            <h2 class="mb-4 indigo-text font-weight-bold">Se Connecter</h2>
-            <div align="center">
-                @Html.LabelFor(m => m.UserAccount.Mail)
-                @Html.TextBoxFor(m => m.UserAccount.Mail)
-                @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+            <div id="LogInForm">
+                <table style="margin:5% 33%; width:34%; background-color: #E2E5E9; padding:2%;">
+                    <tr>
+                        <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:2em;">Se connecter</div></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:25px; padding:5%"><label for="mail">Votre adresse :</label></td>
+                        <td style="padding:5%;">@Html.TextBoxFor(m => m.UserAccount.Mail, new { @class = "form-control", placeholder = "adresse@domaine.com", style = "font-size:35px;", id = "mail" })</td>
+                        @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+                    </tr>
+                    <tr>
+                        <td style="font-size:25px; padding-top:7%; padding:5%;"><label for="pass">Mot de passe :</label></td>
+                        <td style="padding:5%;">@Html.PasswordFor(m => m.UserAccount.Password, new { @class = "form-control", style = "font-size:35px; margin-top:7%;", id = "pass" })</td>
+                        @Html.ValidationMessageFor(m => m.UserAccount.Password)
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-size:25px; padding-top:7%; padding-right:5%; text-align: right;">
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-size:25px; padding-top:7%; padding-right:5%; padding-bottom:5%; text-align: right;"><input type="submit" value="Se connecter" /></td>
+                    </tr>
+                </table>
             </div>
-            <div align="center">
-                @Html.LabelFor(m => m.UserAccount.Password)
-                @Html.PasswordFor(m => m.UserAccount.Password)
-                @Html.ValidationMessageFor(m => m.UserAccount.Password)
-            </div>
-            <label>
-                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-            </label>
-            <input type="submit" value="Se connecter" />
-            <br />
-            <p class="inscription">Je n'ai pas de compte.</p>
-            @Html.ActionLink("Créer un compte", "CreateUserAccount")
         </form>
+        <div id="ZeroAccount">
+            <table style="margin:auto 33%; width:34%; background-color: #E2E5E9;">
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding-right:5%; text-align: center;">Je n'ai pas de compte</td>
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding-right:5%; padding-bottom:7%;text-align: center;">@Html.ActionLink("Créer un compte", "CreateUserAccount")</td>
+                </tr>
+            </table>
+        </div>
     }
 </section>
