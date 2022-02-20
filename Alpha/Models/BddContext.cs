@@ -64,7 +64,7 @@ namespace Alpha.Models
             {
                 profilePersonality = ProfilePersonality.Single,
                 FirstName = "Alain",
-                LastName = "TERIEUR",
+                LastName = "Prevost",
                 Birthday = 1991 - 06 - 25,
                 PayMethod = "CB",
                 Nick = "toto",
@@ -84,8 +84,8 @@ namespace Alpha.Models
             Profile profile2 = new Profile
             {
                 profilePersonality = ProfilePersonality.Ngo,
-                FirstName = "Joe",
-                LastName = "DALTON",
+                FirstName = "Jean-Louis",
+                LastName = "AUBIN",
                 Birthday = 2000 - 02 - 08,
                 PayMethod = "CB",
                 Nick = "tata",
@@ -130,7 +130,7 @@ namespace Alpha.Models
                 profilePersonality = ProfilePersonality.Single,
                 FirstName = "David",
                 LastName = "LAUNEY",
-                Birthday = 1990 - 08 - 07,
+                Birthday = 1990-08-07,
                 PayMethod = "CB",
                 Nick = "dav",
                 Nationality = "FR",
@@ -151,7 +151,7 @@ namespace Alpha.Models
                 profilePersonality = ProfilePersonality.Single,
                 FirstName = "Nacer",
                 LastName = "BENCHEHIDA ",
-                Birthday = 1989 - 08 - 07,
+                Birthday = 1989-08-07,
                 PayMethod = "CB",
                 Nick = "nass",
                 Nationality = "FR",
@@ -172,7 +172,7 @@ namespace Alpha.Models
                 profilePersonality = ProfilePersonality.Single,
                 FirstName = "Stephane",
                 LastName = "PROST-TOURNIER ",
-                Birthday = 1968 - 04 - 25,
+                Birthday = 1968-04-25,
                 PayMethod = "CB",
                 Nick = "steph",
                 Nationality = "FR",
@@ -187,12 +187,100 @@ namespace Alpha.Models
                 Profil = profile6,
                 Role = "Admin"
             });
+            Adress addr7 = new Adress { City = "Lyon", Country = "FR", Street = "16, Boulevard Gambetta", Zip = 69000 };
+            Profile profile7 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Blaise",
+                LastName = "Wolff ",
+                Birthday = 2003-02-03,
+                PayMethod = "CB",
+                Nick = "bunedik",
+                Nationality = "FR",
+                Phone = "0677851420",
+                Adress = addr7
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "blaise@gmail.com",
+                Password = "60-DA-C8-94-81-3A-D2-98-AE-61-F6-36-21-36-9B-20",
+                Status = AccountStatus.Valid,
+                Profil = profile7,
+                Role = "basic"
+            });
+            Adress addr8 = new Adress { City = "Gissac", Country = "FR", Street = "36 Rue de l'Aire aux Grains", Zip = 12360 };
+            Profile profile8 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Didier",
+                LastName = "Allain ",
+                Birthday = 1978-02-05,
+                PayMethod = "CB",
+                Nick = "lepan",
+                Nationality = "FR",
+                Phone = "0655418766",
+                Adress = addr8
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "alaind@gmail.com",
+                Password = "9C-D4-E5-8F-17-09-F7-F9-0A-A4-75-FA-F1-89-62-A7",
+                Status = AccountStatus.Valid,
+                Profil = profile8,
+                Role = "basic"
+            });
+            Adress addr9 = new Adress { City = "Hussigny-Godbrange", Country = "FR", Street = "22 Rue Henri Lasne", Zip = 54590 };
+            Profile profile9 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Marielle",
+                LastName = "Arnaud ",
+                Birthday = 1969-06-11,
+                PayMethod = "CB",
+                Nick = "soxoha",
+                Nationality = "FR",
+                Phone = "0655418766",
+                Adress = addr9
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "marielle@wanadoo.fr",
+                Password = "F8-FE-6D-0B-C2-1F-20-69-D2-DF-BE-74-BD-72-13-DE",
+                Status = AccountStatus.Valid,
+                Profil = profile9,
+                Role = "basic"
+            });
+            Adress addr10 = new Adress { City = "Lanet ", Country = "FR", Street = "24 Rue de la Bretinais", Zip = 11330 };
+            Profile profile10 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Marcelle",
+                LastName = "Godard ",
+                Birthday = 1993 - 02 - 21,
+                PayMethod = "CB",
+                Nick = "rusum",
+                Nationality = "FR",
+                Phone = "0769411766",
+                Adress = addr10
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "marcelle@yahoo.fr",
+                Password = "F8-FE-6D-0B-C2-1F-20-69-D2-DF-BE-74-BD-72-13-DE",
+                Status = AccountStatus.Valid,
+                Profil = profile10,
+                Role = "basic"
+            });
 
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
             this.Collects.AddRange(
              new Collect { CurrentAmount = 1350, Id = 1 },
-             new Collect { CurrentAmount = 890, Id = 2 }
+             new Collect { CurrentAmount = 890, Id = 2 },
+             new Collect { CurrentAmount = 2500, Id = 3 },
+             new Collect { CurrentAmount = 560, Id = 4 },
+             new Collect { CurrentAmount = 3600, Id = 5 },
+             new Collect { CurrentAmount = 4150, Id = 6 }
              );
             this.SaveChanges();
 
@@ -207,15 +295,16 @@ namespace Alpha.Models
                     Rib = "FR76 8001 0032 1540",
                     Category = ProjectCategory.fairTrade,
                     Limit = 5000,
-                    Picture = "crowdfunding3.jpg",
+                    Picture = "chat.jpg",
                     CollectId = 1,
                     ProfileId = 1,
+                    Status = ProjectStatus.created
                     
                 },
                  new Project
                  {
                      ProjectName = "Traverse",
-                     StartDate = new DateTime(2022, 02, 10),
+                     StartDate = new DateTime(2021, 12, 10),
                      EndDate = new DateTime(2022, 06, 25),
                      Description = "Aider la rénovation du pont de Morette",
                      Place = "Thones",
@@ -223,75 +312,85 @@ namespace Alpha.Models
                      Category = ProjectCategory.infrastructural,
                      Limit = 2000,
                      CollectId = 2,
-                     ProfileId = 2
-                 }
-                  //new Project
-                  //{
-                  //    ProjectName = "Rénovation d'une école",
-                  //    StartDate = new DateTime(2022, 01, 20),
-                  //    EndDate = new DateTime(2023, 01, 20),
-                  //    Description = "Aider la rénovation d'une école au Cambodge",
-                  //    Place = "Phnom Pen",
-                  //    Rib = "FR76 8002 0004 0220",
-                  //    Category = ProjectCategory.infrastructural,
-                  //    Limit = 50000,
-                  //    CollectId = 3,
-                  //    ProfileId = 3
-                  //},
-                  //new Project
-                  //{
-                  //    ProjectName = "Tour du monde en sac à dos",
-                  //    StartDate = new DateTime(2021, 11, 31),
-                  //    EndDate = new DateTime(2022, 07, 31),
-                  //    Description = "M'aider à réaliser mon rêve de faire le tour du monde",
-                  //    Place = "France",
-                  //    Rib = "FR76 8002 0008 0880",
-                  //    Category = ProjectCategory.sport,
-                  //    Limit = 25000,
-                  //    CollectId = 4,
-                  //    ProfileId = 4
-                  //},
-                  //  new Project
-                  //  {
-                  //      ProjectName = "Du matériel médical pour le Cameroun",
-                  //      StartDate = new DateTime(2021, 12, 31),
-                  //      EndDate = new DateTime(2022, 12, 31),
-                  //      Description = "Envoi d'un container à l'hôpital de M'Bouo",
-                  //      Place = "Cameroun",
-                  //      Rib = "FR76 8002 0009 0990",
-                  //      Category = ProjectCategory.medical,
-                  //      Limit = 10000,
-                  //      CollectId = 5,
-                  //      ProfileId = 5
-                  //  },
-                  //  new Project
-                  //  {
-                  //      ProjectName = "Opération humanitaire en Bulgarie",
-                  //      StartDate = new DateTime(2022, 01, 01),
-                  //      EndDate = new DateTime(2022, 10, 10),
-                  //      Description = "3 étudiants pour aider les orphelins bulgares",
-                  //      Place = "Bulgarie",
-                  //      Rib = "FR76 8002 0010 1010",
-                  //      Category = ProjectCategory.humanitarian,
-                  //      Limit = 5000,
-                  //      CollectId = 6,
-                  //      ProfileId = 6
-                  //  },
-                  //  new Project
-                  //  {
-                  //      ProjectName = "ENSEMBLE, POUR DES FORÊTS LIBRES",
-                  //      StartDate = new DateTime(2021, 11, 01),
-                  //      EndDate = new DateTime(2022, 11, 01),
-                  //      Description = "DÉCOUVRIR ET DÉFENDRE LE VIVANT, ET SA BIODIVERSITÉ",
-                  //      Place = "France",
-                  //      Rib = "FR76 8002 0011 1111",
-                  //      Category = ProjectCategory.infrastructural,
-                  //      Limit = 4000,
-                  //      CollectId = 7,
-                  //      ProfileId = 7
-                  //  }
+                     ProfileId = 2,
+                     Picture= "pontthones.jpg"
+                 },
+                 new Project
+                 {
+                     ProjectName = "Rénovation d'une école",
+                     StartDate = new DateTime(2021, 12, 25),
+                     EndDate = new DateTime(2023, 01, 12),
+                     Description = "Aider la rénovation d'une école au Cambodge",
+                     Place = "Phnom Pen",
+                     Rib = "FR76 8002 0004 0220",
+                     Category = ProjectCategory.infrastructural,
+                     Limit = 50000,
+                     CollectId = 3,
+                     ProfileId = 7,
+                     Picture = "pnompen4.jpg",
+                     Status = ProjectStatus.collectStarted
+                 },
+                 new Project
+                 {
+                     ProjectName = "Tour du monde en sac à dos",
+                     StartDate = new DateTime(2022, 01, 12),
+                     EndDate = new DateTime(2022, 07, 31),
+                     Description = "M'aider à réaliser mon rêve de faire le tour du monde",
+                     Place = "France",
+                     Rib = "FR76 8002 0008 0880",
+                     Category = ProjectCategory.sport,
+                     Limit = 25000,
+                     CollectId = 4,
+                     ProfileId = 8,
+                     Picture = "tourmonde.jpg",
+                     Status = ProjectStatus.collectStarted
+                 },
+                   new Project
+                   {
+                       ProjectName = "Du matériel médical pour le Cameroun",
+                       StartDate = new DateTime(2021, 12, 31),
+                       EndDate = new DateTime(2022, 12, 31),
+                       Description = "Envoi d'un container à l'hôpital de M'Bouo",
+                       Place = "Cameroun",
+                       Rib = "FR76 8002 0009 0990",
+                       Category = ProjectCategory.medical,
+                       Limit = 10000,
+                       CollectId = 5,
+                       ProfileId = 9,
+                       Picture = "cameroun.jpg",
+                       Status = ProjectStatus.beingControled
+                   },
+                   new Project
+                   {
+                       ProjectName = "Opération humanitaire en Bulgarie",
+                       StartDate = new DateTime(2022, 01, 01),
+                       EndDate = new DateTime(2022, 10, 10),
+                       Description = "3 étudiants pour aider les orphelins bulgares",
+                       Place = "Bulgarie",
+                       Rib = "FR76 8002 0010 1010",
+                       Category = ProjectCategory.humanitarian,
+                       Limit = 5000,
+                       CollectId = 6,
+                       ProfileId = 10,
+                       Picture= "bulgarie.jpg",
+                       Status = ProjectStatus.toControl
+                   }
+                 //  new Project
+                 //  {
+                 //      ProjectName = "ENSEMBLE, POUR DES FORÊTS LIBRES",
+                 //      StartDate = new DateTime(2021, 11, 01),
+                 //      EndDate = new DateTime(2022, 11, 01),
+                 //      Description = "DÉCOUVRIR ET DÉFENDRE LE VIVANT, ET SA BIODIVERSITÉ",
+                 //      Place = "France",
+                 //      Rib = "FR76 8002 0011 1111",
+                 //      Category = ProjectCategory.infrastructural,
+                 //      Limit = 4000,
+                 //      CollectId = 7,
+                 //      ProfileId = 7,
+                 //      Status = ProjectStatus.collectOver
+                 //  }
 
-                 ) ;
+                 );
             this.SaveChanges();
 
             this.UnitDonations.AddRange(

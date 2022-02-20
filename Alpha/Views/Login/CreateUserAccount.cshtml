@@ -1,28 +1,34 @@
 ﻿@model Alpha.Models.UserAccount
-
 @{
     Layout = "_Layout";
 }
-
-
 <section class="text-center py-5">
-    <br />
-    <br />
-
-    <h2 class="mb-4 indigo-text font-weight-bold">Créer votre compte</h2> <br />
-        @using (Html.BeginForm("CreateUserAccount", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-        <div>
-            @Html.LabelFor(m => m.Mail)
-            @Html.TextBoxFor(m => m.Mail)
-            @Html.ValidationMessageFor(m => m.Mail)
+    @using (Html.BeginForm("CreateUserAccount", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div id="SignUp">
+            <table style="margin:5% 30%; width:40%; background-color: #E2E5E9; padding:2%;">
+                <tr>
+                    <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Créer votre compte</div></td>
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding:5%"><label for="mail">Votre adresse :</label></td>
+                    <td style="padding:5%;">@Html.TextBoxFor(m => m.Mail, new { @class = "form-control", placeholder = "adresse@domaine.com", style = "font-size:35px;", id = "mail" })</td>
+                    @Html.ValidationMessageFor(m => m.Mail)
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding:5%;"><label for="pass">Mot de passe :</label></td>
+                    <td style="padding:5%;">@Html.PasswordFor(m => m.Password, new { @class = "form-control", style = "font-size:35px; margin-top:7%;", id = "pass" })</td>
+                    @Html.ValidationMessageFor(m => m.Password)
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:25px; padding-top:7%; padding-right:5%; text-align: center;">
+                        <p>En créant votre compte vous acceptez nos <a href="#" style="color:dodgerblue">Conditions Générales d'Utilisation</a>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
+                </tr>
+            </table>
         </div>
-        <div>
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </div>
-        <p>En créant votre compte vous acceptez nos <a href="#" style="color:dodgerblue">Conditions Générales d'Utilisation</a>.</p>
-        <input type="submit" value="Créer" />
     }
 </section>
