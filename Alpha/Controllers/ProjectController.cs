@@ -213,14 +213,14 @@ namespace Alpha.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendEmail(string receiver, string subject, string message)
+        public ActionResult SendEmail(string subject, string message)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var senderEmail = new MailAddress("jerem.engelm@gmail.com", "Jerem");
-                    var receiverEmail = new MailAddress(receiver, "jerem_engelmann@hotmail.fr");
+                    var receiverEmail = new MailAddress("jerem_engelmann@hotmail.fr");
                     var password = "Isika2022";
                     var sub = subject;
                     var body = message;
@@ -241,7 +241,7 @@ namespace Alpha.Controllers
                     {
                         smtp.Send(mess);
                     }
-                    return View();
+                    return View("CreateProject");
                 }
             }
             catch (Exception)
