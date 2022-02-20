@@ -163,12 +163,7 @@ namespace Alpha.Models
             return _bddContext.UserAccounts.Include(u => u.Profil).ThenInclude(p => p.Adress).ToList();
         }
 
-        //public void CreateProfile()
-        //{
-        //    Profile profile = new Profile { };
-        //    this._bddContext.Add(profile);
-        //    this._bddContext.SaveChanges();
-        //}
+
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
             string nick, string phone, string payMethod, string picture)
         {
@@ -187,6 +182,25 @@ namespace Alpha.Models
                 _bddContext.SaveChanges();
             }
         }
+
+        //j'essaie de contourner si image est null
+        public void ProfileChangeNoImage(int id, string lastName, string firstName, string nationality, Int32 birthday,
+           string nick, string phone, string payMethod)
+        {
+            Profile profile = _bddContext.Profiles.Find(id);
+
+            if (profile != null)
+            {
+                profile.LastName = lastName;
+                profile.FirstName = firstName;
+                profile.Nationality = nationality;
+                profile.Nick = nick;
+                profile.Birthday = birthday;
+                profile.Phone = phone;
+                profile.PayMethod = payMethod;
+                _bddContext.SaveChanges();
+            }
+        }
         public UserAccount GetUserAccountConnected(string uaId)
         {
             //recupere id du user connecté
@@ -200,7 +214,7 @@ namespace Alpha.Models
 
         // Authentification functions
 
-        public int AddUserAccount(string mail, string password)
+        public UserAccount AddUserAccount(string mail, string password)
         {
             Profile profil = new Profile()
             {
@@ -211,11 +225,11 @@ namespace Alpha.Models
             this._bddContext.SaveChanges();
 
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, ProfilId = profil.Id };
+            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, Role= "Basic", ProfilId = profil.Id };
             this._bddContext.UserAccounts.Add(userAccount);
             this._bddContext.SaveChanges();
 
-            return userAccount.Id;
+            return userAccount;
         }
 
 

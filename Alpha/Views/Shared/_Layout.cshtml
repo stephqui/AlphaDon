@@ -46,7 +46,7 @@
                 <!-- Navbar brand -->
                 <a class="navbar-brand" href="#"><img src="~/img/alpha-logo3 vide.png" alt="Logo Alpha-Don" style="width:50px; height:auto" /></a>
 
-                @{ if (User.Identity.IsAuthenticated)
+                @{ if (User.Identity.IsAuthenticated && @User.Identity.Name != null)
                     {
         <a class="navbar-brand" href="#page-top">Bonjour @User.Identity.Name</a> }
                     else
