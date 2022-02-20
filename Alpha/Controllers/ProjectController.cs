@@ -36,7 +36,7 @@ namespace Alpha.Controllers
         {
 
             Project project = dal.GetThisProject(projectId);
-            return View("MyProject", project);
+            return View("CheckAndValidProject", project);
         }
 
 
@@ -169,6 +169,41 @@ namespace Alpha.Controllers
         return RedirectToAction("FullSingleProject");
     }
 
+
+
+        //modifier projet (uniquement pour l'utilisateur)
+        public ActionResult ModifyProject(int? id)
+        {
+            if (id.HasValue)
+            {
+                Project project = dal.GetAllProjects().FirstOrDefault(r => r.Id == id.Value);
+                if (project == null)
+                    return View("Error");
+                return View("ModifyProject");
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult ModifyProject(Project project)
+        {
+            if (!ModelState.IsValid)
+                return View("ManageProjects");
+            dal.UpdateProject(project.Id, project.ProjectName, project.Description, project.Summary, project.Picture, project.Place, project.Rib, project.Limit);
+            return RedirectToAction("Index");
+        }
+
+        //supprimer projet (uniquement pour le gestionnaire) 
+        public ActionResult DeleteProject(int id)
+        {
+            dal.DeleteProject(id);
+            return RedirectToAction("CheckAndValidProject");
+        }
+
+
+
+        //envoi d'un mail à l'admin si besoin d'aide durant création projet
         public ActionResult SendEmail()
         {
             return View();

@@ -7,7 +7,7 @@
     <br />
     <br />
     <h2 class="mb-4 indigo-text font-weight-bold">Gestion des projets</h2> <br />
-    <div><li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets en cours de création</a></li></div>
+    <div class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="~/Project/Index">Projets en cours de création</a></></div>
     <div class="container">
         <table class="table table-striped">
             <thead>
@@ -24,19 +24,18 @@
             <tbody>
                 @foreach (var p in Model)
                 {
-                <tr>
-                    <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.ProjectName</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.FirstName</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.LastName</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.Adress.City</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })"> @p.Collect.CurrentAmount</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Limit</a></td>
-                    <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Status</a></td>
-                    
-                </tr>
+                    <tr>
+                        <td><a href="@Url.Action("ThisProject", "Project", new { projectId = p.Id })">@p.ProjectName</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.FirstName</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.LastName</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Profile.Adress.City</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })"> @p.Collect.CurrentAmount</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Limit</a></td>
+                        <td><a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">@p.Status</a></td>
+                    </tr>
                 }
             </tbody>
+
         </table>
     </div>
 </section>
-<section>
