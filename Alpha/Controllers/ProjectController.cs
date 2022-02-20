@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -54,20 +56,54 @@ namespace Alpha.Controllers
             return View(project);
         }
 
+        //le gestionnaire projet valide le statut d'un projet
+        //[HttpPost]
+        //public ActionResult EvaluateProject(Project project, IFormFile image)
+        //{
+
+        //    if (ProjectStatus != null)
+        //    {
+        //        var fileName = Path.GetFileName(image.FileName);
+        //        var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", fileName);
+        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            image.CopyTo(fileStream);
+        //        }
+        //    }
+
+        //    if (dal.ProjectExiste(project.ProjectName))
+        //    {
+        //        ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
+        //        return View(project);
+        //    }
+        //    if (!ModelState.IsValid)
+        //        return View(project);
+
+        //    //recupere id du user connecté
+        //    string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    UserAccount ua = dal.GetUserAccountConnected(uaId);
+
+        //    dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
+        //        project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
+
+        //    return Redirect("/Project/Index");
+        //}
+
+
         //*****************************************************************************************
 
         //Pour le gestionnaire de projet, il affiche le formulaire pour remplir/modifier les champs.
         //Je le neutralise car la méthode demande l'id du createur.
-        //public ActionResult CreateProject(int projectId)
-        //{
-        //    if (projectId != 0)
-        //    {
+        public ActionResult CreateProject(int projectId)
+        {
+            if (projectId != 0)
+            {
 
-        //        Project project = dal.GetThisProject(projectId);
-        //        return View(project);
-        //    }
-        //    return View();
-        //}
+                Project project = dal.GetThisProject(projectId);
+                return View(project);
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult CreateProject(Project project, IFormFile image)
         {
@@ -121,6 +157,50 @@ namespace Alpha.Controllers
 
         return RedirectToAction("FullSingleProject");
     }
-}
+
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendEmail(string receiver, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("jerem.engelm@gmail.com", "Jerem");
+                    var receiverEmail = new MailAddress(receiver, "jerem_engelmann@hotmail.fr");
+                    var password = "Isika2022";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
+            return View();
+        }
+    }
 }
 
