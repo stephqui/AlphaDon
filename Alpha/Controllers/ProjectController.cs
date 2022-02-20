@@ -122,16 +122,28 @@ namespace Alpha.Controllers
                 ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
                 return View(project);
             }
-            if (!ModelState.IsValid)
-                return View(project);
+
+            //pas sur d'en avoir besoin
+            //if (!ModelState.IsValid)
+            //    return View(project);
 
             //recupere id du user connecté
             string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserAccount ua = dal.GetUserAccountConnected(uaId);
 
-            dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
+            //if  (project.Id != 0 && image == null)
+            //{
+                //dal.CreateProjectNoImage(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
+                //project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary);
             
+            //return Redirect("/Project/Index");
+            //} else if (project.Id != 0)
+            //{
+                dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
+               project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
+
+                //return Redirect("/Project/Index");
+            //}
             return Redirect("/Project/Index");
         }
     
