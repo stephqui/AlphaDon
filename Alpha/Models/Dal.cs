@@ -163,12 +163,7 @@ namespace Alpha.Models
             return _bddContext.UserAccounts.Include(u => u.Profil).ThenInclude(p => p.Adress).ToList();
         }
 
-        //public void CreateProfile()
-        //{
-        //    Profile profile = new Profile { };
-        //    this._bddContext.Add(profile);
-        //    this._bddContext.SaveChanges();
-        //}
+
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
             string nick, string phone, string payMethod, string picture)
         {
@@ -184,6 +179,25 @@ namespace Alpha.Models
                 profile.Phone = phone;
                 profile.PayMethod = payMethod;
                 profile.Picture = picture;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        //j'essaie de contourner si image est null
+        public void ProfileChangeNoImage(int id, string lastName, string firstName, string nationality, Int32 birthday,
+           string nick, string phone, string payMethod)
+        {
+            Profile profile = _bddContext.Profiles.Find(id);
+
+            if (profile != null)
+            {
+                profile.LastName = lastName;
+                profile.FirstName = firstName;
+                profile.Nationality = nationality;
+                profile.Nick = nick;
+                profile.Birthday = birthday;
+                profile.Phone = phone;
+                profile.PayMethod = payMethod;
                 _bddContext.SaveChanges();
             }
         }

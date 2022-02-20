@@ -42,10 +42,7 @@ namespace Alpha.Controllers
         [HttpPost]
         public IActionResult ProfileChange(Profile profile, IFormFile image)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(profile);
-            //}
+
 
             if (image != null && image.Length > 0)
             {
@@ -56,11 +53,20 @@ namespace Alpha.Controllers
                     image.CopyTo(fileStream);
                 }
             }
-            if (profile.Id != 0)
+
+            if (profile.Id != 0 && image == null)
             {
-                    dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
-                     profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName);
-                    return Redirect("/Home/Index");
+                dal.ProfileChangeNoImage(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
+                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod);
+                return Redirect("/Home/Index");
+                //return Redirect("/Profile/ProfileChange"); ne marche pas: erreur page profilechange @Model.Picture ligne20
+            }
+            else if (profile.Id != 0)
+            {
+                dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
+                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName);
+                return Redirect("/Home/Index");
+                //return Redirect("/Profile/ProfileChange"); ne marche pas: erreur page profilechange @Model.Picture ligne20
             }
             else
             {
