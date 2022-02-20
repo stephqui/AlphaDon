@@ -42,8 +42,6 @@ namespace Alpha.Controllers
         [HttpPost]
         public IActionResult ProfileChange(Profile profile, IFormFile image)
         {
-
-
             if (image != null && image.Length > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);

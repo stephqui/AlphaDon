@@ -39,7 +39,7 @@ namespace Alpha.Controllers
                 {
                     var userClaims = new List<Claim>()
                     {
-                        //new Claim(ClaimTypes.Name, userAccount.Id.ToString()),
+                        //new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
                         new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Role, userAccount.Role),
                     };
