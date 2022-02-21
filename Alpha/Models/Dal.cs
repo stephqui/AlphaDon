@@ -117,6 +117,14 @@ namespace Alpha.Models
             }
         }
 
+        public void UpdateProjectStatus(int projectId, ProjectStatus status)
+        {
+            Project project = this._bddContext.Projects.Find(projectId);
+            project.Status = status;
+            this._bddContext.SaveChanges();
+
+        }
+
         //*************************************** COMMENTAIRES ********************************************
         //commentaires
         public void CreateCommentProject(ushort userId, ushort projectId, string comment)
