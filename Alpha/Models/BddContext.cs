@@ -275,8 +275,8 @@ namespace Alpha.Models
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
             this.Collects.AddRange(
-             new Collect { CurrentAmount = 1350, Id = 1 },
-             new Collect { CurrentAmount = 890, Id = 2 },
+             new Collect { CurrentAmount = 20, Id = 1 },
+             new Collect { CurrentAmount = 224, Id = 2 },
              new Collect { CurrentAmount = 2500, Id = 3 },
              new Collect { CurrentAmount = 560, Id = 4 },
              new Collect { CurrentAmount = 3600, Id = 5 },
@@ -397,7 +397,11 @@ namespace Alpha.Models
              new UnitDonation { PayMethod = "CB", Amount = 20, Date = new DateTime(2022, 02, 10), CollectId = 1 },
              new UnitDonation { PayMethod = "CB", Amount = 100, Date = new DateTime(2022, 01, 08), CollectId = 2 },
              new UnitDonation { PayMethod = "PayPa", Amount = 48, Date = new DateTime(2022, 01, 09), CollectId = 2 },
-             new UnitDonation { PayMethod = "PayPa", Amount = 76, Date = new DateTime(2022, 01, 09), CollectId = 2 }
+             new UnitDonation { PayMethod = "PayPa", Amount = 76, Date = new DateTime(2022, 01, 09), CollectId = 2 },
+             new UnitDonation { PayMethod = "CB", Amount = 2500, Date = new DateTime(2022, 02, 10), CollectId = 3 },
+             new UnitDonation { PayMethod = "CB", Amount = 560, Date = new DateTime(2022, 01, 08), CollectId = 4 },
+             new UnitDonation { PayMethod = "PayPa", Amount = 3600, Date = new DateTime(2022, 01, 09), CollectId = 5 },
+             new UnitDonation { PayMethod = "PayPa", Amount = 4150, Date = new DateTime(2022, 01, 09), CollectId = 6 }
             );
 
             this.SaveChanges();

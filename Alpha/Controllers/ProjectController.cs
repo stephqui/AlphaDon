@@ -157,29 +157,33 @@ namespace Alpha.Controllers
 
 
         //modifier projet (uniquement pour l'utilisateur)
-        public ActionResult ModifyProject(int id)
+        public ActionResult ModifyProject()
         {
-            if (id != 0)
-            {
-                Project project = dal.GetMyProject(id);
+            string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserAccount ua = dal.GetUserAccountConnected(uaId);
+            Project project = dal.GetMyProject(ua.ProfilId.Value);
+            //if (id != 0)
+            //{
+                //Project project = dal.GetMyProject(id);
 
                 //Project project = dal.GetAllProjects().FirstOrDefault(r => r.Id == id.Value);
                 //if (project == null)
                 //    return View("Error");
                 return View("ModifyBeforeValidation",project);
-            }
-            else
-                return NotFound();
+            //}
+            //else
+            //    return NotFound();
         }
 
         [HttpPost]
-        public ActionResult ModifyProject(Project project)
+        public IActionResult ModifyProject(Project project)
         {
-            if (!ModelState.IsValid)
-                return View("ManageProjects");
+
+            //if (!ModelState.IsValid)
+               
             dal.UpdateProject(project.Id, project.ProjectName, project.Description, project.Summary, project.Picture, project.Place, project.Rib, project.Limit);
-            return RedirectToAction("/Project/Index");
-            //return RedirectToAction("Index");
+
+            return RedirectToAction("ModifyProject");
         }
 
         //supprimer projet (uniquement pour le gestionnaire) 
