@@ -81,13 +81,12 @@ namespace Alpha.Controllers
             if (userAccount.Mail !=null && userAccount.Password !=null)
             {
                 userAccount = dal.AddUserAccount(userAccount.Mail, userAccount.Password);
-
                 var userClaims = new List<Claim>()
                 {
                     //new Claim(ClaimTypes.Name, id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Role, userAccount.Role),
-                        //new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
+                        new Claim(ClaimTypes.Name, userAccount.Profil.FirstName),
                 };
 
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");

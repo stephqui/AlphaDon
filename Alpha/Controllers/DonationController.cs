@@ -24,8 +24,15 @@ namespace Alpha.Controllers
         }
         public ActionResult CreateUnitDonation(int collectId)
         {
-            ViewBag.collectId = collectId;
-            return View("DonationProject");
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.collectId = collectId;
+                return View("DonationProject");
+            }
+            else
+            {
+                return RedirectToAction("CreateUserAccount", "Login");
+            }           
         }
 
         public IActionResult UpDateCollect(int collectId)

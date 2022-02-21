@@ -322,14 +322,14 @@ namespace Alpha.Models
         {
             Profile profil = new Profile()
             {
-
+                FirstName = ""
             };
 
             this._bddContext.Profiles.Add(profil);
             this._bddContext.SaveChanges();
 
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, Role= "Basic", ProfilId = profil.Id };
+            UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, Role= "Basic", Profil = profil };
             this._bddContext.UserAccounts.Add(userAccount);
             this._bddContext.SaveChanges();
 
