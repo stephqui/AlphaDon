@@ -74,7 +74,7 @@
                     {
                         @class = "form-control",
                         placeholder = "Description",
-    id = "Description",
+                        id = "Description",
                         name = "Description",
                         rows = "4",
                         cols = "50",
@@ -104,41 +104,50 @@
                 @Html.ValidationMessageFor(model => model.StartDate)
                 @Html.ValidationMessageFor(model => model.EndDate)
             </tr>
-            <!-- Submit Button-->
-            <tr>             
-                <td colspan="3" style="padding-top:15%; padding-left: 70%;">
-                    <button class="btn btn-primary btn-xl" type="submit">Créer le projet</button>
-                </td>               
-            </tr>
         </table>
-       
+
+        <form method="post" action="SendEmail">
+            <table>
+                <tr>
+                    
+                    <td> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner. <br />
+                     Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </td>
+                   
+                    @if (ViewBag.Error != null)
+                    {
+                    <td><h2> @ViewBag.Error </h2></td>
+                    }
+
+                <td>
+                    <div class="mb-3">
+                        <div class="container">
+                            <div class="container">
+                                <span class="form-control-static"> Subject: </span>
+                                <input class="form-control" type="text" name="subject"> <br />
+                                <span class="form-control-static"> Message: </span>
+                                <input class="form-control" type="text" name="message"> <br />
+                                <input class="btn btn-primary" type="submit" value="Nous contacter">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                </tr>
+
+                <!-- Submit Button-->
+                <tr>
+                    <td colspan="3" style="padding-top:15%; padding-left: 70%;">
+                        <button class="btn btn-primary btn-xl" type="submit">Créer le projet</button>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+
     }
 </div>
-@* *********************************************************************************************************************@
-        @*}*@
-        @*<div>
-                <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
-                <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
-                <textarea cols="30" rows="5" placeholder="taper votre message ici"></textarea> <br />
-                <input type="submit" href="mailto:jerem_engelmann@hotmail.fr" value="Nous contacter" />
-            </div>*@
-        <p> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner.</p>
-        <p> Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </p>
-        <br />
-        <br />
-        @if (ViewBag.Error != null)
-        {
-            <h2> @ViewBag.Error </h2>
-        }
-        <form method="post" action="SendEmail">
-            <div class="container">
-                <span class="form-control-static"> Subject: </span>
-                <input class="form-control" type="text" name="subject"> <br />
-                <span class="form-control-static"> Message: </span>
-                <input class="form-control" type="text" name="message"> <br />
-                <input class="btn btn-primary" type="submit" value="Nous contacter">
-            </div>
-        </form>
+
+
+
 
 
 

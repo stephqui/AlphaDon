@@ -57,37 +57,13 @@ namespace Alpha.Controllers
         }
 
         //le gestionnaire projet valide le statut d'un projet
-        //[HttpPost]
-        //public ActionResult EvaluateProject(Project project, IFormFile image)
-        //{
 
-        //    if (ProjectStatus != null)
-        //    {
-        //        var fileName = Path.GetFileName(image.FileName);
-        //        var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", fileName);
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            image.CopyTo(fileStream);
-        //        }
-        //    }
+        public IActionResult NewProjectStatus(Project project, int projectId)
+        {
+            dal.UpdateProjectStatus(projectId, project.Status);
 
-        //    if (dal.ProjectExiste(project.ProjectName))
-        //    {
-        //        ModelState.AddModelError("Nom", "Ce nom du project existe déjà");
-        //        return View(project);
-        //    }
-        //    if (!ModelState.IsValid)
-        //        return View(project);
-
-        //    //recupere id du user connecté
-        //    string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    UserAccount ua = dal.GetUserAccountConnected(uaId);
-
-        //    dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-        //        project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
-
-        //    return Redirect("/Project/Index");
-        //}
+            return RedirectToAction("Index");
+        }
 
 
         //*****************************************************************************************
@@ -201,7 +177,7 @@ namespace Alpha.Controllers
         public ActionResult DeleteProject(int id)
         {
             dal.DeleteProject(id);
-            return RedirectToAction("CheckAndValidProject");
+            return RedirectToAction("ManageProjects");
         }
 
 
