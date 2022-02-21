@@ -55,39 +55,53 @@
 <body>
     <div id="ProjectPublic">
         <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:0.5%;">
-            <tr id="nomduprojet"><th colspan="5">@Model.ProjectName <img src="~/img/Collecte en cours.png" class="imgStatut"> </th></tr>
-            <tr id="description sommaire"><td colspan="5" align="center">Description sommaire</td></tr>
+            <tr id="nomduprojet"><th colspan="5"><div class="titres1">@Model.ProjectName <img src="~/img/Collecte en cours.png" class="imgStatut"></div></th></tr>
+            <tr id="description sommaire"><td colspan="5" align="center">@Model.Summary</td></tr>
             <tr>
-                <td id="image du projet" rowspan="4" style="width:60%;"><img src="~/img/@Model.Picture"></td>
+                <td id="image du projet" rowspan="5" style="width:60%;"><img src="~/img/@Model.Picture" style="margin:auto;width:60%; height:100%; object-fit : scale-down;"></td>
                 <td id="cagnotte" colspan="4" style="padding:3%;">
                     <div style="text-align:center;">
-                        <div class="progress" style="height:30px">
-                            <div class="progress-bar bg-success" role="progressbar" style="width:40%;">
+                        <div class="progress" style="height:30px" font="bolder">
+                            <div class="progress-bar bg-success" role="progressbar" style="width:@((Model.Collect.CurrentAmount*100)/Model.Limit)%">
                                 @Model.Collect.CurrentAmount
                             </div>
-                            <div class="progress-bar bg-warning" role="progressbar" style="width:60%">
-                                @Model.Limit <p>€ attendus !</p>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width:@(100-(Model.Collect.CurrentAmount*100)/Model.Limit)%">
+                                @Model.Limit
                             </div>
                         </div>
                     </div>
                 </td>
             </tr>
+            <tr></tr>
             <tr>
                 <td id="nbre donateurs"><div style="text-align:center">25 <br>contributions</div></td>
-                <td id="image date"><img src="img/calendrier.png" style="height:55px; float:right;"></td>
-                <td id="nbre de jours">Plus que <br><h4>25 jours !</h4></td>
+                <td id="image date"><img src="~/img/calendrier.png" style="height:55px; float:right;"></td>
+                <td id="nbre de jours">
+                    Plus que <br><h4>
+                        @if (@Model.EndDate.Day.CompareTo(DateTime.Now.Day) < 0)
+                        {
+                            @(Model.EndDate.Date.Month - DateTime.Now.Date.Month+1)<span> mois et </span>@(Model.EndDate.Date.Day + DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        else if (@Model.EndDate.Date.Month.CompareTo(DateTime.Now.Date.Month) > 0)
+                        {
+                            @(Model.EndDate.Date.Month - DateTime.Now.Date.Month)<span> mois et </span>@(Model.EndDate.Date.Day - DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        else
+                        {
+                            @(Model.EndDate.Date.Day - DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        !
+                    </h4>
+                </td>
+               
+               
             </tr>
             <tr id="donation" style="height:55px;">
-                <td style="width:10%"></td>              
-                <td class="donation" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='@Url.Action("CreateUnitDonation", "Donation", new { collectId = Model.CollectId })'">
-                    CONTRIBUER AU PROJET
-
-                </td>
-
+                <td style="width:10%"></td>
+                <td class="boutondusite" style="border-radius:5%" onclick="location.href='@Url.Action("CreateUnitDonation", "Donation", new { collectId = Model.CollectId })'">CONTRIBUER AU PROJET</td>
                 @*<td style="width:20%; text-align:center; background-color:green; border-radius:5px;">
                         <input type="submit" name="button" value="INIT" onclick="document.location.href=~/Donation/Index">CONTRIBUER AU PROJET
                     </td>*@
-
                 <td style="width:10%"></td>
             </tr>
             <tr>
@@ -111,31 +125,39 @@
             </tr>
         </table>
     </div>
-    <div id="Corpus" style="margin:5%;">
+    <div id="Corpus" ">
         <div id="theProject">
-            <p>
-                @Model.Description
-            </p>
+            <table style="background-color:#E2E5E9; border-radius:5px; width:90%; margin:5%">
+                <tr><td><p>@Model.Description</p></td></tr>
+            </table>
         </div>
         <div id="Compensations">
-            <table id="Comp1" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left: 5%; padding:1%;">
+            <table id="Comp1" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left:5%; padding:1%;">
+                <tr><td style="height:1% ; color:#E2E5E9" colspan="4"> </td></tr>
                 <tr>
                     <td id="Comp1Name" style="width:80%">Une brosse à dent dédicacée</td>
-                    <td id="Comp1Price" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                    <td style="width:1%"></td>
+                    <td id="Comp1Price" class="boutondusite" style="width:18%; text-align:center; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                    <td style="width:1%"> </td>
                 </tr>
-                <tr><td id="Comp1Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                <tr><td style="height:1% ; color:#E2E5E9" colspan="4"> </td></tr>
+                <tr><td id="Comp1Img" colspan="4"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
                 <tr>
-                    <td id="Comp1Descr" colspan="2">Cette brosse à dent a été signée par Superman lui-même</td>
+                    <td id="Comp1Descr" colspan="4">Cette brosse à dent a été signée par Superman lui-même</td>
                 </tr>
             </table>
             <table id="Comp2" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left:5%; padding:1%;">
+                <tr><td style="height:1% ; color:#E2E5E9" colspan="4"> </td></tr>
                 <tr>
                     <td id="Comp2Name" style="width:80%">Une brosse à dent dédicacée</td>
-                    <td id="Comp2Price" style="width:20%; text-align:center; background-color:green; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                    <td style="width:1%"></td>
+                    <td id="Comp2Price" class="boutondusite" style="width:18%; text-align:center; border-radius:5px;" onclick="location.href='tonlien.html'">25€</td>
+                    <td style="width:1%"> </td>
                 </tr>
-                <tr><td id="Comp2Img" colspan="2"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
+                <tr><td style="height:1% ; color:#E2E5E9" colspan="4"> </td></tr>
+                <tr><td id="Comp2Img" colspan="4"><img src="~/img/phone.jpg" style="width:150px" /> </td></tr>
                 <tr>
-                    <td id="Comp2Descr" colspan="2">Cette brosse à dent a été signée par Superman lui-même</td>
+                    <td id="Comp2Descr" colspan="4">Cette brosse à dent a été signée par Superman lui-même</td>
                 </tr>
             </table>
             <table id="Comp3" style="width:25%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left:5%; padding:1%;">
@@ -150,17 +172,7 @@
             </table>
         </div>
         <div id="Comments">
-            <table id="Comt1" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
-                <tr>
-                    <th id="Comt1avatar" style="width:5%" rowspan="3">
-                        <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />
-                    </th>
-                    <th id="Comt1Name" style="text-align:left ">Gros riche sympa</th>
-                </tr>
-                <tr><td id="Comt1Comt" style="font-size:large">Vous faites du bon boulot !</td></tr>
-                <tr><td id="Comt1Date" style="font-size: small;">Posté le 15 juillet 2021</td></tr>
-            </table>
-            <table id="Comt2" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
+            <table id="Comt2" style="background-color:#E2E5E9;width:90%; border:1px solid black; border-radius:5px; margin-top:1%; margin-left: 5%;">
                 <tr>
                     <th id="Comt2avatar" style="width:5%" rowspan="3">
                         <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />
@@ -170,7 +182,7 @@
                 <tr><td id="Comt2Comt" style="font-size:large">Vous faites du bon boulot !</td></tr>
                 <tr><td id="Comt2Date" style="font-size: small;">Posté le 15 juillet 2021</td></tr>
             </table>
-            <table id="Comt3" style="width:100%; border:1px solid black; border-radius:5px; margin-top:1%;">
+            <table id="Comt3" style="background-color:#E2E5E9;width:90%; border:1px solid black; border-radius:5px; margin-top:1%;">
                 <tr>
                     <th id="Comt3avatar" style="width:5%" rowspan="3">
                         <img src="~/img/img-projets/humain-nature.jpg" style="height:55px" />

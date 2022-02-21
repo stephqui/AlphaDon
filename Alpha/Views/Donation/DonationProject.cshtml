@@ -1,5 +1,11 @@
 ﻿@model Alpha.Models.UnitDonation
-@using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post))
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Donation";
+}
+
+@using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post, new { style ="margin-top: 100px;" }))
 {
     <div id="Donation">
         <input type="hidden" name="collectId" value="@ViewBag.collectId" />

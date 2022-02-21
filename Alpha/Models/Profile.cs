@@ -10,7 +10,6 @@ namespace Alpha.Models
     public enum ProfilePersonality { Single, Ngo, Association, Company }
     public class Profile
     {
-       
         public int Id { get; set; }
 
         public ProfilePersonality profilePersonality { get; set; }

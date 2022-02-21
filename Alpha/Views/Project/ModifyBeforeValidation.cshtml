@@ -1,6 +1,7 @@
 ﻿@model Alpha.Models.Project
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "ModifyProject";
 }
 
 <div id="ProjectNotPublic" style=" float:left; width:40%; margin:5%; ">
@@ -31,7 +32,7 @@
             <td colspan="3">
             </td>
         </tr>
-        <tr><td id="nom du pp">Projet porté par <b>ta mère</b> depuis le </td></tr>
+        <tr><td id="nom du pp">Projet porté par <b>prenom</b> depuis le </td></tr>
         <tr><td id="nom du pp"><b>@Model.Place</b>, @Model.Area</td></tr>
 
         <tr>
@@ -44,9 +45,12 @@
 <div id="FormModification" style=" float:left; width:40%; margin:5%; ">
     @using (Html.BeginForm("ModifyProject", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <table style="max-width:38%; background-color: #E2E5E9; padding:5% 5%; float:left;">
+        <table style="max-width:100%; background-color: #E2E5E9; padding:5% 5%; float:left;">
             <tr><th colspan="3">Etat actuel du projet</th></tr>
             <tr><th colspan="3">Modifier des champs</th></tr>
+            @Html.HiddenFor(Model => Model.Id)
+            @Html.HiddenFor(Model => Model.Picture)
+
             <!-- Nom du projet -->
             <tr>
                 <th><label title="Name" for="name">Nom du projet : </label></th>
@@ -62,93 +66,94 @@
             <!-- Category -->
             <tr>
                 <th><label for="Category">@Model.Category</label></th>
-                <td>@Html.DropDownListFor(model => model.Category, new List<SelectListItem>
-                {
-                   new SelectListItem{ Text="Médical", Value = "medical" },
-                   new SelectListItem{ Text="Sport", Value = "sport" },
-                   new SelectListItem{ Text="Humanitaire", Value = "humanitarian" },
-                   new SelectListItem{ Text="Education", Value = "educational" },
-                   new SelectListItem{ Text="infrastructural", Value = "infrastructural" },
-                   new SelectListItem{ Text="Commerce équitable", Value = "fairTrade" },
-                }, new { @class = "form-select w-100" })
-                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger float-end" })
-                </td>
-            </tr>
-            <!-- Place + WorldArea -->
-            <tr>
-                <th><label for="Place">Localisation</label></th>
-                <td>@Html.TextBoxFor(model => model.Place, new { @class = "form-control", placeholder = "@Model.Place", id = "Place", name = "Place" })</td>
-                @Html.ValidationMessageFor(model => model.Place)
                 <td>
-                    <label>WorldArea</label>
-                    @Html.DropDownListFor(model => model.Area, new List<SelectListItem>
-                    {
-                       new SelectListItem{ Text="Moyen-Orient, monde arabe", Value = "middleEast" },
-                       new SelectListItem{ Text="Extrême-Orient", Value = "farEast" },
-                       new SelectListItem{ Text="Afrique", Value = "africa" },
-                       new SelectListItem{ Text="Amérique du Nord", Value = "northAmerica" },
-                       new SelectListItem{ Text="Amérique du Sud", Value = "southAmerica" },
-                       new SelectListItem{ Text="Europe", Value = "europa" },
-                       new SelectListItem{ Text="Océanie", Value = "oceania" }
-                    }, new { @class = "form-select w-100" })
-                    @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger float-end" })
-                </td>
-            </tr>
-            >
-<!-- Description-->
-<tr>
-    <th colspan="2"><label for="Description">Description de votre projet</label></th>
-</tr>
-<tr>
-    <td colspan="3" style="height:350px;">
-        @Html.TextBoxFor(model => model.Description, new
-        {
-            @class = "form-control",
-            placeholder = "@model.Description",
-            id = "Description",
-            name = "Description",
-            rows = "4",
-            cols = "50",
-            style = "width:100%; height:100%;"
-        })
-    </td>
-    @Html.ValidationMessageFor(model => model.Description)
-</tr>
-<!-- Image -->
-<tr>
-    <th>Changer l'image</th>
-    <td colspan="2"><input type="file" name="image" class="upload" /></td>
-</tr>
-<!-- Montant -->
-<tr>
-    <th>
-        <label for="Limit">Montant demandé</label>
-    </th>
-    <td colspan="2"> @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "@model.Limit", title = "D'après la législation française, il vous est interdit de réclamer plus de 2,5 millions d'euros." })</td>
-    @Html.ValidationMessageFor(model => model.Limit)
-</tr>
-<!-- Dates -->
-<tr>
-    <th><label for="StartDate">Dates</label></th>
-    <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", type = "date", placeholder = "@Model.StartDate", id = "StartDate", name = "StartDate" })</td>
-    <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "@Model.EndDate", id = "EndDate", name = "EndDate" })</td>
-    @Html.ValidationMessageFor(model => model.StartDate)
-    @Html.ValidationMessageFor(model => model.EndDate)
-</tr>
+                    @Html.DropDownListFor(model => model.Category, new List<SelectListItem>
+            {
+               new SelectListItem{ Text="Médical", Value = "medical" },
+               new SelectListItem{ Text="Sport", Value = "sport" },
+               new SelectListItem{ Text="Humanitaire", Value = "humanitarian" },
+               new SelectListItem{ Text="Education", Value = "educational" },
+               new SelectListItem{ Text="infrastructural", Value = "infrastructural" },
+               new SelectListItem{ Text="Commerce équitable", Value = "fairTrade" },
+            }, new { @class = "form-select w-100" })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger float-end" })
+            </td>
+        </tr>
+        <!-- Place + WorldArea -->
+        <tr>
+            <th><label for="Place">Localisation</label></th>
+            <td>@Html.TextBoxFor(model => model.Place, new { @class = "form-control", placeholder = "@Model.Place", id = "Place", name = "Place" })</td>
+            @Html.ValidationMessageFor(model => model.Place)
+            <td>
+                <label>WorldArea</label>
+                @Html.DropDownListFor(model => model.Area, new List<SelectListItem>
+                {
+                   new SelectListItem{ Text="Moyen-Orient, monde arabe", Value = "middleEast" },
+                   new SelectListItem{ Text="Extrême-Orient", Value = "farEast" },
+                   new SelectListItem{ Text="Afrique", Value = "africa" },
+                   new SelectListItem{ Text="Amérique du Nord", Value = "northAmerica" },
+                   new SelectListItem{ Text="Amérique du Sud", Value = "southAmerica" },
+                   new SelectListItem{ Text="Europe", Value = "europa" },
+                   new SelectListItem{ Text="Océanie", Value = "oceania" }
+                }, new { @class = "form-select w-100" })
+                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger float-end" })
+            </td>
+        </tr>
 
-<!-- Submit Button-->
-<tr>
-    <td colspan="3" style="color:#E2E5E9; padding-bottom:15px;">truc de feignasse pour rajouter une ligne</td>
-</tr>
-<!-- Submit Button-->
-<tr>
-    <td colspan="2"></td>
-    <td class="boutondusite" rowspan="2" style="height:40px;">
-        <button type=submit href="@Url.Action("ModifyProject", "Project")">MODIFIER</button>
-    </td>
-</tr>
+        <!-- Description-->
+        <tr>
+            <th colspan="2"><label for="Description">Description de votre projet</label></th>
+        </tr>
+        <tr>
+            <td colspan="3" style="height:350px;">
+                @Html.TextBoxFor(model => model.Description, new
+                {
+                    @class = "form-control",
+                    placeholder = "@model.Description",
+                    id = "Description",
+                    name = "Description",
+                    rows = "4",
+                    cols = "50",
+                    style = "width:100%; height:100%;"
+                })
+            </td>
+            @Html.ValidationMessageFor(model => model.Description)
+        </tr>
+        <!-- Image -->
+        <tr>
+            <th>Changer l'image</th>
+            <td colspan="2"><input type="file" name="image" class="upload" /></td>
+        </tr>
+        <!-- Montant -->
+        <tr>
+            <th>
+                <label for="Limit">Montant demandé</label>
+            </th>
+            <td colspan="2"> @Html.TextBoxFor(model => model.Limit, new { @class = "form-control", placeholder = "@model.Limit", title = "D'après la législation française, il vous est interdit de réclamer plus de 2,5 millions d'euros." })</td>
+            @Html.ValidationMessageFor(model => model.Limit)
+        </tr>
+        <!-- Dates -->
+        <tr>
+            <th><label for="StartDate">Dates</label></th>
+            <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.StartDate,"{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", placeholder = "@Model.StartDate", id = "StartDate", name = "StartDate" })</td>
+            <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", placeholder = "@Model.EndDate", id = "EndDate", name = "EndDate" })</td>
+            @Html.ValidationMessageFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </tr>
 
-</table>
-    }
+        <!-- Submit Button-->
+        <tr>
+            <td colspan="3" style="color:#E2E5E9; padding-bottom:15px;">truc de feignasse pour rajouter une ligne</td>
+        </tr>
+        <!-- Submit Button-->
+        <tr>
+            <td colspan="2"></td>
+            <td class="boutondusite" rowspan="2" style="height:40px;">
+                <button type=submit href="@Url.Action("ModifyProject", "Project")">MODIFIER</button>
+            </td>
+        </tr>
+
+    </table>
+}
 </div>
 
