@@ -20,7 +20,7 @@
     <link href="~/css/style.min.css" rel="stylesheet">
     <style>
         body {
-            height: 150vh;
+            height: 100vh;
             background: linear-gradient(to right, #1D617A, white);
         }
 
@@ -158,7 +158,7 @@
         .titres1 {
             color: #066387;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 5em;
+            font-size: 2em;
             font: bolder;
             text-align: center;
         }
@@ -191,8 +191,8 @@
                                 {
                                     <div class="dropdown-content">
                                         <a href="#">Page d'accueil</a>
-                                        <a href="/project/myproject">Mon projet</a>
-                                        <a href="~/Profile/ProfileChange/@User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value">Gérer mon profil</a>
+                                        @*<a href="@Url.Action("ModifyProject", "Project", new { projectId = p.Id})">Voir mon projet</a>*@
+                                        <a href="#">Gérer mon profil</a>
                                         <a href="#">Mes newsletters</a>
                                         <a href="#">Mes favoris</a>
                                         <a href="#">Historique des dons</a>

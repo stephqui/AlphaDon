@@ -48,12 +48,21 @@ namespace Alpha.Controllers
         }
 
         //le createur du projet va voir son projet
+        //public IActionResult MyProject()
+        //{
+        //    //Project project = dal.GetMyProject(1);
+        //    Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
+            
+        //    return View(project);
+        //}
+
         public IActionResult MyProject()
         {
-            //Project project = dal.GetMyProject(1);
-            Project project = dal.GetMyProject(Convert.ToInt32(User.Identity.Name));
-            
+            string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserAccount ua = dal.GetUserAccountConnected(uaId);
+            Project project = dal.GetMyProject(ua.ProfilId.Value);
             return View(project);
+
         }
 
         //le gestionnaire projet valide le statut d'un projet
