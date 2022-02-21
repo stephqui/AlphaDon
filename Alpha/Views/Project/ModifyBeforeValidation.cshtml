@@ -45,7 +45,7 @@
 <div id="FormModification" style=" float:left; width:40%; margin:5%; ">
     @using (Html.BeginForm("ModifyProject", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <table style="max-width:38%; background-color: #E2E5E9; padding:5% 5%; float:left;">
+        <table style="max-width:100%; background-color: #E2E5E9; padding:5% 5%; float:left;">
             <tr><th colspan="3">Etat actuel du projet</th></tr>
             <tr><th colspan="3">Modifier des champs</th></tr>
             @Html.HiddenFor(Model => Model.Id)
@@ -99,7 +99,7 @@
                 @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger float-end" })
             </td>
         </tr>
-        >
+
         <!-- Description-->
         <tr>
             <th colspan="2"><label for="Description">Description de votre projet</label></th>
@@ -135,8 +135,8 @@
         <!-- Dates -->
         <tr>
             <th><label for="StartDate">Dates</label></th>
-            <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", type = "date", placeholder = "@Model.StartDate", id = "StartDate", name = "StartDate" })</td>
-            <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", type = "date", placeholder = "@Model.EndDate", id = "EndDate", name = "EndDate" })</td>
+            <td><label for="StartDate">Début : </label>@Html.TextBoxFor(model => model.StartDate,"{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", placeholder = "@Model.StartDate", id = "StartDate", name = "StartDate" })</td>
+            <td><label for="EndDate">Fin : </label>@Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", placeholder = "@Model.EndDate", id = "EndDate", name = "EndDate" })</td>
             @Html.ValidationMessageFor(model => model.StartDate)
             @Html.ValidationMessageFor(model => model.EndDate)
         </tr>

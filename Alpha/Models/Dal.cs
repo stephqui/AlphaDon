@@ -54,8 +54,9 @@ namespace Alpha.Models
             return targetProject;
         }
 
-        // je vais **********************TENTER DE MODIFIER ********** POUR ADAPTER COMME LA METHODE PROFILE CHANGE ******
-        // Creation de projet
+        // ********************* MODIFIE ********** POUR ADAPTER COMME LA METHODE PROFILE CHANGE ******
+
+        // Creation de projet si image présente
         public void CreateProject(string projectName, string description, ProjectCategory category, DateTime startDate,
             DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id, 
             string summary, string picture)
@@ -79,6 +80,40 @@ namespace Alpha.Models
             this._bddContext.SaveChanges();
         }
 
+        // Creation de projet si image pas renseignée
+        public void CreateProjectNoImage(string projectName, string description, ProjectCategory category, DateTime startDate,
+            DateTime endDate, string place, WorldAreas area, Int32 limit, int? profileId, int id,
+            string summary)
+        {
+            //on crée une collecte en meme temps que le projet
+
+            Collect collect = new Collect { };
+            this._bddContext.Collects.Add(collect);
+            this._bddContext.SaveChanges();
+
+
+            Project projectToAdd = new Project
+            {
+                ProjectName = projectName,
+                Description = description,
+                Category = category,
+                StartDate = startDate,
+                EndDate = endDate,
+                Area = area,
+                Limit = limit,
+                ProfileId = profileId,
+                CollectId = collect.Id
+            };
+            if (id != 0)
+            {
+                projectToAdd.Id = id;
+            }
+
+            this._bddContext.Projects.Add(projectToAdd);
+            this._bddContext.SaveChanges();
+        }
+
+
         public bool ProjectExiste(string projectName)
         {
             return _bddContext.Projects.ToList().Any(Project => string.Compare(Project.ProjectName, projectName, StringComparison.CurrentCultureIgnoreCase) == 0);
@@ -101,7 +136,9 @@ namespace Alpha.Models
             }
         }
 
-        public void UpdateProject(int id, string projectName, string description, string summary, string picture, string place, string rib, int limit)
+        //modif du projet si pas d'image insérée
+        public void UpdateProject(int id, string projectName, string description, string summary, string picture,
+            DateTime starDate, DateTime endDate, string place, string rib, int limit)
         {
             Project projectToUpdate = this._bddContext.Projects.Find(id);
             if (projectToUpdate != null)
@@ -113,11 +150,34 @@ namespace Alpha.Models
                 projectToUpdate.Place = place;
                 projectToUpdate.Rib = rib;
                 projectToUpdate.Limit = limit;
+                projectToUpdate.StartDate = starDate;
+                projectToUpdate.EndDate = endDate;
+
                 this._bddContext.SaveChanges();
             }
         }
 
-        public void UpdateProjectStatus(int projectId, ProjectStatus status)
+        //modif du projet si image insérée
+        public void UpdateProjectNoImage(int id, string projectName, string description, string summary,
+            DateTime starDate, DateTime endDate, string place, string rib, int limit)
+        {
+            Project projectToUpdate = this._bddContext.Projects.Find(id);
+            if (projectToUpdate != null)
+            {
+                projectToUpdate.ProjectName = projectName;
+                projectToUpdate.Description = description;
+                projectToUpdate.Summary = summary;
+                projectToUpdate.Place = place;
+                projectToUpdate.Rib = rib;
+                projectToUpdate.Limit = limit;
+                projectToUpdate.StartDate = starDate;
+                projectToUpdate.EndDate = endDate;
+
+                this._bddContext.SaveChanges();
+            }
+        }
+
+            public void UpdateProjectStatus(int projectId, ProjectStatus status)
         {
             Project project = this._bddContext.Projects.Find(projectId);
             project.Status = status;

@@ -1,12 +1,13 @@
 ﻿@model Alpha.Models.Project
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "CreateProject";
 }
 <div id="FormCreation">
     @using (Html.BeginForm("CreateProject", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <table style="width:90%; margin:5%; background-color: #E2E5E9; padding:5% 15%;">
-            <tr><th colspan="3">Bonjour, Nom !</th></tr>
+            <tr><th colspan="3">Bonjour, @Model.Profile.FirstName</th></tr>
             <tr><th colspan="3">Expliquez-nous vos aspirations...</th></tr>
             <!-- Nom du projet -->
             <tr>
@@ -109,28 +110,30 @@
         <form method="post" action="SendEmail">
             <table>
                 <tr>
-                    
-                    <td> Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner. <br />
-                     Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail : </td>
-                   
+
+                    <td>
+                        Si vous avez besoin d'aide sur votre projet, Alpha-Don peut vous accompagner. <br />
+                        Dites nous brievement sur quoi nous pouvons vous aider et nous vous contacterons par mail :
+                    </td>
+
                     @if (ViewBag.Error != null)
                     {
-                    <td><h2> @ViewBag.Error </h2></td>
+                        <td><h2> @ViewBag.Error </h2></td>
                     }
 
-                <td>
-                    <div class="mb-3">
-                        <div class="container">
+                    <td>
+                        <div class="mb-3">
                             <div class="container">
-                                <span class="form-control-static"> Subject: </span>
-                                <input class="form-control" type="text" name="subject"> <br />
-                                <span class="form-control-static"> Message: </span>
-                                <input class="form-control" type="text" name="message"> <br />
-                                <input class="btn btn-primary" type="submit" value="Nous contacter">
+                                <div class="container">
+                                    <span class="form-control-static"> Subject: </span>
+                                    <input class="form-control" type="text" name="subject"> <br />
+                                    <span class="form-control-static"> Message: </span>
+                                    <input class="form-control" type="text" name="message"> <br />
+                                    <input class="btn btn-primary" type="submit" value="Nous contacter">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
                 </tr>
 
                 <!-- Submit Button-->

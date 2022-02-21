@@ -76,7 +76,25 @@
             <tr>
                 <td id="nbre donateurs"><div style="text-align:center">25 <br>contributions</div></td>
                 <td id="image date"><img src="~/img/calendrier.png" style="height:55px; float:right;"></td>
-                <td id="nbre de jours">Plus que <br><h4>25 jours !</h4></td>
+                <td id="nbre de jours">
+                    Plus que <br><h4>
+                        @if (@Model.EndDate.Day.CompareTo(DateTime.Now.Day) < 0)
+                        {
+                            @(Model.EndDate.Date.Month - DateTime.Now.Date.Month+1)<span> mois et </span>@(Model.EndDate.Date.Day + DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        else if (@Model.EndDate.Date.Month.CompareTo(DateTime.Now.Date.Month) > 0)
+                        {
+                            @(Model.EndDate.Date.Month - DateTime.Now.Date.Month)<span> mois et </span>@(Model.EndDate.Date.Day - DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        else
+                        {
+                            @(Model.EndDate.Date.Day - DateTime.Now.Date.Day)<span> jours !</span>
+                        }
+                        !
+                    </h4>
+                </td>
+               
+               
             </tr>
             <tr id="donation" style="height:55px;">
                 <td style="width:10%"></td>

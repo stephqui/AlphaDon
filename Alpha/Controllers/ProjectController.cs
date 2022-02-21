@@ -88,6 +88,9 @@ namespace Alpha.Controllers
             }
             return View();
         }
+
+
+        //Creation d'un projet
         [HttpPost]
         public ActionResult CreateProject(Project project, IFormFile image)
         {
@@ -116,19 +119,20 @@ namespace Alpha.Controllers
             string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserAccount ua = dal.GetUserAccountConnected(uaId);
 
-            //if  (project.Id != 0 && image == null)
-            //{
-                //dal.CreateProjectNoImage(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
-                //project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary);
+            if (project.Id == 0 && image == null)
+            {
+                dal.CreateProjectNoImage(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
+                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary);
             
-            //return Redirect("/Project/Index");
-            //} else if (project.Id != 0)
-            //{
+
+            return Redirect("/Project/Index");
+        } else if (project.Id == 0)
+                {
                 dal.CreateProject(project.ProjectName, project.Description, project.Category, project.StartDate, project.EndDate,
                project.Place, project.Area, project.Limit, ua.ProfilId, project.Id, project.Summary, image.FileName);
 
-                //return Redirect("/Project/Index");
-            //}
+                return Redirect("/Project/Index");
+    }
             return Redirect("/Project/Index");
         }
     
@@ -157,8 +161,11 @@ namespace Alpha.Controllers
 
 
         //modifier projet (uniquement pour l'utilisateur)
+        //public ActionResult ModifyProject(IFormFile image)
         public ActionResult ModifyProject()
         {
+   
+
             string uaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserAccount ua = dal.GetUserAccountConnected(uaId);
             Project project = dal.GetMyProject(ua.ProfilId.Value);
@@ -176,12 +183,29 @@ namespace Alpha.Controllers
         }
 
         [HttpPost]
-        public IActionResult ModifyProject(Project project)
+        public IActionResult ModifyProject(Project project, IFormFile image)
         {
+            if (image != null && image.Length > 0)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    image.CopyTo(fileStream);
+                }
+            }
 
-            //if (!ModelState.IsValid)
-               
-            dal.UpdateProject(project.Id, project.ProjectName, project.Description, project.Summary, project.Picture, project.Place, project.Rib, project.Limit);
+            if (project.Id != 0 && image == null)
+            {
+                dal.UpdateProjectNoImage(project.Id, project.ProjectName, project.Description, project.Summary,
+                 project.StartDate, project.EndDate, project.Place, project.Rib, project.Limit);
+            }
+            else if (project.Id != 0)
+            {
+                dal.UpdateProject(project.Id, project.ProjectName, project.Description, project.Summary,
+                image.FileName, project.StartDate, project.EndDate, project.Place, project.Rib, project.Limit);
+            }
+            
 
             return RedirectToAction("ModifyProject");
         }
