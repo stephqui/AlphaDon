@@ -70,12 +70,14 @@ namespace Alpha.Controllers
 
         public IActionResult CreateUserAccount()
         {
+            string returnUrl = Request.Headers["Referer"].ToString();
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
-        // 2eme post ********************************************************
+
         [HttpPost]
-        public IActionResult CreateUserAccount(UserAccount userAccount)
+        public IActionResult CreateUserAccount(UserAccount userAccount, int forDonation, string returnUrl)
         {
             
             if (userAccount.Mail !=null && userAccount.Password !=null)
@@ -93,15 +95,17 @@ namespace Alpha.Controllers
 
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
+                if (forDonation == 0)
+                    return RedirectToAction("ProfileChange", "Profile", new { id = userAccount.Id });
+                else
+                    return Redirect(returnUrl);
 
-                return RedirectToAction("ProfileChange", "Profile", new { id = userAccount.Id });
- 
                 //return Redirect("/Profile/ProfileChange");
             }
-            
-
             return View(userAccount);
         }
+
+       
 
         public ActionResult Deconnexion()
         {
