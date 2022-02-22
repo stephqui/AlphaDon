@@ -30,7 +30,7 @@ namespace Alpha.Models
 
         List<Profile> GetAllProfiles();
         void ProfileChange(int id, string lastName, string firstName, string nationality, Int32 birthday,
-            string nick, string phone, string payMethod, string picture);
+            string nick, string phone, string payMethod, string picture, string siret, string street, int zip, string city, string country, ProfilePersonality profilePersonality);
         void ProfileChangeNoImage(int id, string lastName, string firstName, string nationality, Int32 birthday,
            string nick, string phone, string payMethod);
         UserAccount Authentify(string mail, string password);

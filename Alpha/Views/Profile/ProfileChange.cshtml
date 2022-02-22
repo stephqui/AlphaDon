@@ -18,7 +18,7 @@
                     <div class="col-md-4 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <label class="labels">Ma photo de Profil</label>
-                            <img class="rounded-circle mt-5" src="~/img/@Model.Picture" style="width: 150px">
+                            <img class="rounded-circle mt-5" src="~/img/@Model.Picture" style="width: 150px" src="">
                             <input type="file" name="image">
                             <a class="text-black-50">Je m'appelle @User.Identity.Name</a>
                             <span class="text-black-50">@Model.Nick</span>
@@ -90,13 +90,13 @@
                                 @Html.TextBoxFor(p => Model.Adress.Country)
                                 @Html.ValidationMessageFor(p => Model.Adress.Country)
                             </div>
-
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Mode de paiement</label></div>
                                 @Html.TextBoxFor(p => Model.PayMethod)
                                 @Html.ValidationMessageFor(p => Model.PayMethod)
                             </div>
+
                             <br />
                             <hr />
                             <br />
@@ -122,6 +122,18 @@
                                 <input type="radio" name="radio">
                                 <span class="checkmark"></span>
                             </label>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Numero de Siret</label></div>
+                                @Html.TextBoxFor(p => Model.Siret)
+                                @Html.ValidationMessageFor(p => Model.Siret)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Le nom de votre Organisation</label></div>
+                                @Html.TextBoxFor(p => Model.profilePersonality)
+                                @Html.ValidationMessageFor(p => Model.profilePersonality)
+                            </div>
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">sauvegarder</button></div>
                         </div>
                     </div>
