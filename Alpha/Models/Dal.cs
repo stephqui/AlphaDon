@@ -259,7 +259,7 @@ namespace Alpha.Models
         }
         public List<Profile> GetAllProfiles()
         {
-            return _bddContext.Profiles.ToList();
+            return _bddContext.Profiles.Include(a => a.Adress).ToList();
         }
 
         public List<UserAccount> GetAllUserAccount()
@@ -267,6 +267,10 @@ namespace Alpha.Models
             return _bddContext.UserAccounts.Include(u => u.Profil).ThenInclude(p => p.Adress).ToList();
         }
 
+        public Adress GetAdressFromProfile(int? adressId)
+        {
+            return _bddContext.Adresses.FirstOrDefault(a => a.Id == adressId);
+        }
 
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
             string nick, string phone, string payMethod, string picture, string siret, string street, int zip, string city, string country, ProfilePersonality profilePersonality)
@@ -333,17 +337,20 @@ namespace Alpha.Models
 
         public UserAccount AddUserAccount(string mail, string password)
         {
+            
+
+            Adress adress = new Adress()
+            {
+                City = "", Country = "", Street = "", Zip = 0
+            };
             Profile profil = new Profile()
             {
-                FirstName = ""
+                FirstName = "", Adress= adress
             };
-
-            Adress adress = new Adress();
-
             this._bddContext.Profiles.Add(profil);
             this._bddContext.SaveChanges();
-            this._bddContext.Adresses.Add(adress);
-            this._bddContext.SaveChanges();
+            //this._bddContext.Adresses.Add(adress);
+            //this._bddContext.SaveChanges();
 
 
 
