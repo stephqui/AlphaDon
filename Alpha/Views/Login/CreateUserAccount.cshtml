@@ -8,7 +8,15 @@
         <div id="SignUp">
             <table style="margin:5% 30%; width:40%; background-color: #E2E5E9; padding:2%;">
                 <tr>
-                    <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Créer votre compte</div></td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Créer votre compte</div></td>
+                    }
+                    @*<td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Créer votre compte</div></td>*@
+                    else
+                    {
+                        <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Veuillez créer un compte pour faire un don</div></td>
+                    }
                 </tr>
                 <tr>
                     <td style="font-size:25px; padding:5%"><label for="mail">Votre adresse :</label></td>
@@ -26,8 +34,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
-                </tr>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
+                    }
+                    else
+                    {
+                <td class="tablebtn" style="display:block; width:14%" onclick="location.href='@Url.Action("Index", "Project")'">Valider pour faire don</td>
+                            }
+                            @*<td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>*@
+                    </tr>
             </table>
         </div>
     }
