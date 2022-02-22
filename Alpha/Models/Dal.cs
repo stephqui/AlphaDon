@@ -269,9 +269,15 @@ namespace Alpha.Models
 
 
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
-            string nick, string phone, string payMethod, string picture)
+            string nick, string phone, string payMethod, string picture, string siret, string street, int zip, string city, string country, ProfilePersonality profilePersonality)
         {
             Profile profile = _bddContext.Profiles.Find(id);
+            Adress adress = _bddContext.Adresses.Find(id);
+            
+            if (picture == null)
+            {
+                picture = "/img/alpha-logo3 vide.png";
+            }
 
             if (profile != null)
             {
@@ -283,6 +289,13 @@ namespace Alpha.Models
                 profile.Phone = phone;
                 profile.PayMethod = payMethod;
                 profile.Picture = picture;
+                profile.Siret = siret;
+                adress.Street = street;
+                adress.Zip = zip;
+                adress.Country = country;
+                profile.profilePersonality = profilePersonality;
+                
+
                 _bddContext.SaveChanges();
             }
         }

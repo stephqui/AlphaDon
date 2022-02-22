@@ -63,7 +63,9 @@ namespace Alpha.Controllers
             else if (profile.Id != 0)
             {
                 dal.ProfileChange(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
-                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName);
+                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, image.FileName, profile.Siret, profile.Adress.Street, profile.Adress.Zip, 
+                 profile.Adress.City, profile.Adress.Country, profile.profilePersonality);
+            
                 return Redirect("/Home/Index");
                 //return Redirect("/Profile/ProfileChange"); ne marche pas: erreur page profilechange @Model.Picture ligne20
             }

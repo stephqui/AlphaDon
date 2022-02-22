@@ -15,7 +15,7 @@ namespace Alpha.Models
         public ProfilePersonality profilePersonality { get; set; }
 
         [MaxLength(40)]
-        public string  FirstName{ get; set; }
+        public string FirstName{ get; set; }
 
         [MaxLength(40)]
         public string LastName { get; set; }
