@@ -1,4 +1,5 @@
 ﻿using Alpha.Models;
+using Alpha.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace Alpha.Controllers
         public IActionResult Index()
         {
             List<Profile> profiles = dal.GetAllProfiles();
+
             return View(profiles);
 
         }
@@ -30,19 +32,29 @@ namespace Alpha.Controllers
         {
             if (id != 0)
             {
-               
-                    Profile profile = dal.GetAllProfiles().Where(s => s.Id == id).FirstOrDefault();
-                    if (profile == null)
+                UserAccountViewModel viewModel = new UserAccountViewModel();
+                
+                    viewModel.Profile = dal.GetAllProfiles().Where(s => s.Id == id).FirstOrDefault();
+                viewModel.Adress = dal.GetAdressFromProfile(viewModel.Profile.AdressId);
+                    //Profile profile = dal.GetAllProfiles().Where(s => s.Id == id).FirstOrDefault();
+                    if (viewModel.Profile == null)
                     {
                         return View("Error");
                     }
-                    return View(profile);//retourne le formulaire
+                    return View(viewModel);//retourne le formulaire
             }
             return View("Error");
         }
         [HttpPost]
-        public IActionResult ProfileChange(Profile profile, IFormFile image)
+        public IActionResult ProfileChange(int id, Profile profile, IFormFile image)
         {
+            UserAccountViewModel viewModel = new UserAccountViewModel();
+            
+
+
+            viewModel.Profile = profile;
+            viewModel.Profile.Id = id;
+            viewModel.Adress = dal.GetAdressFromProfile(viewModel.Profile.AdressId);
             if (image != null && image.Length > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);

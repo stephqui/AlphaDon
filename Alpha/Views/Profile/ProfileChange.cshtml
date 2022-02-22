@@ -1,4 +1,4 @@
-﻿@model Alpha.Models.Profile
+﻿@model Alpha.ViewModels.UserAccountViewModel
 @{
     Layout = "_Layout";
     ViewBag.Title = "Modification du profil";
@@ -10,7 +10,7 @@
 <h3 class="titre">Votre Profil</h3>
 
 <body>
-    @using (Html.BeginForm("profilechange", "profile", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("ProfileChange", "Profile", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         <fieldset>
             <div class="container rounded bg-white mt-5 mb-5">
@@ -18,10 +18,10 @@
                     <div class="col-md-4 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <label class="labels">Ma photo de Profil</label>
-                            <img class="rounded-circle mt-5" src="~/img/@Model.Picture" style="width: 150px" src="">
+                            <img class="rounded-circle mt-5" src="~/img/@Model.Profile.Picture" style="width: 150px" src="">
                             <input type="file" name="image">
                             <a class="text-black-50">Je m'appelle @User.Identity.Name</a>
-                            <span class="text-black-50">@Model.Nick</span>
+                            <span class="text-black-50">@Model.Profile.Nick</span>
 
                         </div>
                     </div>
@@ -32,43 +32,44 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Nom</label></div>
-                                @Html.TextBoxFor(l => Model.LastName)
-                                @Html.ValidationMessageFor(l => Model.LastName)
+                                @Html.TextBoxFor(l => Model.Profile.LastName)
+                                @Html.ValidationMessageFor(l => Model.Profile.LastName)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Prénom</label></div>
-                                @Html.TextBoxFor(f => Model.FirstName)
-                                @Html.ValidationMessageFor(f => Model.FirstName)
+                                @Html.TextBoxFor(f => Model.Profile.FirstName)
+                                @Html.ValidationMessageFor(f => Model.Profile.FirstName)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Nationalité</label></div>
-                                @Html.TextBoxFor(n => Model.Nationality)
-                                @Html.ValidationMessageFor(n => Model.Nationality)
+                                @Html.TextBoxFor(n => Model.Profile.Nationality)
+                                @Html.ValidationMessageFor(n => Model.Profile.Nationality)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Pseudo</label></div>
-                                @Html.TextBoxFor(n => Model.Nick)
-                                @Html.ValidationMessageFor(n => Model.Nick)
+                                @Html.TextBoxFor(n => Model.Profile.Nick)
+                                @Html.ValidationMessageFor(n => Model.Profile.Nick)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Date de naissance</label></div>
-                                @Html.TextBoxFor(b => Model.Birthday)
-                                @Html.ValidationMessageFor(b => Model.Birthday)
+                                @Html.TextBoxFor(b => Model.Profile.Birthday)
+                                @Html.ValidationMessageFor(b => Model.Profile.Birthday)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Téléphone</label></div>
-                                @Html.TextBoxFor(b => Model.Phone)
-                                @Html.ValidationMessageFor(b => Model.Phone)
+                                @Html.TextBoxFor(b => Model.Profile.Phone)
+                                @Html.ValidationMessageFor(b => Model.Profile.Phone)
                             </div>
 
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Adresse</label></div>
+ 
                                 @Html.TextBoxFor(p => Model.Adress.Street)
                                 @Html.ValidationMessageFor(p => Model.Adress.Street)
                             </div>
@@ -93,8 +94,8 @@
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Mode de paiement</label></div>
-                                @Html.TextBoxFor(p => Model.PayMethod)
-                                @Html.ValidationMessageFor(p => Model.PayMethod)
+                                @Html.TextBoxFor(p => Model.Profile.PayMethod)
+                                @Html.ValidationMessageFor(p => Model.Profile.PayMethod)
                             </div>
 
                             <br />
@@ -125,14 +126,14 @@
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Numero de Siret</label></div>
-                                @Html.TextBoxFor(p => Model.Siret)
-                                @Html.ValidationMessageFor(p => Model.Siret)
+                                @Html.TextBoxFor(p => Model.Profile.Siret)
+                                @Html.ValidationMessageFor(p => Model.Profile.Siret)
                             </div>
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Le nom de votre Organisation</label></div>
-                                @Html.TextBoxFor(p => Model.profilePersonality)
-                                @Html.ValidationMessageFor(p => Model.profilePersonality)
+                                @Html.TextBoxFor(p => Model.Profile.profilePersonality)
+                                @Html.ValidationMessageFor(p => Model.Profile.profilePersonality)
                             </div>
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" input type="submit" value="Sauvegarder">sauvegarder</button></div>
                         </div>

@@ -9,6 +9,8 @@ namespace Alpha.ViewModels
     public class UserAccountViewModel
     {
         public UserAccount UserAccount{ get; set; }
+        public Profile Profile { get; set; }
+        public Adress Adress { get; set; }
         public bool Authentify { get; set; }
     }
 }
