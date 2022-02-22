@@ -36,14 +36,18 @@
                 <tr>
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <input type="hidden" name="forDonation" value="0" />
                         <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
                     }
                     else
                     {
-                <td class="tablebtn" style="display:block; width:14%" onclick="location.href='@Url.Action("Index", "Project")'">Valider pour faire don</td>
-                            }
-                            @*<td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>*@
-                    </tr>
+                        <input type="hidden" name="forDonation" value="1" />
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                        <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Valider pour faire un don" style="width:80%" /></td>
+                        //<td class="tablebtn" style="display:block; width:50%" onclick="location.href='@Url.Action("CreateUserAccountForDonation", "login",new { User = Model.Id })'">Valider pour faire un don</td>
+                    }
+                    @*<td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>*@
+                </tr>
             </table>
         </div>
     }
