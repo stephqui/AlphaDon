@@ -65,6 +65,32 @@
                                 @Html.TextBoxFor(b => Model.Phone)
                                 @Html.ValidationMessageFor(b => Model.Phone)
                             </div>
+
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Adresse</label></div>
+                                @Html.TextBoxFor(p => Model.Adress.Street)
+                                @Html.ValidationMessageFor(p => Model.Adress.Street)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Code Postal</label></div>
+                                @Html.TextBoxFor(p => Model.Adress.Zip)
+                                @Html.ValidationMessageFor(p => Model.Adress.Zip)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Ville</label></div>
+                                @Html.TextBoxFor(p => Model.Adress.City)
+                                @Html.ValidationMessageFor(p => Model.Adress.City)
+                            </div>
+                            <br />
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Région</label></div>
+                                @Html.TextBoxFor(p => Model.Adress.Country)
+                                @Html.ValidationMessageFor(p => Model.Adress.Country)
+                            </div>
+
                             <br />
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Mode de paiement</label></div>
