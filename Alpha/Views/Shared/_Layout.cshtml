@@ -58,18 +58,18 @@
             display: inline-block;
         }
 
-        .dashboarduser {
-            display: none;
-            position: absolute;
-            min-width: 160%;
-            background-color: #B2BED2;
-            border-radius: 5px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: black;
-            text-align: left;
-            margin-left: -16px;
-            padding: -14px;
+        .footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #066387;
+            text-align: center;
+            height: 40px;
         }
+        
         /* Style The Dropdown Button */
         .tablebtn {
             border: none;
@@ -258,5 +258,23 @@
                     @RenderBody()
                 </div>
             </section>
+
+            <div class="row footer" style="align-content:center;">
+                <div class="col-2">
+                    Mentions Légales
+                </div>
+                <div class="col-2">
+                    L'équipe
+                </div>
+                <div class="col-3">
+                    NewsLetters du site
+                </div>
+                <div class="col-3">
+                    Conditions Générales d'utilisation
+                </div>
+                <div class="col-2">
+                    Contact
+                </div>
+            </div>
         </body>
     </html>

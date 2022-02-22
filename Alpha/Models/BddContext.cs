@@ -271,6 +271,27 @@ namespace Alpha.Models
                 Profil = profile10,
                 Role = "basic"
             });
+            Adress addr11 = new Adress { City = "Saumur", Country = "FR", Street = "64 avenue du Général de Gaulle", Zip = 49400 };
+            Profile profile11 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Duravel",
+                LastName = "LAUREEN",
+                Birthday = 1994 - 08 - 07,
+                PayMethod = "CB",
+                Nick = "dudu",
+                Nationality = "FR",
+                Phone = "0712210311",
+                Adress = addr11
+            };
+            //this.UserAccounts.Add(new UserAccount
+            //{
+            //    Mail = "duravel@gmail.com",
+            //    Password = "1D-F1-37-E0-56-CD-51-99-14-A4-87-52-D3-66-77-04",
+            //    Status = AccountStatus.Valid,
+            //    Profil = profile11,
+            //    Role = "basic"
+            //});
 
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
@@ -280,7 +301,8 @@ namespace Alpha.Models
              new Collect { CurrentAmount = 2500, Id = 3 },
              new Collect { CurrentAmount = 560, Id = 4 },
              new Collect { CurrentAmount = 3600, Id = 5 },
-             new Collect { CurrentAmount = 4150, Id = 6 }
+             new Collect { CurrentAmount = 4150, Id = 6 },
+             new Collect { CurrentAmount = 9000, Id = 7 }
              );
             this.SaveChanges();
 
@@ -375,6 +397,21 @@ namespace Alpha.Models
                        Picture= "bulgarie.jpg",
                        Status = ProjectStatus.toControl
                    }
+                   //new Project
+                   //{
+                   //    ProjectName = "Aidez-nous à sauver l'Escale Gourmande",
+                   //    StartDate = new DateTime(2022, 01, 01),
+                   //    EndDate = new DateTime(2022, 10, 10),
+                   //    Description = "Sauver le restaurant familiale",
+                   //    Place = "France",
+                   //    Rib = "FR76 8002 0010 0011",
+                   //    Category = ProjectCategory.infrastructural,
+                   //    Limit = 10000,
+                   //    CollectId = 7,
+                   //    ProfileId = 11,
+                   //    Picture = "EscaleGourmande.jpg",
+                   //    Status = ProjectStatus.toControl
+                   //}
                  //  new Project
                  //  {
                  //      ProjectName = "ENSEMBLE, POUR DES FORÊTS LIBRES",
