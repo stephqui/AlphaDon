@@ -325,8 +325,14 @@ namespace Alpha.Models
                 FirstName = ""
             };
 
+            Adress adress = new Adress();
+
             this._bddContext.Profiles.Add(profil);
             this._bddContext.SaveChanges();
+            this._bddContext.Adresses.Add(adress);
+            this._bddContext.SaveChanges();
+
+
 
             string motDePasse = EncodeMD5(password);
             UserAccount userAccount = new UserAccount() { Mail = mail, Password = motDePasse, Status=AccountStatus.Valid, Role= "Basic", Profil = profil };
