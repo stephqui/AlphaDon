@@ -73,6 +73,10 @@
             height: 40px;
         }
 
+            .footer a {
+                color: #066387;
+            }
+
         /* Style The Dropdown Button */
         .tablebtn {
             border: none;
@@ -172,6 +176,9 @@
             text-align: center;
             background-color: #E2E5E9;
         }
+
+
+
     </style>
 </head>
 
@@ -189,7 +196,7 @@
                     <li class="tablebtn alphabarlink dropdown" style="display:block;">
                         <div class="tablebtn">
                             <div style="margin-left:0%;">
-                                Bonjour, @User.Identity.Name !
+                                Bonjour @User.Identity.Name !
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <div class="dropdown-content">
@@ -279,13 +286,13 @@
                 L'équipe
             </div>
             <div class="col-3">
-                NewsLetters du site
+                <a href="~/La Gazette Alpha-don.pdf" target="_blank">NewsLetters du site</a>
             </div>
             <div class="col-3">
                 Conditions Générales d'utilisation
             </div>
             <div class="col-2">
-                Contact
+                <a href="~/img/Photo profil.png">Contact</a>
             </div>
         </div>
     </body>
