@@ -70,6 +70,9 @@
         <div id="ProjectList">
             @foreach (var p in Model)
             {
+                @if (String.Compare(@p.Status.ToString(), "collectStarted") == 0)
+                {
+
 <a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">
 
     @*<a href="~/Project/FullSingleProject">*@
@@ -133,6 +136,7 @@
             </tr>
         </table>*@
 </a>}
+            }
         </div>
     </section>
 </body>

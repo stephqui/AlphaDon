@@ -73,6 +73,10 @@
             height: 40px;
         }
 
+        .footer a {
+            color: #066387;
+        }
+
         /* Style The Dropdown Button */
         .tablebtn {
             border: none;
@@ -172,6 +176,10 @@
             text-align: center;
             background-color: #E2E5E9;
         }
+
+        .kiki:hover {
+            color:#DBEFE1
+        }
     </style>
 </head>
 
@@ -224,7 +232,7 @@
                     <!--AlphaLogo connecté-->
                     <li class="alphabarlink tablebtn" style="margin-left:25%;">
                         <div class="alphalogo" style="height:75px" title="Page d'accueil">
-                            <a style="position: relative;" href="~/../Project/Index">
+                            <a style="position: relative;" href="~/../Home/Index">
                                 <img src="~/img/alpha-logo3 vide.png" style="height:55px;" />
                             </a>
                         </div>
@@ -236,7 +244,7 @@
                     <!--AlphaLogo non connecté-->
                     <li class="alphabarlink tablebtn" style="margin-left:45%;">
                         <div class="alphalogo" style="height:75px" title="Page d'accueil">
-                            <a style="position: relative;" href="~/../Project/Index">
+                            <a style="position: relative;" href="~/../Home/Index">
                                 <img src="~/img/alpha-logo3 vide.png" style="height:55px;" />
                             </a>
                         </div>
@@ -246,7 +254,7 @@
                 }
 
                 <!--Recherche un projet-->
-                <li class="alphabarlink tablebtn">Rechercher un projet</li>
+                <li class="alphabarlink tablebtn"><a class="kiki" href="~/../Project/Index">Rechercher un projet</a></li>
 
                 <!--Se connecter-->
                 @if (User.Identity.IsAuthenticated)
@@ -279,13 +287,13 @@
                 L'équipe
             </div>
             <div class="col-3">
-                NewsLetters du site
+                <a href="~/La Gazette Alpha-don.pdf" target="_blank">NewsLetters du site</a>
             </div>
             <div class="col-3">
                 Conditions Générales d'utilisation
             </div>
             <div class="col-2">
-                Contact
+                <a href="~/img/Photo profil.png">Contact</a>
             </div>
         </div>
     </body>

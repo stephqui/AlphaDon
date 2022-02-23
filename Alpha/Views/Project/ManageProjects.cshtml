@@ -9,6 +9,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>Projet sur Alpha-Don</title>
     <style>
+        #Pr0 {
+            display: none;
+        }
+
+            #Pr0:target {
+                display: block;
+            }
+
         #Pr1 {
             display: none;
         }
@@ -54,7 +62,12 @@
             width: 10%
         }
 
-        .tablerowmanaging th, tr:hover {
+        .table {
+            width:70%;
+            margin-left:15%;
+            margin-right:15%;
+        }
+                .tablerowmanaging th, tr:hover {
             cursor: pointer;
         }
 
@@ -74,7 +87,10 @@
             <div>
                 <table class="MenuManaging" style="background-color:#E2E5E9; border-radius:5px; z-index: 1; width:100%; margin-bottom:5%;">
                     <tr>
-                        <th style="width:20%;" onclick="location.href='#Pr1'">En attente de validation</th>
+                        <th colspan="5" onclick="location.href='#Pr0'">Voir tous les projets</th>
+                    </tr>
+                    <tr>
+                        <th style="width:20%;" onclick="location.href='#Pr1'">Prendre en main un projet</th>
                         <th style="width:20%;" onclick="location.href='#Pr2'">A l'étude</th>
                         <th style="width:20%;" onclick="location.href='#Pr3'">Collecte en cours</th>
                         <th style="width:20%;" onclick="location.href='#Pr4'">Collecte terminée</th>
@@ -86,12 +102,9 @@
         <div class="col-2"></div>
     </div>
 
-    <div class="row" id="Pr1">
-        <div class="col-2"></div>
-        <div class="col-8">
-
-            @*Tableau En attente*@
-            <table class="table table-striped" style="background-color:#E2E5E9; width:100%;">
+    <div class="row" id="Pr0">
+ 
+<table class="table table-striped" style="background-color:#E2E5E9;">
                 <thead>
                     <tr>
                         <th class="font-weight-bold">Projet</th>
@@ -106,7 +119,39 @@
                 <tbody>
                     @foreach (var p in Model)
                     {
-        @if (String.Compare(@p.Status.ToString(), "toControl") == 0)
+        
+                <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
+                    <td>@p.ProjectName</td>
+                    <td>@p.Category</td>
+                    <td>@p.Profile.FirstName @p.Profile.LastName</td>
+                    <td>@p.Profile.Adress.City</td>
+                    <td>@p.Collect.CurrentAmount</td>
+                    <td>@p.Limit</td>
+                    <td>@p.Status</td>
+                </tr>                }
+                </tbody>
+</table>
+
+    </div>
+
+
+            @*Tableau En attente*@
+            <table id="Pr1" class="table table-striped" style="background-color:#E2E5E9;">
+                <thead>
+                    <tr>
+                        <th class="font-weight-bold">Projet</th>
+                        <th class="font-weight-bold">Domaine du projet</th>
+                        <th class="font-weight-bold">Porteur de Projet</th>
+                        <th class="font-weight-bold">Adresse</th>
+                        <th class="font-weight-bold">Montant actuel</th>
+                        <th class="font-weight-bold">Plafond à atteindre</th>
+                        <th class="font-weight-bold">Satut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+        @if (String.Compare(@p.Status.ToString(), "created") == 0)
         {
 <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
     <td>@p.ProjectName</td>
@@ -116,13 +161,22 @@
     <td>@p.Collect.CurrentAmount</td>
     <td>@p.Limit</td>
     <td>@p.Status</td>
-</tr>                }}
+                    </tr>
+                } else if(String.Compare(@p.Status.ToString(), "toControl") == 0) {
+<tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
+    <td>@p.ProjectName</td>
+    <td>@p.Category</td>
+    <td>@p.Profile.FirstName @p.Profile.LastName</td>
+    <td>@p.Profile.Adress.City</td>
+    <td>@p.Collect.CurrentAmount</td>
+    <td>@p.Limit</td>
+    <td>@p.Status</td>
+                    </tr>                
+                }
+            }
                 </tbody>
 
             </table>
-        </div>
-        <div class="col-2"></div>
-    </div>
     @*Tableau A l'étude*@
     <table id="Pr2" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
         <thead>
@@ -187,13 +241,13 @@
                         <td>@p.Collect.CurrentAmount</td>
                                                 <td>@p.Limit</td>}
     <td>@p.Status</td>
-    @if (@p.EndDate.CompareTo(DateTime.Now) < 30)
+    @if (@p.EndDate.Month.CompareTo(DateTime.Now.Month) ==0)
     {
-<td style="background-color:#970909; color:white;"><bolder>@p.EndDate</bolder></td>
+<td style="background-color:#970909; color:white;"><bolder>@p.EndDate.ToShortDateString()</bolder></td>
  }
                     else
                     {
-<td>@p.EndDate</td>}
+<td>@p.EndDate.ToShortDateString()</td>}
 </tr>                }}
         </tbody>
 
