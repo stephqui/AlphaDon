@@ -1,70 +1,68 @@
 ﻿@model Alpha.Models.UnitDonation
 
-@{
-    Layout = "_Layout";
-    ViewBag.Title = "Donation";
-}
+@{ Layout = "_Layout";
+                ViewBag.Title = "Donation"; }
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
 
-@using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post, new { style ="margin-top: 100px;" }))
+@using (Html.BeginForm("CreateUnitDonation", "Donation", FormMethod.Post, new { name = "titre", style = "margin-top: 100px;" }))
 {
-    <div id="Donation">
-        <input type="hidden" name="collectId" value="@ViewBag.collectId" />
-        <table style="width:80%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
-            <tr>
-                <th colspan="7">
-                    <h4>Faire un don</h4>
-                </th>
-            </tr>
-            <tr>
-                <td colspan="1" style="width:20%;"></td>
-                <td colspan="5">
-                    <div align="center">
-                        amount:@Html.TextBoxFor(m => m.Amount, new { @class = "form-control", style = "width:80px; height:40px; text-align:center; font-size:35px;", placeholder = "0€", type = "number" })
-                    </div>
-                </td>
+<div id="Donation">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6 cadre">
+            <button class="btn boutondusite" style="border:solid 2px #1D617A;width:20%; margin-right:90%;">Revenir sur<br />le projet</button>
+            <div class="titres1">Faire un don</div><br>
+            Montant: @Html.TextBoxFor(m => m.Amount, new
+            {
 
-                <td colspan="1" style="width:40%; text-align:center">Sélectionner un moyen de paiement</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td colspan="1"></td>
-                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">10 €</td>
-                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">20 €</td>
-                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">40 €</td>
-                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">60 €</td>
-                <td style="border-style:solid; border-radius: 5%; padding: auto 15%;">100€</td>
-                <td colspan="1">
-                    <img src="~/img/carte bleue.png" style="height:30px" />
-                    <img src="~/img/Paypal.png" style="size:200%; height:30px; padding-left: 5%;" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6"></td>
-                <td rowspan="3">
-                    <div align="center">
-                        <button class="btn btn-primary btn-xl" type="submit">Donner !</button><br>Label et Input
-                        NomLabel et Input Prénom <br> Label et Input CB <br><br><br><br>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="1"></td>
-                <td colspan="5">
-                    <div align="center">Choisissez / ajoutez des contreparties !</div>
-                </td>
-            </tr>
-            <tr></tr>
-        </table>
-        <!--For each Compensation-->
-        <table style="width:50%; margin:1% 10%; background-color: #E2E5E9; padding:0.5%;">
-            <tr>
-                <td></td>
-                <td rowspan="2"><img src="~/img/phone.jpg" style="width:100px" /> </td>
-                <td rowspan="2" colspan="3">Nom de la compensation<br> description</td>
-                <td rowspan="2">montant <br><input type="checkbox"> </td>
-            </tr>
-        </table>
+                style = "width:20%; margin:1% 40%; height:40px; text-align:center; font-size:35px;",
+                placeholder = "0€",
+
+                name = "total"
+            })
+            <br>
+
+        </div>
+        <div class=col-1></div>
+        <div class="col-3 cadre" style="padding:2%;">
+
+            <div class="titres1" style="font-size:2em;">Faire un don</div><br>
+            <img src="~/img/carte bleue.png" style="height:30px" />
+            <img src="~/img/Paypal.png" style="size:200%; height:30px; padding-left: 5%;" />
+            <br><br>
+            <button class="btn boutondusite btn-xl" type="submit" style="border:solid 2px #1D617A;width:100%; float:left">Donner !</button>
+
+
+        </div>
+        <div class="col-1"></div>
     </div>
-}
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6 cadre" style="margin-top:2%; margin-bottom:-1%">
+            <div class="titres1" style="font-size:1.5em;">Choisissez une contrepartie symbolique pour un montant minimum !</div>
+        </div>
+        <div class="col-5"></div>
+    </div>
+    <!--For each Compensation-->
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6 cadre" style="margin-top:2%; padding:1%;">
+            <img src="~/img/phone.jpg" style="width:100px; float:left;" />
+            <div class="titres1" style="font-size:1.5em;">Un T-Shirt dédicacé</div>
+            <div class="titres1" style="font-size:1.5em; float:right;">40€</div>
+            <br>
+            <div style="float-left; text-align:left;">
+                Ce T-Shirt a été fabriqué par des petits enfants heureux que vous contribuiiez à la rénovation de leur école.
+            </div>
+        </div>
+        <div class="col-5"></div>
+    </div>
+    <input type="hidden" name="collectId" value="@ViewBag.collectId" />
+
+</div>}
 @*<h2>Les collectes</h2>
     <br />
     @foreach (var ud in Model)
