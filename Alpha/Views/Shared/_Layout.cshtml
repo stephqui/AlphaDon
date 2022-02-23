@@ -77,6 +77,7 @@
             color: #066387;
         }
 
+
         /* Style The Dropdown Button */
         .tablebtn {
             border: none;
@@ -180,6 +181,7 @@
         .kiki:hover {
             color:#DBEFE1
         }
+
     </style>
 </head>
 
@@ -197,7 +199,7 @@
                     <li class="tablebtn alphabarlink dropdown" style="display:block;">
                         <div class="tablebtn">
                             <div style="margin-left:0%;">
-                                Bonjour, @User.Identity.Name !
+                                Bonjour @User.Identity.Name !
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <div class="dropdown-content">
