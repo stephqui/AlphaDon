@@ -46,15 +46,15 @@ namespace Alpha.Controllers
             return View("Error");
         }
         [HttpPost]
-        public IActionResult ProfileChange(int id, Profile profile, IFormFile image)
+        public IActionResult ProfileChange(int id, UserAccountViewModel viewModel, IFormFile image)
         {
-            UserAccountViewModel viewModel = new UserAccountViewModel();
-            
 
-
-            viewModel.Profile = profile;
-            viewModel.Profile.Id = id;
-            viewModel.Adress = dal.GetAdressFromProfile(viewModel.Profile.AdressId);
+            //UserAccountViewModel viewModel = new UserAccountViewModel();
+            Profile profile = viewModel.Profile;
+            profile.Adress = viewModel.Adress;
+            //viewModel.Profile = profile;
+            //viewModel.Profile.Id = id;
+            //viewModel.Adress = dal.GetAdressFromProfile(viewModel.Profile.AdressId);
             if (image != null && image.Length > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);
@@ -68,7 +68,8 @@ namespace Alpha.Controllers
             if (profile.Id != 0 && image == null)
             {
                 dal.ProfileChangeNoImage(profile.Id, profile.LastName, profile.FirstName, profile.Nationality,
-                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod);
+                 profile.Birthday, profile.Nick, profile.Phone, profile.PayMethod, profile.Siret, profile.Adress.Street,
+                 profile.Adress.Zip,profile.Adress.City, profile.Adress.Country, profile.profilePersonality);
                 return Redirect("/Home/Index");
                 //return Redirect("/Profile/ProfileChange"); ne marche pas: erreur page profilechange @Model.Picture ligne20
             }
