@@ -86,7 +86,7 @@ namespace Alpha.Controllers
                 Project project = dal.GetThisProject(projectId);
                 return View(project);
             }
-            return View();
+            return View(new Project { StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) });
         }
 
 
