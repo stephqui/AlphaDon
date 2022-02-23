@@ -461,6 +461,49 @@ namespace Alpha.Models
                 Profil = profile19,
                 Role = "basic"
             });
+            Adress addr20 = new Adress { City = "Lyon", Country = "FR", Street = "64 rue de l'étoile", Zip = 69013 };
+            Profile profile20 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Dorian",
+                LastName = "Faudel",
+                Birthday = 1986 - 02 - 07,
+                PayMethod = "CB",
+                Nick = "dori",
+                Nationality = "FR",
+                Phone = "0712210320",
+                Adress = addr20
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "dorian@gmail.com",
+                Password = "1D-F1-37-E0-56-CD-51-99-14-A4-87-52-D3-66-77-04",
+                Status = AccountStatus.Valid,
+                Profil = profile20,
+                Role = "basic"
+            });
+            Adress addr21 = new Adress { City = "Blagnac", Country = "FR", Street = "15 rue de la terre", Zip = 31700 };
+            Profile profile21 = new Profile
+            {
+                profilePersonality = ProfilePersonality.Single,
+                FirstName = "Davielle",
+                LastName = "Fort",
+                Birthday = 1986 - 02 - 07,
+                PayMethod = "CB",
+                Nick = "dada",
+                Nationality = "FR",
+                Phone = "0712210321",
+                Adress = addr21
+            };
+            this.UserAccounts.Add(new UserAccount
+            {
+                Mail = "davielle@gmail.com",
+                Password = "1D-F1-37-E0-56-CD-51-99-14-A4-87-52-D3-66-77-04",
+                Status = AccountStatus.Valid,
+                Profil = profile21,
+                Role = "basic"
+
+            });
 
             //*********************************************   FIN de  CREATIONS DES PROFILS *****************************************
 
@@ -479,29 +522,31 @@ namespace Alpha.Models
              new Collect { CurrentAmount = 9000, Id = 12 },
              new Collect { CurrentAmount = 9000, Id = 13 },
               new Collect { CurrentAmount = 1800, Id = 14 },
-             new Collect { CurrentAmount = 1900, Id = 15 }
+             new Collect { CurrentAmount = 1900, Id = 15 },
+             new Collect { CurrentAmount = 2000, Id = 16 },
+             new Collect { CurrentAmount = 2100, Id = 17 }
 
 
              );
             this.SaveChanges();
-
+            //***************************************************************************************
             this.Projects.AddRange(
-                new Project
-                {
-                    ProjectName = "Sauver les chats battus",
-                    StartDate = new DateTime(2022, 02, 10),
-                    EndDate = new DateTime(2022, 06, 25),
-                    Description = "Aider les animaux à avoir une vie heureuse",
-                    Place = "Marne-la-Vallée",
-                    Rib = "FR76 8001 0032 1540",
-                    Category = ProjectCategory.fairTrade,
-                    Limit = 5000,
-                    Picture = "chat.jpg",
-                    CollectId = 1,
-                    ProfileId = 1,
-                    Status = ProjectStatus.created
-                    
-                },
+               new Project
+               {
+                   ProjectName = "Sauver les chats battus",
+                   StartDate = new DateTime(2022, 02, 10),
+                   EndDate = new DateTime(2022, 06, 25),
+                   Description = "Aider les animaux à avoir une vie heureuse",
+                   Place = "Marne-la-Vallée",
+                   Rib = "FR76 8001 0032 1540",
+                   Category = ProjectCategory.fairTrade,
+                   Limit = 5000,
+                   Picture = "chat.jpg",
+                   CollectId = 1,
+                   ProfileId = 1,
+                   Status = ProjectStatus.created
+
+               },
                  new Project
                  {
                      ProjectName = "Traverse",
@@ -514,7 +559,7 @@ namespace Alpha.Models
                      Limit = 2000,
                      CollectId = 2,
                      ProfileId = 2,
-                     Picture= "pontthones.jpg"
+                     Picture = "pontthones.jpg"
                  },
                  new Project
                  {
@@ -573,14 +618,14 @@ namespace Alpha.Models
                        Limit = 5000,
                        CollectId = 6,
                        ProfileId = 10,
-                       Picture= "bulgarie.jpg",
+                       Picture = "bulgarie.jpg",
                        Status = ProjectStatus.toControl
                    },
                    new Project
                    {
                        ProjectName = "Aidez-nous à sauver l'Escale Gourmande",
                        StartDate = new DateTime(2022, 01, 01),
-                       EndDate = new DateTime(2022, 10, 10),
+                       EndDate = new DateTime(2022, 06, 21),
                        Description = "Sauver le restaurant familiale",
                        Place = "France",
                        Rib = "FR76 8002 0010 0011",
@@ -591,41 +636,41 @@ namespace Alpha.Models
                        Picture = "EscaleGourmande.jpg",
                        Status = ProjectStatus.toControl
                    },
-                    new Project
-                    {
-                        ProjectName = "A velo pour Ruban Rose",
-                        StartDate = new DateTime(2022, 01, 01),
-                        EndDate = new DateTime(2022, 10, 10),
-                        Description = "Tour du monde à vélo pour Ruban Rose ",
-                        Place = "France",
-                        Rib = "FR76 8002 0010 0012",
-                        Category = ProjectCategory.medical,
-                        Limit = 50000,
-                        CollectId = 8,
-                        ProfileId = 12,
-                        Picture = "AVeloPourRubanRose.jpg",
-                        Status = ProjectStatus.toControl
-                    },
-                     new Project
-                     {
-                         ProjectName = "L'accident de voiture d'Esthia",
-                         StartDate = new DateTime(2022, 02, 10),
-                         EndDate = new DateTime(2022, 06, 25),
-                         Description = "Aider ma pupuce qui est hospitalisée à cause d'un camion ",
-                         Place = "France",
-                         Rib = "FR76 8001 0032 1513",
-                         Category = ProjectCategory.medical,
-                         Limit = 2000,
-                         Picture = "Esthia.jpg",
-                         CollectId = 9,
-                         ProfileId = 13,
-                         Status = ProjectStatus.created
-                     },
+                      new Project
+                      {
+                          ProjectName = "A velo pour Ruban Rose",
+                          StartDate = new DateTime(2022, 01, 01),
+                          EndDate = new DateTime(2022, 03, 10),
+                          Description = "Tour du monde à vélo pour Ruban Rose ",
+                          Place = "France",
+                          Rib = "FR76 8002 0010 0012",
+                          Category = ProjectCategory.medical,
+                          Limit = 50000,
+                          CollectId = 8,
+                          ProfileId = 12,
+                          Picture = "AVeloPourRubanRose.jpg",
+                          Status = ProjectStatus.toControl
+                      },
+                       new Project
+                       {
+                           ProjectName = "L'accident de voiture d'Esthia",
+                           StartDate = new DateTime(2022, 02, 10),
+                           EndDate = new DateTime(2022, 02, 28),
+                           Description = "Aider ma pupuce qui est hospitalisée à cause d'un camion ",
+                           Place = "France",
+                           Rib = "FR76 8001 0032 1513",
+                           Category = ProjectCategory.medical,
+                           Limit = 2000,
+                           Picture = "Esthia.jpg",
+                           CollectId = 9,
+                           ProfileId = 13,
+                           Status = ProjectStatus.created
+                       },
                         new Project
                         {
                             ProjectName = "Financer mes études d'infirmière",
                             StartDate = new DateTime(2021, 12, 25),
-                            EndDate = new DateTime(2023, 01, 12),
+                            EndDate = new DateTime(2022, 12, 25),
                             Description = "L'objectif de ma page est de terminer mes etudes ",
                             Place = "France",
                             Rib = "FR76 8002 0004 0214",
@@ -640,7 +685,7 @@ namespace Alpha.Models
                          {
                              ProjectName = "Soutenez l'association Baobab",
                              StartDate = new DateTime(2022, 01, 01),
-                             EndDate = new DateTime(2022, 10, 10),
+                             EndDate = new DateTime(2022, 08, 01),
                              Description = "15 étudiants pour aider les ecoles du Sénégal",
                              Place = "France",
                              Rib = "FR76 8002 0010 1015",
@@ -648,14 +693,14 @@ namespace Alpha.Models
                              Limit = 10000,
                              CollectId = 11,
                              ProfileId = 15,
-                             Picture = "Baobab.png",
+                             Picture = "Baobab.jpg",
                              Status = ProjectStatus.toControl
                          },
                           new Project
                           {
                               ProjectName = "4L moi si tu peux",
                               StartDate = new DateTime(2022, 01, 01),
-                              EndDate = new DateTime(2022, 10, 10),
+                              EndDate = new DateTime(2022, 07, 14),
                               Description = "Pour le plus grand raid humainitaire du monde, le 4L Trophy ",
                               Place = "France",
                               Rib = "FR76 8002 0010 1016",
@@ -699,8 +744,8 @@ namespace Alpha.Models
                                new Project
                                {
                                    ProjectName = "Soutien aux soignants",
-                                   StartDate = new DateTime(2022, 01, 12),
-                                   EndDate = new DateTime(2022, 07, 31),
+                                   StartDate = new DateTime(2022, 02, 12),
+                                   EndDate = new DateTime(2022, 06, 30),
                                    Description = "Pour ameliorer nos conditions de travail",
                                    Place = "France",
                                    Rib = "FR76 8002 0008 0880",
@@ -710,7 +755,37 @@ namespace Alpha.Models
                                    ProfileId = 19,
                                    Picture = "soutienparis.jpg",
                                    Status = ProjectStatus.collectStarted
-                               }
+                               },
+                                  new Project
+                                  {
+                                      ProjectName = "Ensemble, on va plus loin",
+                                      StartDate = new DateTime(2022, 01, 22),
+                                      EndDate = new DateTime(2022, 04, 29),
+                                      Description = "Pour ameliorer nos conditions de travail",
+                                      Place = "France",
+                                      Rib = "FR76 8002 0008 0880",
+                                      Category = ProjectCategory.medical,
+                                      Limit = 6000,
+                                      CollectId = 16,
+                                      ProfileId = 20,
+                                      Picture = "Ensemble.jpg",
+                                      Status = ProjectStatus.collectStarted
+                                  },
+                                    new Project
+                                    {
+                                        ProjectName = "JET, Tournoi de football",
+                                        StartDate = new DateTime(2022, 01, 22),
+                                        EndDate = new DateTime(2022, 05, 29),
+                                        Description = "Tenez les enfants, on a match",
+                                        Place = "France",
+                                        Rib = "FR76 8002 0008 0880",
+                                        Category = ProjectCategory.sport,
+                                        Limit = 3000,
+                                        CollectId = 17,
+                                        ProfileId = 21,
+                                        Picture = "Tournoi.jpg",
+                                        Status = ProjectStatus.collectStarted
+                                    }
 
 
                  );
