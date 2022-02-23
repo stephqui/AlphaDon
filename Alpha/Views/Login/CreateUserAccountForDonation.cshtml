@@ -1,0 +1,56 @@
+﻿@model Alpha.Models.UserAccount
+@{
+    Layout = "_Layout";
+}
+<section class="text-center py-5">
+    @using (Html.BeginForm("CreateUserAccount", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div id="SignUp">
+            <table style="margin:5% 30%; width:40%; background-color: #E2E5E9; padding:2%;">
+                <tr>
+                    @*@if (User.Identity.IsAuthenticated)
+                        {
+                            <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Créer votre compte</div></td>
+                        }*@
+                    <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Pour faire un don, merci de créer votre compte</div></td>
+                    @*else
+                        {
+                            <td colspan="2" style="padding-bottom:7%;"><div class="titres1" style="font-size:3em;">Veuillez créer un compte pour faire un don</div></td>
+                        }*@
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding:5%"><label for="mail">Votre adresse :</label></td>
+                    <td style="padding:5%;">@Html.TextBoxFor(m => m.Mail, new { @class = "form-control", placeholder = "adresse@domaine.com", style = "font-size:35px;", id = "mail" })</td>
+                    @Html.ValidationMessageFor(m => m.Mail)
+                </tr>
+                <tr>
+                    <td style="font-size:25px; padding-top:7%; padding:5%;"><label for="pass">Mot de passe :</label></td>
+                    <td style="padding:5%;">@Html.PasswordFor(m => m.Password, new { @class = "form-control", style = "font-size:35px; margin-top:7%;", id = "pass" })</td>
+                    @Html.ValidationMessageFor(m => m.Password)
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:25px; padding-top:7%; padding-right:5%; text-align: center;">
+                        <p>En créant votre compte vous acceptez nos <a href="~/img/CGU.pdf" style="color:dodgerblue">Conditions Générales d'Utilisation</a>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <input type="hidden" name="forDonation" value="1" />
+                    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                    @*@if (User.Identity.IsAuthenticated)
+        {
+            <input type="hidden" name="forDonation" value="0" />
+            <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
+        }
+        else
+        {
+            <input type="hidden" name="forDonation" value="1" />
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Valider pour faire un don" style="width:80%" /></td>
+            //<td class="tablebtn" style="display:block; width:50%" onclick="location.href='@Url.Action("CreateUserAccountForDonation", "login",new { User = Model.Id })'">Valider pour faire un don</td>
+        }*@
+                    <td colspan="2" style="font-size:25px; padding-top:5%; padding-bottom:5%; text-align: center;"><input type="submit" value="Créer" style="width:80%" /></td>
+                </tr>
+            </table>
+        </div>
+    }
+</section>

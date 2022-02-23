@@ -54,49 +54,93 @@
             width: 10%
         }
 
-        .tablerowmanaging:hover {
+        .tablerowmanaging th, tr:hover {
             cursor: pointer;
-            ]
+        }
+
+        .MenuManaging th:hover {
+            cursor: pointer;
+            background-color: #858485;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <section class="text-center py-5">
-    <br />
-    <br />
-    <h2 class="mb-4 indigo-text font-weight-bold">Gestion des projets</h2> <br />
-    <div class="container">
+    <div class="row" style="top:80px;">
+        <div class="col-2"></div>
+        <div class="col-8">
+            @*Menu*@
+            <div>
+                <table class="MenuManaging" style="background-color:#E2E5E9; border-radius:5px; z-index: 1; width:100%; margin-bottom:5%;">
+                    <tr>
+                        <th style="width:20%;" onclick="location.href='#Pr1'">En attente de validation</th>
+                        <th style="width:20%;" onclick="location.href='#Pr2'">A l'étude</th>
+                        <th style="width:20%;" onclick="location.href='#Pr3'">Collecte en cours</th>
+                        <th style="width:20%;" onclick="location.href='#Pr4'">Collecte terminée</th>
+                        <th style="width:20%;" onclick="location.href='#Pr5'">Projet financé et en cours de réalisation</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
 
-        @*Menu*@
-        <div id="MenuManaging">
-            <table style="background-color:#E2E5E9; border-radius:5px; z-index: 1; width:100%; margin-bottom:5%;">
-                <tr>
-                    <th style="width:20%;" onclick="location.href='#Pr1'">En attente de validation</th>
-                    <th style="width:20%;" onclick="location.href='#Pr2'">A l'étude</th>
-                    <th style="width:20%;" onclick="location.href='#Pr3'">Collecte en cours</th>
-                    <th style="width:20%;" onclick="location.href='#Pr4'">Collecte terminée</th>
-                    <th style="width:20%;" onclick="location.href='#Pr5'">Projet financé et en cours de réalisation</th>
-                </tr>
+    <div class="row" id="Pr1">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            @*Tableau En attente*@
+            <table class="table table-striped" style="background-color:#E2E5E9; width:100%;">
+                <thead>
+                    <tr>
+                        <th class="font-weight-bold">Projet</th>
+                        <th class="font-weight-bold">Domaine du projet</th>
+                        <th class="font-weight-bold">Porteur de Projet</th>
+                        <th class="font-weight-bold">Adresse</th>
+                        <th class="font-weight-bold">Montant actuel</th>
+                        <th class="font-weight-bold">Plafond à atteindre</th>
+                        <th class="font-weight-bold">Satut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+        @if (String.Compare(@p.Status.ToString(), "toControl") == 0)
+        {
+<tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
+    <td>@p.ProjectName</td>
+    <td>@p.Category</td>
+    <td>@p.Profile.FirstName @p.Profile.LastName</td>
+    <td>@p.Profile.Adress.City</td>
+    <td>@p.Collect.CurrentAmount</td>
+    <td>@p.Limit</td>
+    <td>@p.Status</td>
+</tr>                }}
+                </tbody>
+
             </table>
         </div>
-
-        @*Tableau En attente*@
-        <table id="Pr1" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Domaine du projet</th>
-                    <th class="font-weight-bold">Porteur de Projet</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Satut</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-    @if (String.Compare(@p.Status.ToString(), "toControl") == 0)
-    {
+        <div class="col-2"></div>
+    </div>
+    @*Tableau A l'étude*@
+    <table id="Pr2" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Projet</th>
+                <th class="font-weight-bold">Domaine du projet</th>
+                <th class="font-weight-bold">Porteur de Projet</th>
+                <th class="font-weight-bold">Adresse</th>
+                <th class="font-weight-bold">Montant actuel</th>
+                <th class="font-weight-bold">Plafond à atteindre</th>
+                <th class="font-weight-bold">Satut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+@if (String.Compare(@p.Status.ToString(), "beingControled") == 0)
+{
 <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
     <td>@p.ProjectName</td>
     <td>@p.Category</td>
@@ -106,60 +150,29 @@
     <td>@p.Limit</td>
     <td>@p.Status</td>
 </tr>                }}
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
 
-        @*Tableau A l'étude*@
-        <table id="Pr2" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Domaine du projet</th>
-                    <th class="font-weight-bold">Porteur de Projet</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Satut</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-    @if (String.Compare(@p.Status.ToString(), "beingControled") == 0)
-    {
-<tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
-    <td>@p.ProjectName</td>
-    <td>@p.Category</td>
-    <td>@p.Profile.FirstName @p.Profile.LastName</td>
-    <td>@p.Profile.Adress.City</td>
-    <td>@p.Collect.CurrentAmount</td>
-    <td>@p.Limit</td>
-    <td>@p.Status</td>
-</tr>                }}
-            </tbody>
-
-        </table>
-
-        @*Tableau Collecte en cours*@
-        <table id="Pr3" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Domaine du projet</th>
-                    <th class="font-weight-bold">Porteur de Projet</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Satut</th>
-                    <th class="font-weight-bold">Date limite</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-    @if (String.Compare(@p.Status.ToString(), "collectStarted") == 0)
-    {
+    @*Tableau Collecte en cours*@
+    <table id="Pr3" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Projet</th>
+                <th class="font-weight-bold">Domaine du projet</th>
+                <th class="font-weight-bold">Porteur de Projet</th>
+                <th class="font-weight-bold">Adresse</th>
+                <th class="font-weight-bold">Montant actuel</th>
+                <th class="font-weight-bold">Plafond à atteindre</th>
+                <th class="font-weight-bold">Satut</th>
+                <th class="font-weight-bold">Date limite</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+@if (String.Compare(@p.Status.ToString(), "collectStarted") == 0)
+{
 <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
     <td>@p.ProjectName</td>
     <td>@p.Category</td>
@@ -182,29 +195,29 @@
                     {
 <td>@p.EndDate</td>}
 </tr>                }}
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
 
 
-        @*Tableau collecte terminé*@
-        <table id="Pr4" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Domaine du projet</th>
-                    <th class="font-weight-bold">Porteur de Projet</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Satut</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-    @if (String.Compare(@p.Status.ToString(), "collectOver") == 0)
-    {
+    @*Tableau collecte terminé*@
+    <table id="Pr4" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Projet</th>
+                <th class="font-weight-bold">Domaine du projet</th>
+                <th class="font-weight-bold">Porteur de Projet</th>
+                <th class="font-weight-bold">Adresse</th>
+                <th class="font-weight-bold">Montant actuel</th>
+                <th class="font-weight-bold">Plafond à atteindre</th>
+                <th class="font-weight-bold">Satut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+@if (String.Compare(@p.Status.ToString(), "collectOver") == 0)
+{
 <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
     <td>@p.ProjectName</td>
     <td>@p.Category</td>
@@ -214,28 +227,28 @@
     <td>@p.Limit</td>
     <td>@p.Status</td>
 </tr>                }}
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
 
-        @*Tableau en cours de réalisation*@
-        <table id="Pr5" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
-            <thead>
-                <tr>
-                    <th class="font-weight-bold">Projet</th>
-                    <th class="font-weight-bold">Domaine du projet</th>
-                    <th class="font-weight-bold">Porteur de Projet</th>
-                    <th class="font-weight-bold">Adresse</th>
-                    <th class="font-weight-bold">Montant actuel</th>
-                    <th class="font-weight-bold">Plafond à atteindre</th>
-                    <th class="font-weight-bold">Satut</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-    @if (String.Compare(@p.Status.ToString(), "beingExecuted") == 0)
-    {
+    @*Tableau en cours de réalisation*@
+    <table id="Pr5" class="table table-striped" style="background-color:#E2E5E9; width:auto;">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Projet</th>
+                <th class="font-weight-bold">Domaine du projet</th>
+                <th class="font-weight-bold">Porteur de Projet</th>
+                <th class="font-weight-bold">Adresse</th>
+                <th class="font-weight-bold">Montant actuel</th>
+                <th class="font-weight-bold">Plafond à atteindre</th>
+                <th class="font-weight-bold">Satut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+@if (String.Compare(@p.Status.ToString(), "beingExecuted") == 0)
+{
 <tr class="tablerowmanaging" onclick="location.href='@Url.Action("ThisProject", "Project", new { projectId = p.Id })'">
     <td>@p.ProjectName</td>
     <td>@p.Category</td>
@@ -245,8 +258,8 @@
     <td>@p.Limit</td>
     <td>@p.Status</td>
 </tr>                }}
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
     </div>
 </section>

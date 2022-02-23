@@ -31,7 +31,7 @@ namespace Alpha.Controllers
             }
             else
             {
-                return RedirectToAction("CreateUserAccount", "Login");
+                return RedirectToAction("CreateUserAccountForDonation", "Login");
             }           
         }
 
