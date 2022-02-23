@@ -1,6 +1,6 @@
 ﻿@model List<Alpha.Models.Project>
 @{ Layout = "_Layout";
-                ViewBag.Title = "Project"; }
+    ViewBag.Title = "Project"; }
 <head>
     <style>
 
@@ -70,69 +70,49 @@
         <div id="ProjectList">
             @foreach (var p in Model)
             {
-<a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">
+                @if (String.Compare(@p.Status.ToString(), "collectStarted") == 0)
+                {
 
-    @*<a href="~/Project/FullSingleProject">*@
+                    <a href="@Url.Action("FullSingleProject", "Project", new { projectId = p.Id })">
 
-    <div id="Project" class="card" style="float:left; padding-top:1%; margin-left:3%; margin-bottom:3%; width:30%; max-width:30%;">
-        <div class="row">
-            <div class="col-1" style="height:250px;"></div>
-            <div class="col-10">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="~/img/@p.Picture" style="width:100%; max-height:250px;" />
-                        </div>
-                        <div class="flip-card-back">@p.Summary</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-1"></div>
-        </div>
 
-        <div class="row" style="padding:1%;">
-            <div class="col-1"></div>
-            <div class="col-10"><h5><b>@p.ProjectName</b></h5></div>
-            <div class="col-1"></div>
-        </div>
+                        @*<a href="~/Project/FullSingleProject">*@
 
-        <div class="row">
-            <div class="col-6">@p.Profile.FirstName @p.Profile.LastName</div>
-            <div class="col-6">@p.Category</div>
-        </div>
-
-        <div class="row" style="padding-bottom:1%;">
-            <div class="col-6">@p.Place</div>
-            <div class="col-6">@p.Collect.CurrentAmount € sur @p.Limit !</div>
-        </div>
-    </div>
-    @*
-        <table style="width:30%; background-color:#E2E5E9; border-radius:5px; float:left; margin-left: 3%; margin-top:3%; padding:1%;">
-            <tr>
-                <td colspan="2" style="height:250px" top="0px">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="~/img/@p.Picture" style="width:250px" />
+                        <div id="Project" class="card" style="float:left; padding-top:1%; margin-left:3%; margin-bottom:3%; width:30%; max-width:30%;">
+                            <div class="row">
+                                <div class="col-1" style="height:250px;"></div>
+                                <div class="col-10">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <img src="~/img/@p.Picture" style="width:100%; max-height:250px;" />
+                                            </div>
+                                            <div class="flip-card-back">@p.Summary</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1"></div>
                             </div>
-                            <div class="flip-card-back">
-                                @p.Summary
+
+                            <div class="row" style="padding:1%;">
+                                <div class="col-1"></div>
+                                <div class="col-10"><h5><b>@p.ProjectName</b></h5></div>
+                                <div class="col-1"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">@p.Profile.FirstName @p.Profile.LastName</div>
+                                <div class="col-6">@p.Category</div>
+                            </div>
+
+                            <div class="row" style="padding-bottom:1%;">
+                                <div class="col-6">@p.Place</div>
+                                <div class="col-6">@p.Collect.CurrentAmount € sur @p.Limit !</div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr><th colspan="2">@p.ProjectName<img src="~/img/Collecte en cours.png" style="border-radius:45%; width:30%"></th></tr>
-            <tr>
-                <td><div style="text-align:left;">@p.Profile.FirstName @p.Profile.LastName</div></td>
-                <td><div style="text-align:right;">@p.Category</div></td>
-            </tr>
-            <tr>
-                <td><div style="text-align:left;">@p.Collect.CurrentAmount</div></td>
-                <td><div style="text-align:right;">@p.Limit</div></td>
-            </tr>
-        </table>*@
-</a>}
+
+                    </a>}
+            }
         </div>
     </section>
 </body>

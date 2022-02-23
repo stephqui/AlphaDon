@@ -273,8 +273,10 @@ namespace Alpha.Models
         }
 
         public void ProfileChange(int id,  string lastName, string firstName, string nationality, Int32 birthday,
-            string nick, string phone, string payMethod, string picture, string siret, string street, int zip, string city, string country, ProfilePersonality profilePersonality)
+            string nick, string phone, string payMethod, string picture, string siret, string street, int zip,
+            string city, string country, ProfilePersonality profilePersonality)
         {
+            //UserAccount userAccount = _bddContext.UserAccounts.Find(id);
             Profile profile = _bddContext.Profiles.Find(id);
             Adress adress = _bddContext.Adresses.Find(id);
             
@@ -306,9 +308,11 @@ namespace Alpha.Models
 
         //j'essaie de contourner si image est null
         public void ProfileChangeNoImage(int id, string lastName, string firstName, string nationality, Int32 birthday,
-           string nick, string phone, string payMethod)
+           string nick, string phone, string payMethod, string siret, string street, int zip,
+            string city, string country, ProfilePersonality profilePersonality)
         {
             Profile profile = _bddContext.Profiles.Find(id);
+            Adress adress = _bddContext.Adresses.Find(id);
 
             if (profile != null)
             {
@@ -319,6 +323,10 @@ namespace Alpha.Models
                 profile.Birthday = birthday;
                 profile.Phone = phone;
                 profile.PayMethod = payMethod;
+                adress.Street = street;
+                adress.Zip = zip;
+                adress.Country = country;
+                profile.profilePersonality = profilePersonality;
                 _bddContext.SaveChanges();
             }
         }

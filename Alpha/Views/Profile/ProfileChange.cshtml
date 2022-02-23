@@ -12,16 +12,26 @@
 <body>
     @using (Html.BeginForm("ProfileChange", "Profile", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
-        <fieldset>
+
+        @Html.HiddenFor(m => m.Profile.Id)
+<fieldset>
             <div class="container rounded bg-white mt-5 mb-5">
                 <div class="row">
                     <div class="col-md-4 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <label class="labels">Ma photo de Profil</label>
-                            <img class="rounded-circle mt-5" src="~/img/@Model.Profile.Picture" style="width: 150px" src="">
+                            @if (!string.IsNullOrEmpty(@Model.Profile.Picture))
+                            {
+                                <img class="rounded-circle mt-5" src="~/img/@Model.Profile.Picture" style="width: 150px" >
+                            }
+                            else
+                            {
+                                <img class="rounded-circle mt-5" src="~/img/alpha-logo3 vide.png" style="width: 150px" >
+
+                            }
                             <input type="file" name="image">
                             <a class="text-black-50">Je m'appelle @User.Identity.Name</a>
-                            <span class="text-black-50">@Model.Profile.Nick</span>
+                            @*<span class="text-black-50">Mon mail: @Model.UserAccount.Mail</span>*@
 
                         </div>
                     </div>

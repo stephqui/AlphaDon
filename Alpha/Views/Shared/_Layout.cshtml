@@ -73,9 +73,10 @@
             height: 40px;
         }
 
-            .footer a {
-                color: #066387;
-            }
+        .footer a {
+            color: #066387;
+        }
+
 
         /* Style The Dropdown Button */
         .tablebtn {
@@ -177,7 +178,9 @@
             background-color: #E2E5E9;
         }
 
-
+        .kiki:hover {
+            color:#DBEFE1
+        }
 
     </style>
 </head>
@@ -231,7 +234,7 @@
                     <!--AlphaLogo connecté-->
                     <li class="alphabarlink tablebtn" style="margin-left:25%;">
                         <div class="alphalogo" style="height:75px" title="Page d'accueil">
-                            <a style="position: relative;" href="~/../Project/Index">
+                            <a style="position: relative;" href="~/../Home/Index">
                                 <img src="~/img/alpha-logo3 vide.png" style="height:55px;" />
                             </a>
                         </div>
@@ -243,7 +246,7 @@
                     <!--AlphaLogo non connecté-->
                     <li class="alphabarlink tablebtn" style="margin-left:45%;">
                         <div class="alphalogo" style="height:75px" title="Page d'accueil">
-                            <a style="position: relative;" href="~/../Project/Index">
+                            <a style="position: relative;" href="~/../Home/Index">
                                 <img src="~/img/alpha-logo3 vide.png" style="height:55px;" />
                             </a>
                         </div>
@@ -253,7 +256,7 @@
                 }
 
                 <!--Recherche un projet-->
-                <li class="alphabarlink tablebtn">Rechercher un projet</li>
+                <li class="alphabarlink tablebtn"><a class="kiki" href="~/../Project/Index">Rechercher un projet</a></li>
 
                 <!--Se connecter-->
                 @if (User.Identity.IsAuthenticated)
